@@ -176,7 +176,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.67, y: -0.19}
@@ -737,7 +737,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.67, y: -0.19}
@@ -831,7 +831,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -884,7 +884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 822476792}
   offset: {x: 0, y: 0, z: 0}
-  edges: []
   LB: {fileID: 926318779}
   RT: {fileID: 1128435220}
 --- !u!1 &1162056676

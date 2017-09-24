@@ -8,7 +8,6 @@ public class CameraFollow : MonoBehaviour {
     public GameObject target;
     public Vector3 offset;
     Vector3 targetPos;
-    public float [] edges;
     public Transform LB, RT;
     // Use this for initialization
     void Start()

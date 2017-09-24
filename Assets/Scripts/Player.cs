@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
     enum PlayerState { idle, walk, updown, interactive}
     PlayerState playerState;
     Animator ani;
+    delegate void PlayerDelegate();
+    PlayerDelegate playerClick;
     private void Awake()
     {
         playerState = PlayerState.idle;
@@ -24,6 +26,10 @@ public class Player : MonoBehaviour {
         
         if (Input.GetMouseButtonDown(0))
         {
+            //delegate
+            if (playerClick != null) {
+                playerClick();
+            }
             //interactive item
 
             //walk
