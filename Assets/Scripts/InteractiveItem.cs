@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 public class InteractiveItem : MonoBehaviour {
-
+    //item tag要設置
     public string itemName;
     Player player;
     public float interactiveDistance;
@@ -13,14 +13,20 @@ public class InteractiveItem : MonoBehaviour {
     [SerializeField]
     bool isHideSprite;
     SpriteRenderer _spriteRender;
+    [SerializeField]
+    bool canPick;
     private void Start()
     {
         player = GameManager.game.Player;
         //TODO: to be improved
+        
+        _spriteRender = GetComponent<SpriteRenderer>();
         if (isHideSprite)
         {
-            _spriteRender = GetComponent<SpriteRenderer>();
             _spriteRender.enabled = false;
+        }
+        if (canPick) {
+
         }
     }
     private void Update()
@@ -40,6 +46,8 @@ public class InteractiveItem : MonoBehaviour {
            // changeSpriteColor();//TODO:BUG
            // transform.localScale = transform.localScale * 0.8f;
             if (OnItemClicked != null) OnItemClicked(this, EventArgs.Empty);//分發事件
+           
+           
             if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
             {
                   Debug.Log(itemName + " is clicked");
@@ -47,11 +55,52 @@ public class InteractiveItem : MonoBehaviour {
                 Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
                 StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));         
             }
-
+            if (canPick)
+            {
+                Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
+                StartCoroutine(itemGotoPoint(pointPos)); 
+            
+            }
         }
     }
-
-    //go to special point
+    //item move to point
+    IEnumerator itemGotoPoint(Vector3 point)
+    {
+        _canInteractive = false;
+        interactiveDistance = 0;
+        _spriteRender.sortingOrder = 4;
+        if(canPick) StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+        else StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.18f));
+        while (transform.position != point) {
+            transform.position = Vector3.MoveTowards(transform.position, point, 4.0f * Time.deltaTime);
+            if(canPick) transform.localScale = transform.localScale * 1.05f;//變大的倍數會隨距離不同
+            yield return null;
+        }
+       if(canPick) yield return new WaitForSeconds(1.0f);
+        afterItemGotoPoint();
+    }
+    void afterItemGotoPoint()
+    {
+        if (canPick)
+        {
+            canPick = false;
+            Vector3 pointPos = Camera.main.transform.position; pointPos.y -= 4.5f; pointPos.z = 0.0f;
+            StartCoroutine(itemGotoPoint(pointPos));
+        }
+        else
+        {
+            player.Playerstate = Player.PlayerState.idle;
+            //display in UI
+            Destroy(this.gameObject);
+          
+        }
+      
+    }
+    private void OnDestroy()
+    {
+        GameManager.game.refindItem();//重新統物品數量
+    }
+    //player go to special point
     IEnumerator gotoPoint(Player.PlayerState state,Vector3 point,string name, float speed) {
         _canInteractive = false;
         player.Playerstate = state;

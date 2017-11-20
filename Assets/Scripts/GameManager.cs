@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
         Items = GameObject.FindGameObjectsWithTag("item");
 
     }
+    public void refindItem() {
+        Items = GameObject.FindGameObjectsWithTag("item");
+    }
     private void Start()
     {
         Debug.Log(Items.Length);
@@ -32,5 +35,20 @@ public class GameManager : MonoBehaviour {
         get { return _items; }
         set { _items = value; }
     }
-  
+    public IEnumerator fadeInOut(SpriteRenderer target, float speed) {
+        while (target.color.a <= 1.0f)
+        {
+            Debug.Log(target.color.a);
+            Color color = target.color;
+            color.a += speed;
+            if (color.a > 1.0f) color.a = 1.0f;
+            else if (color.a < 0.0f) color.a = 0.0f;
+            target.color = color;
+            yield return null;
+        }       
+    }
+
+    public void AddBagItem() {
+
+    }
 }

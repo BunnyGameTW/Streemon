@@ -93,6 +93,7 @@ public class Player : MonoBehaviour {
         else if (state == PlayerState.walk) ani.SetBool("isWalk", true);
         if (state == PlayerState.offset) ani.SetBool("isWalk", true);
         if (state == PlayerState.up) ani.SetBool("isUp", true);
+        if (state == PlayerState.interactive) ani.SetBool("isWalk", false);
     }
     public void SetPlayerRotation(int rot) {
         transform.eulerAngles = new Vector3(0, rot, 0);
