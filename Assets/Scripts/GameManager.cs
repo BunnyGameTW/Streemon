@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
     public IEnumerator fadeInOut(SpriteRenderer target, float speed) {
         while (target.color.a <= 1.0f)
         {
-            Debug.Log(target.color.a);
+           // Debug.Log(target.color.a);
             Color color = target.color;
             color.a += speed;
             if (color.a > 1.0f) color.a = 1.0f;

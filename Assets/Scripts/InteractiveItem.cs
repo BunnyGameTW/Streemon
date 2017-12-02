@@ -43,11 +43,8 @@ public class InteractiveItem : MonoBehaviour {
     {
        
         if (_canInteractive) {
-           // changeSpriteColor();//TODO:BUG
-           // transform.localScale = transform.localScale * 0.8f;
             if (OnItemClicked != null) OnItemClicked(this, EventArgs.Empty);//分發事件
-           
-           
+                     
             if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
             {
                   Debug.Log(itemName + " is clicked");
@@ -72,7 +69,7 @@ public class InteractiveItem : MonoBehaviour {
         if(canPick) StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
         else StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.18f));
         while (transform.position != point) {
-            transform.position = Vector3.MoveTowards(transform.position, point, 4.0f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, point, 5.0f * Time.deltaTime);
             if(canPick) transform.localScale = transform.localScale * 1.05f;//變大的倍數會隨距離不同
             yield return null;
         }
@@ -90,7 +87,7 @@ public class InteractiveItem : MonoBehaviour {
         else
         {
             player.Playerstate = Player.PlayerState.idle;
-            //display in UI
+            player.AddHoldItem(itemName);
             Destroy(this.gameObject);
           
         }

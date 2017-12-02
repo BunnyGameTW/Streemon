@@ -6,27 +6,30 @@ public class Player : MonoBehaviour {
     Vector3 mouseScrPos = Vector3.zero;
     [SerializeField]
     float moveSpeed = 1.0f;
-    public enum PlayerState { idle, walk, interactive, up, down, offset}
+    public enum PlayerState { idle, walk, interactive, up, down, offset }
     public PlayerState _playerState;
     Animator ani;
-    public event EventHandler playerClicked;
     SpriteRenderer _spriteRender;
+    List<string> _holdItems;
+    public event EventHandler OnItemAdd;
+
     private void Awake()
     {
         _playerState = PlayerState.idle;
         ani = GetComponent<Animator>();
         _spriteRender = GetComponentInChildren<SpriteRenderer>();
+        _holdItems = new List<string>();
     }
     // Use this for initialization
-    void Start () {
+    void Start() {
         for (int i = 0; i < GameManager.game.Items.Length; i++)
         {
             GameManager.game.Items[i].GetComponent<InteractiveItem>().OnItemClicked += this.OnItemClicked;//監聽
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         //check item interactive status
         for (int i = 0; i < GameManager.game.Items.Length; i++)
         {
@@ -51,22 +54,22 @@ public class Player : MonoBehaviour {
             //set walk state
             if (_playerState == PlayerState.idle || _playerState == PlayerState.walk) _playerState = PlayerState.walk;
         }
- 
+
         if (_playerState == PlayerState.walk) {
             _playerState = move();
         }
-        else if (_playerState == PlayerState.idle){
+        else if (_playerState == PlayerState.idle) {
 
         }
         else if (_playerState == PlayerState.interactive)
         {
-           
+
         }
         setAnimation(_playerState);
     }
     void OnItemClicked(object sender, EventArgs args) {
         _playerState = PlayerState.interactive;
-        
+
     }
 
     public PlayerState Playerstate
@@ -100,5 +103,24 @@ public class Player : MonoBehaviour {
     }
     public void SetOrderInLayer(int i) {
         _spriteRender.sortingOrder = i;
+    }
+    public void AddHoldItem(string name) {
+
+
+        _holdItems.Add(name);
+        OnItemAdd(this, EventArgs.Empty);//分發事件
+        for (int i = 0; i < _holdItems.Count; i++)
+        {
+            Debug.Log(_holdItems[i].ToString());
+        }
+    }
+    public void DeleteHoldItem(string name)
+    {
+        _holdItems.Remove(name);
+    }
+    public List<string> HoldItems
+    {
+        get { return _holdItems; }
+
     }
 }
