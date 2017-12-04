@@ -13,7 +13,7 @@ public class BagUI : MonoBehaviour {
 	void Start () {
         _sprite = new Sprite[6];
         player = GameManager.game.Player;
-        player.OnItemAdd += this.OnItemChange;//監聽
+        player.OnItemChange += this.OnItemChange;//監聽
         for (int i = 0; i < GetComponentsInChildren<Image>().Length; i++)
         {
             //_sprite[i] = GetComponentsInChildren<Image>()[i].sprite;
@@ -32,7 +32,7 @@ public class BagUI : MonoBehaviour {
         int itemListNum = 0;
         foreach (string _item in player.HoldItems)
         {
-          
+          //TODO:BUG 要每個都檢查 不能只檢查串列有的
             for (int i = 0; i < itemSprite.Length; i++)
             {
                 if (_item == itemSprite[i].name)

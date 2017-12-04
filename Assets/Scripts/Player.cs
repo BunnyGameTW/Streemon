@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     Animator ani;
     SpriteRenderer _spriteRender;
     List<string> _holdItems;
-    public event EventHandler OnItemAdd;
+    public event EventHandler OnItemChange;
 
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
         {
             GameManager.game.Items[i].GetComponent<InteractiveItem>().OnItemClicked += this.OnItemClicked;//監聽
         }
+
     }
 
     // Update is called once per frame
@@ -108,16 +109,22 @@ public class Player : MonoBehaviour {
 
 
         _holdItems.Add(name);
-        OnItemAdd(this, EventArgs.Empty);//分發事件
-        for (int i = 0; i < _holdItems.Count; i++)
-        {
-            Debug.Log(_holdItems[i].ToString());
-        }
+        
+        //for (int i = 0; i < _holdItems.Count; i++)
+        //{
+        //    Debug.Log(_holdItems[i].ToString());
+        //}
     }
     public void DeleteHoldItem(string name)
     {
         _holdItems.Remove(name);
     }
+    public void OnItemChanged() {
+        foreach (string _item in _holdItems)
+        { Debug.Log(_item + ","); }
+
+            OnItemChange(this, EventArgs.Empty);//分發事件
+    } 
     public List<string> HoldItems
     {
         get { return _holdItems; }

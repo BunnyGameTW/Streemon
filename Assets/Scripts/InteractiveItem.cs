@@ -66,11 +66,15 @@ public class InteractiveItem : MonoBehaviour {
         _canInteractive = false;
         interactiveDistance = 0;
         _spriteRender.sortingOrder = 4;
-        if(canPick) StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+
+        if (canPick)
+        {
+            player.AddHoldItem(itemName);
+            StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+        }
         else StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.18f));
         while (transform.position != point) {
-            transform.position = Vector3.MoveTowards(transform.position, point, 5.0f * Time.deltaTime);
-            if(canPick) transform.localScale = transform.localScale * 1.05f;//變大的倍數會隨距離不同
+            transform.position = Vector3.MoveTowards(transform.position, point, 10.0f * Time.deltaTime);
             yield return null;
         }
        if(canPick) yield return new WaitForSeconds(1.0f);
@@ -81,13 +85,17 @@ public class InteractiveItem : MonoBehaviour {
         if (canPick)
         {
             canPick = false;
-            Vector3 pointPos = Camera.main.transform.position; pointPos.y -= 4.5f; pointPos.z = 0.0f;
+          
+            Vector3 pointPos = FindObjectOfType<BagUI>().transform.GetChild(player.HoldItems.Count-1).position;
+            pointPos = Camera.main.ScreenToWorldPoint(pointPos); pointPos.z = 0.0f;
+
+          
             StartCoroutine(itemGotoPoint(pointPos));
         }
         else
         {
             player.Playerstate = Player.PlayerState.idle;
-            player.AddHoldItem(itemName);
+            player.OnItemChanged();
             Destroy(this.gameObject);
           
         }
