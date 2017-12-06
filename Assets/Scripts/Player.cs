@@ -109,11 +109,7 @@ public class Player : MonoBehaviour {
 
 
         _holdItems.Add(name);
-        
-        //for (int i = 0; i < _holdItems.Count; i++)
-        //{
-        //    Debug.Log(_holdItems[i].ToString());
-        //}
+   
     }
     public void DeleteHoldItem(string name)
     {

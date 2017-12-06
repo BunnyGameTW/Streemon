@@ -9,13 +9,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject target;
     private Transform myTransform;
     private RectTransform myRectTransform;
-    // 用于event trigger对自身检测的开关
-    private CanvasGroup canvasGroup;
-    // 拖拽操作前的有效位置，拖拽到有效位置时更新
-    public Vector3 originalPosition;
-    // 记录上一帧所在物品格子
-    Player player;
-    // 记录上一帧所在物品格子的正常颜色
+    public Vector3 originalPosition;   
+    Player player;    
     void Start()
     {
         myTransform = this.transform;
@@ -27,8 +22,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         player.Playerstate = Player.PlayerState.interactive;
-         originalPosition = myTransform.position;//拖拽前记录起始位置
-        
+         originalPosition = myTransform.position;
+        //TODO:判斷target的位置
     }
     public void OnDrag(PointerEventData eventData)
     {

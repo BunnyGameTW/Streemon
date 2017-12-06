@@ -14,12 +14,7 @@ public class BagUI : MonoBehaviour {
         _sprite = new Sprite[6];
         player = GameManager.game.Player;
         player.OnItemChange += this.OnItemChange;//監聽
-        for (int i = 0; i < GetComponentsInChildren<Image>().Length; i++)
-        {
-            //_sprite[i] = GetComponentsInChildren<Image>()[i].sprite;
-            //_sprite[i] = noneSprite;
-             GetComponentsInChildren<Image>()[i].sprite = noneSprite;
-        }
+        resetDisplayItem();
     }
 
     
@@ -27,8 +22,14 @@ public class BagUI : MonoBehaviour {
         displayItem();
     
     }
+    void resetDisplayItem() {
+        for (int i = 0; i < GetComponentsInChildren<Image>().Length; i++)
+        {
+            GetComponentsInChildren<Image>()[i].sprite = noneSprite;
+        }
+    }
     void displayItem() {
-
+        resetDisplayItem();
         int itemListNum = 0;
         foreach (string _item in player.HoldItems)
         {
