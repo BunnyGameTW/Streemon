@@ -41,7 +41,6 @@ public class Player : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
         {
-
             //walk
             mouseScrPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseScrPos.z = 0.0f;
@@ -106,10 +105,7 @@ public class Player : MonoBehaviour {
         _spriteRender.sortingOrder = i;
     }
     public void AddHoldItem(string name) {
-
-
-        _holdItems.Add(name);
-   
+        _holdItems.Add(name);  
     }
     public void DeleteHoldItem(string name)
     {
@@ -125,5 +121,8 @@ public class Player : MonoBehaviour {
     {
         get { return _holdItems; }
 
+    }
+    public void SetPlayerState(int state) {
+        _playerState = (PlayerState)state;
     }
 }
