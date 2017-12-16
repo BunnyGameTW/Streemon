@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Player _player;
     private GameObject [] _items;
+    [SerializeField]
+    private GameObject _BookUI;
     private void Awake()
     {
         if (game == null) {
@@ -50,5 +52,13 @@ public class GameManager : MonoBehaviour {
 
     public void AddBagItem() {
 
+    }
+    public void Setactive(GameObject obj, bool isAble) {
+        obj.SetActive(isAble);
+       
+    }
+    public GameObject BookUI
+    {
+        get { return _BookUI; }
     }
 }

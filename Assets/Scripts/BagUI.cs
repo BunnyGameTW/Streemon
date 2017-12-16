@@ -50,6 +50,6 @@ public class BagUI : MonoBehaviour {
     public void OnPointerDown()
     {
         player.Playerstate = Player.PlayerState.interactive;
-        Debug.Log("fuk");
+      
     }
 }
