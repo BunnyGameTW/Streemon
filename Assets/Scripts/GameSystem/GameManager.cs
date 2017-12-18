@@ -12,14 +12,15 @@ public class GameManager : MonoBehaviour {
     private GameObject _BookUI;
     [SerializeField]
     private GameObject _TalkUI;
+    Talk _talky;
     private void Awake()
     {
         if (game == null) {
             game = this;
         }
-        CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1217.csv");//loadCSV
+        CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");//loadCSV
         Items = GameObject.FindGameObjectsWithTag("item");
-
+        _talky = _TalkUI.GetComponent<Talk>();
     }
     public void refindItem() {
         Items = GameObject.FindGameObjectsWithTag("item");
@@ -64,34 +65,38 @@ public class GameManager : MonoBehaviour {
     {
         get { return _BookUI; }
     }
-    public void talk(string name, int paragraph) {
-        Debug.Log("123");
+    public void SetTalk(string name, int paragraph) {
         //TODO:not finish
-        Talk talky = _TalkUI.GetComponent<Talk>();
-        //check name
+      
+        //check name and paragraph
         int iLine = 0;
         for (int i = 0; ; i++) {
             Debug.Log(CSV.GetInstance().arrayData[i][0]);
-            if (name == CSV.GetInstance().arrayData[i][0]) {
+            if (name == CSV.GetInstance().arrayData[i][0] && paragraph.ToString() == CSV.GetInstance().arrayData[i][1]) {
                 iLine = i;
-                Debug.Log("123");
                 break;
             }
         }
        
-        int storySize = CSV.GetInstance().arrayData[iLine + paragraph].Length;
-        talky.SetStorySize(storySize - 2);
-        string[] talkStory = talky.story;
-        for (int j = 2; j < storySize; j++)
+        int np; int.TryParse(CSV.GetInstance().arrayData[iLine][3], out np);//4th parameter
+        _talky.SetNextTalk(CSV.GetInstance().arrayData[iLine][2], np);
+        int storySize = CSV.GetInstance().arrayData[iLine].Length;
+        _talky.SetStorySize(storySize - 4);
+        string[] talkStory = _talky.story;
+        for (int j = 4; j < storySize; j++)
         {//讀入第N段文字
-            talkStory[j - 2] = CSV.GetInstance().arrayData[iLine + paragraph][j];
-            Debug.Log(talkStory[j - 2]);
+            talkStory[j - 4] = CSV.GetInstance().arrayData[iLine][j];
+            Debug.Log(talkStory[j - 4]);
         }
-        //
-        Setactive(_TalkUI, true);
+        Debug.Log(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
+        _talky.SetCharsBG(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
+
     }
     public GameObject TalkUI
     {
         get { return _TalkUI; }
+    }
+    public Talk Talky {
+        get { return _talky; }
     }
 }

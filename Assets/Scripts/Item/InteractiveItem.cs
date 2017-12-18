@@ -28,7 +28,7 @@ public class InteractiveItem : MonoBehaviour {
         {
             _spriteRender.enabled = false;
         }
-        talkNum = 0;
+        talkNum = 2;
     }
     private void Update()
     {
@@ -60,14 +60,24 @@ public class InteractiveItem : MonoBehaviour {
             
             }
             if (canTalk) {
-                if (itemName == "testchar2") { GameManager.game.talk(itemName, talkNum); }
                
-                GameManager.game.talk(itemName, talkNum);
-                
-                //item talk
-                //player talk
+                SetTalk();
+
+
             }
         }
+    }
+    public void SetTalkNum(int i)
+    {
+        //TODO:set talk num
+        talkNum = i;
+        SetTalk();
+    }
+    public void SetTalk() {
+        player.Playerstate = Player.PlayerState.talk;
+        if (itemName == "testchar2") { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
+        else GameManager.game.SetTalk(itemName, talkNum);//item talk first
+        GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }
     //item move to point
     IEnumerator itemGotoPoint(Vector3 point)

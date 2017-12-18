@@ -25,16 +25,20 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("1"+player.Playerstate);//ok
+        if (player.Playerstate == Player.PlayerState.talk) canDrag = false;
         if (player.Playerstate == Player.PlayerState.idle || player.Playerstate == Player.PlayerState.walk || player.Playerstate == Player.PlayerState.interactive)
         {
             player.Playerstate = Player.PlayerState.interactive;
             originalPosition = myTransform.position;
             if (GetComponent<Image>().sprite.name == "UIMask" || GetComponent<Image>().sprite.name == "diamond") { canDrag = false; }//TODO:名字要改成書的圖片名
             else canDrag = true;
+            Debug.Log(player.Playerstate);
+            //Debug.Log(canDrag);
         }
     }
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log(canDrag);
         if (canDrag)
         {
             Vector3 globalMousePos;
@@ -59,12 +63,15 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
             Vector3 pos = Camera.main.ScreenToWorldPoint(transform.position); pos.z = 0;
 
-            if (Vector3.Distance(pos, target.transform.position) < 1.0f)
+            if (Vector3.Distance(pos, target.transform.position) < 1.0f)//TBD
             {
                 Debug.Log("delete:" + GetComponent<Image>().sprite.name);
 
                 player.DeleteHoldItem(GetComponent<Image>().sprite.name);
                 player.OnItemChanged();
+                if (GetComponent<Image>().sprite.name == "cake_03") {
+                    target.GetComponentInParent<InteractiveItem>().SetTalkNum();
+                }
             }
             myTransform.position = originalPosition;
 
