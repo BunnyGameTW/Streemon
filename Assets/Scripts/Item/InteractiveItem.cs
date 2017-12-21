@@ -28,7 +28,7 @@ public class InteractiveItem : MonoBehaviour {
         {
             _spriteRender.enabled = false;
         }
-        talkNum = 2;
+        talkNum = 1;
     }
     private void Update()
     {
@@ -71,11 +71,11 @@ public class InteractiveItem : MonoBehaviour {
     {
         //TODO:set talk num
         talkNum = i;
-        SetTalk();
+       
     }
     public void SetTalk() {
         player.Playerstate = Player.PlayerState.talk;
-        if (itemName == "testchar2") { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
+        if (itemName == "tutorial") { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
         else GameManager.game.SetTalk(itemName, talkNum);//item talk first
         GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }

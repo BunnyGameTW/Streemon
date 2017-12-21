@@ -66,12 +66,15 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (Vector3.Distance(pos, target.transform.position) < 1.0f)//TBD
             {
                 Debug.Log("delete:" + GetComponent<Image>().sprite.name);
-
+                if (GetComponent<Image>().sprite.name == "cake_03")
+                {//
+                    Debug.Log("123456");
+                    target.GetComponentInParent<InteractiveItem>().SetTalkNum(1);
+                    target.GetComponentInParent<InteractiveItem>().SetTalk();
+                }
                 player.DeleteHoldItem(GetComponent<Image>().sprite.name);
                 player.OnItemChanged();
-                if (GetComponent<Image>().sprite.name == "cake_03") {
-                    target.GetComponentInParent<InteractiveItem>().SetTalkNum();
-                }
+                
             }
             myTransform.position = originalPosition;
 

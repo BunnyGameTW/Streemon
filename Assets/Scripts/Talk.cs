@@ -43,10 +43,19 @@ public class Talk : MonoBehaviour {
         nextParagraph = paragraph;
     }
     public void nextTalk() {
-        if(nextName == "0" && nextParagraph.ToString() == "0")
+        if (nextName == "0" && nextParagraph.ToString() == "0")
         {
             GameManager.game.Player.Playerstate = Player.PlayerState.idle;
             GameManager.game.Setactive(GameManager.game.TalkUI, false);
+        }
+        else if (nextName == "tutorialEnd")
+        {
+            GameManager.game.changeScene("SmainFake");
+        }
+        else if (nextName == "gotoRoom") {
+            //TODO:轉場黑幕
+            StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+           // GameManager.game.changeScene("SredRoom");//not finished
         }
         else
         {

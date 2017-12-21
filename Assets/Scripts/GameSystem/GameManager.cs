@@ -18,7 +18,13 @@ public class GameManager : MonoBehaviour {
         if (game == null) {
             game = this;
         }
-        CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");//loadCSV
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221.csv");//loadCSV
+        else if (SceneManager.GetActiveScene().name == "SmainFake")
+        {
+            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");
+        }
+        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");//loadCSV
         Items = GameObject.FindGameObjectsWithTag("item");
         _talky = _TalkUI.GetComponent<Talk>();
     }
