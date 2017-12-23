@@ -1,25 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SaveData : MonoBehaviour {
-    //string playerInfo;
-    //struct PlayerInfo  
-    //{
-    //    public Vector3 pos;
-    //    public string items;
-    //}
+using System;
+public class SaveData :MonoBehaviour{
+    
+    public string nowScene;
     public Vector3 playerPos;
-    public string playerItems;
-    public int i_scene;
-    public string npc;
-	// Use this for initialization
-	void Start () {
-       
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Serializable]
+    public struct CharsInfo
+    {    
+       public bool firstTalk;
+       public int talkNum;
+    }
+    [Serializable]
+    public struct SceneInfo
+    {
+        public string name;
+        public bool firstTalk;
+        public Vector3[] doorPos;
+
+    }
+    public CharsInfo purple, blue, girl, bird, flower;
+    public SceneInfo blueRoom, redRoom, storageRoom, balcony;
+    public static SaveData _data = new SaveData();
+
+    SaveData()
+    {
+        purple.firstTalk = blue.firstTalk = girl.firstTalk = bird.firstTalk = flower.firstTalk = true;
+        blueRoom.firstTalk = redRoom.firstTalk = storageRoom.firstTalk = balcony.firstTalk = true;
+    }
+   
 }

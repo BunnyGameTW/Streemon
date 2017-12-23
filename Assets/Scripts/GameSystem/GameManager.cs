@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//門的命名要和Scene的名字一樣
 public class GameManager : MonoBehaviour {
     public static GameManager game;//singleton pattern
     [SerializeField]
@@ -18,13 +18,22 @@ public class GameManager : MonoBehaviour {
         if (game == null) {
             game = this;
         }
+      
         Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221.csv");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
-            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");
+            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223.csv");
         }
-        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1218.csv");//loadCSV
+        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223.csv");//loadCSV
+
+        if (!SaveData._data.blueRoom.firstTalk)
+        {
+            Player.transform.position = GameObject.Find(SaveData._data.nowScene).transform.position;
+            SaveData._data.playerPos = Player.transform.position;
+            SaveData._data.nowScene = SceneManager.GetActiveScene().name;//update scene name
+        }
+        else SaveData._data.nowScene = SceneManager.GetActiveScene().name;
         Items = GameObject.FindGameObjectsWithTag("item");
         _talky = _TalkUI.GetComponent<Talk>();
     }
@@ -33,7 +42,16 @@ public class GameManager : MonoBehaviour {
     }
     private void Start()
     {
-        Debug.Log(Items.Length);
+        if (SceneManager.GetActiveScene().name == "SredRoom"  && SaveData._data.blueRoom.firstTalk) {
+            SaveData._data.blueRoom.firstTalk = false;
+            Camera.main.GetComponentInChildren<SpriteRenderer>().color += new Color(0, 0, 0, 1); 
+            StartCoroutine(fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.08f));
+            SetTalk("yellow",1);
+            Player.Playerstate = Player.PlayerState.talk;        
+            Setactive(TalkUI, true);
+        }
+
+
     }
     public void changeScene(string name) {
         SceneManager.LoadScene(name);
@@ -50,19 +68,32 @@ public class GameManager : MonoBehaviour {
     public IEnumerator fadeInOut(SpriteRenderer target, float speed) {
         while (target.color.a <= 1.0f)
         {
-           // Debug.Log(target.color.a);
+            //Debug.Log(target.color.a);
             Color color = target.color;
             color.a += speed;
-            if (color.a > 1.0f) color.a = 1.0f;
-            else if (color.a < 0.0f) color.a = 0.0f;
+            if (color.a > 1.0f)
+            {
+                color.a = 1.0f;
+                target.color = color;
+                break;
+            }
+            else if (color.a < 0.0f)
+            {
+                color.a = 0.0f;
+                target.color = color;
+                break;
+            }
             target.color = color;
             yield return null;
-        }       
+        }
+        yield return new WaitForSeconds(3.0f);
+
+        if (SceneManager.GetActiveScene().name == "SmainFake")
+        {
+            changeScene("SredRoom");
+        }
     }
 
-    public void AddBagItem() {
-
-    }
     public void Setactive(GameObject obj, bool isAble) {
         obj.SetActive(isAble);
        
@@ -72,7 +103,6 @@ public class GameManager : MonoBehaviour {
         get { return _BookUI; }
     }
     public void SetTalk(string name, int paragraph) {
-        //TODO:not finish
       
         //check name and paragraph
         int iLine = 0;

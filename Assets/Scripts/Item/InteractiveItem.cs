@@ -53,6 +53,12 @@ public class InteractiveItem : MonoBehaviour {
                 Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
                 StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));         
             }
+            if(itemName == "Smain" || itemName =="Sbalcony" || itemName == "SredRoom" || itemName =="SblueRoom")
+            {
+              //  StartCoroutine(gotoPoint(Player.PlayerState.offset,transform.position, itemName, walkSpeed));
+                GameManager.game.changeScene(itemName);
+             
+            }
             if (canPick)
             {
                 Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
