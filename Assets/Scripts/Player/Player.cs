@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     Vector3 mouseScrPos = Vector3.zero;
     [SerializeField]
     float moveSpeed = 1.0f;
-    public enum PlayerState { idle, walk, interactive, up, down, offset, pick, talk }
+    public enum PlayerState { idle, walk, interactive, up, down, offset, pick, talk, read }
     public PlayerState _playerState;
     Animator ani;
     SpriteRenderer _spriteRender;
@@ -53,8 +53,7 @@ public class Player : MonoBehaviour {
             }
             //set walk state
             if (_playerState == PlayerState.idle || _playerState == PlayerState.walk) _playerState = PlayerState.walk;
-            if (_playerState == PlayerState.talk) {
-                Debug.Log("player talk click");
+            if (_playerState == PlayerState.talk) {               
                 GameManager.game.Talky.next();
             }
         }
@@ -72,8 +71,8 @@ public class Player : MonoBehaviour {
         setAnimation(_playerState);
     }
     void OnItemClicked(object sender, EventArgs args) {
-        _playerState = PlayerState.pick;//
-
+        _playerState = PlayerState.pick;//??
+       
     }
 
     public PlayerState Playerstate
@@ -87,7 +86,14 @@ public class Player : MonoBehaviour {
         if (transform.position == mouseScrPos) return PlayerState.idle;
         else return PlayerState.walk;
     }
-
+    public void setMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+    public float getMoveSpeed()
+    {
+        return moveSpeed;
+    }
     void setAnimation(PlayerState state) {
 
 
@@ -131,6 +137,5 @@ public class Player : MonoBehaviour {
     }
     public void SetPlayerState(int state) {
         _playerState = (PlayerState)state;
-        Debug.Log("2");
     }
 }

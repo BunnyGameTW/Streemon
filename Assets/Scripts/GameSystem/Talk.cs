@@ -6,7 +6,7 @@ using System;
 public class Talk : MonoBehaviour {
 	public string [] story;
 	int id,subId;//sentence, word
-	
+	public AudioClip talkSE;
 	public int storySize;
 	Text txt;
 	bool sentenceEnd,talkEnd;
@@ -43,29 +43,107 @@ public class Talk : MonoBehaviour {
         nextParagraph = paragraph;
     }
     public void nextTalk() {
-        if (nextName == "0" && nextParagraph.ToString() == "0")
+        //if (nextName == "0" && nextParagraph.ToString() == "0")
+        //{
+        //    GameManager.game.Player.Playerstate = Player.PlayerState.idle;
+        //    GameManager.game.Setactive(GameManager.game.TalkUI, false);
+        //}
+        //else
+        //{
+        //    setTalkBehavior();
+        //}
+        if (nextName != "0")
         {
+            setTalkBehavior();
+            
+        }
+        if (nextName != "0" && nextParagraph.ToString() != "0")//1.special, 2.normal 
+        {
+            if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");//add paragraph number
+            else if (nextName == "yellow" && nextParagraph.ToString() == "999")//特殊
+            {
+                GameManager.game.SetTalk(nextName, nextParagraph);
+                reset();
+                StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+            }
+            else
+            {
+                GameManager.game.SetTalk(nextName, nextParagraph);
+                reset();
+            }
+        }
+        else //1.talk end 2.set talk num
+        {
+            setTalkBehavior();
             GameManager.game.Player.Playerstate = Player.PlayerState.idle;
             GameManager.game.Setactive(GameManager.game.TalkUI, false);
         }
-        else if (nextName == "tutorialEnd")
+       
+
+        if (nextName == "yellow" && nextParagraph == 11)//給淡淡
         {
-            GameManager.game.changeScene("SmainFake");
+
+            GameObject.Find("bird").GetComponent<Animator>().SetTrigger("Eat");
+            GameManager.game.Player.AddHoldItem("diamond");
+            GameManager.game.Player.OnItemChanged();
+            
         }
-        else if (nextName == "yellow" && nextParagraph.ToString() == "999") {
-            GameManager.game.SetTalk(nextName, nextParagraph);
-            reset();
-            StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));           
-        }
-        else if(nextName == "greenFirstTalkEnd")
+    }
+    void setTalkBehavior()
+    {
+        SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
+        for (int i = 0; i < SaveData._data.chars.Length; i++)
         {
-           //TODO:
+            if (nextName.ToString().Contains(SaveData._data.chars[i].name))
+            {
+                _charInfo.name = SaveData._data.chars[i].name;
+                Debug.Log(_charInfo.name);
+            }
+           
         }
-        else
+        if (nextName.ToString().Contains("FirstTalkEnd")) { _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission; }
+        else if (nextName.ToString().Contains("End")) { _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete; }
+        if (nextName == "birdFirstTalkEnd")
         {
-            GameManager.game.SetTalk(nextName, nextParagraph);
-            reset();
+            _charInfo.talkNum = 6;
+        //    _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+        //TODO:箝制任務限制，拿錯對話
         }
+        else if (nextName == "birdrandom")
+        {      
+            _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 6;         
+        }
+        else if (nextName == "birdEnd")
+        {
+
+            _charInfo.talkNum = 14;
+        //    _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete;
+        }
+        else if (nextName == "girlFirstTalkEnd")
+        {
+          
+            _charInfo.talkNum = 30;
+         //   _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+
+
+        }
+        else if (nextName == "girlTalkEnd")
+        {         
+            _charInfo.talkNum = 31;      
+        }
+        else if (nextName == "blueFirstTalkEnd")
+        {         
+            _charInfo.talkNum = 11;   
+           }
+        else if (nextName == "blueRandom")
+        {
+            _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
+         }
+        else if (nextName == "blueTalkEnd")
+        {          
+            _charInfo.talkNum = 18;          
+        }
+        SaveData._data.setCharInfo(_charInfo.name, _charInfo);
     }
     private void Awake()
     {
@@ -75,6 +153,11 @@ public class Talk : MonoBehaviour {
         
         reset();
 
+    }
+    public void skip() {
+
+
+        nextTalk();
     }
     public void reset()
     {
@@ -91,17 +174,20 @@ public class Talk : MonoBehaviour {
     }
 	public void next(){
         if (sentenceEnd)
+        {
+
+            SoundManager.sound.playOne(talkSE);
             StartCoroutine(print());
+        }
         else if (talkEnd)
         {
+           
             nextTalk();
         }
 	}
 	IEnumerator print(){
-		//
-		subId = 0;
-        //if(id==0)txt.text = "";
-        //else txt.text+="\n";
+		
+		subId = 0;  
         txt.text = "";
         while (true){
 			
@@ -119,7 +205,7 @@ public class Talk : MonoBehaviour {
 					sentenceEnd = false;
 					talkEnd = true;
 					id = 0;
-                  
+                    SoundManager.sound.stopSE();
                     break;
 				}
 				sentenceEnd = true;
@@ -127,7 +213,7 @@ public class Talk : MonoBehaviour {
 				break;
 
 			}
-			yield return new WaitForSeconds (0.1f);
+			yield return new WaitForSeconds (0.07f);
 		}
 	}
 }

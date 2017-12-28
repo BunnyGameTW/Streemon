@@ -48,25 +48,61 @@ public class InteractiveItem : MonoBehaviour {
                      
             if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
             {
-                  Debug.Log(itemName + " is clicked");
                 //矯正誤差，讓玩家移動到定點再開始波動畫
                 Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
                 StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));         
             }
             if(itemName == "Smain" || itemName =="Sbalcony" || itemName == "SredRoom" || itemName =="SblueRoom")
             {
-              //  StartCoroutine(gotoPoint(Player.PlayerState.offset,transform.position, itemName, walkSpeed));
-                GameManager.game.changeScene(itemName);
-             
+                // go to door animation 
+                //save player hold item
+                SaveData._data.player.itemName.Clear();//清空
+                foreach (string _item in GameManager.game.Player.HoldItems)
+                {
+                    SaveData._data.player.itemName.Add(_item) ;            
+                }
+                foreach (string _item in SaveData._data.player.itemName)//Debug
+                {
+                    Debug.Log(_item);
+                }
+                //save scene item    
+                SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SaveData._data.nowScene);
+                roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];      
+                for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
+                SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
+                //save chars info
+                for (int i = 0; i <GameManager.game.Items.Length; i++)
+                {
+                    for (int j = 0; j < SaveData._data.chars.Length; j++)
+                    {
+                        if (SaveData._data.chars[j].name == GameManager.game.Items[i].GetComponent<InteractiveItem>().itemName)
+                        {
+                            SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(SaveData._data.chars[j].name); 
+                            if(!(charInfo.name == "bird" && charInfo.talkNum == 6))charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
+
+                            SaveData._data.setCharInfo(charInfo.name, charInfo);
+                        }
+                    }
+
+                }
+
+                GameManager.game.changeScene(itemName);            
+            }
+            if(itemName == "mouse") {//特例
+                GetComponent<SpriteRenderer>().enabled = true;
+                Destroy(GameObject.Find("cheese_02_target"));
             }
             if (canPick)
             {
+                SoundManager.sound.playOne(SoundManager.sound.playerse.pick);              
                 Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
                 StartCoroutine(itemGotoPoint(pointPos)); 
             
             }
             if (canTalk) {
-               
+                //load talk data
+               SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(itemName);
+               talkNum = charInfo.talkNum;
                 SetTalk();
 
 
@@ -75,13 +111,13 @@ public class InteractiveItem : MonoBehaviour {
     }
     public void SetTalkNum(int i)
     {
-        //TODO:set talk num
         talkNum = i;
        
     }
     public void SetTalk() {
         player.Playerstate = Player.PlayerState.talk;
-        if (itemName == "tutorial") { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
+      
+        if (itemName == "tutorial" || (itemName =="girl" && talkNum !=15) || (itemName == "blue" && talkNum !=11 && talkNum !=12 && talkNum!=13 && talkNum != 18)) { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
         else GameManager.game.SetTalk(itemName, talkNum);//item talk first
         GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }
@@ -90,7 +126,7 @@ public class InteractiveItem : MonoBehaviour {
     {
         _canInteractive = false;
         interactiveDistance = 0;
-        _spriteRender.sortingOrder = 4;
+        _spriteRender.sortingOrder = 9;
 
         if (canPick)
         {

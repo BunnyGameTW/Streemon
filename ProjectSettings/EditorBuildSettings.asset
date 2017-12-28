@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Stitle.unity
+    guid: 53fdf2d7f3dbdaa418bcffebae271074
+  - enabled: 1
     path: Assets/Scenes/Sopen.unity
     guid: 90d86ca2e0199b744920054275fccf95
   - enabled: 1
@@ -20,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sbalcony.unity
     guid: 6dfdd715fd5eb7249bd1a378f44d107f
+  - enabled: 1
+    path: Assets/Scenes/SblueRoom.unity
+    guid: afcbd27e2b689af4bb370f78ee9f6041

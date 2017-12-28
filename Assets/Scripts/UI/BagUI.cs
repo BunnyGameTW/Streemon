@@ -11,8 +11,12 @@ public class BagUI : MonoBehaviour {
     Sprite [] _sprite;
     Player player;
     List<string> itemList;
-	void Start () {
+    private void Awake()
+    {
         _sprite = new Sprite[6];
+      
+    }
+    void Start () {
         player = GameManager.game.Player;
         player.OnItemChange += this.OnItemChange;//監聽
         resetDisplayItem();
@@ -47,9 +51,5 @@ public class BagUI : MonoBehaviour {
             itemListNum++;
         }
     }
-    //public void OnPointerDown()
-    //{
-    //    player.Playerstate = Player.PlayerState.interactive;
-      
-    //}
+
 }

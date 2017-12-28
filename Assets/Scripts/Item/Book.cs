@@ -7,9 +7,9 @@ public class Book : MonoBehaviour {
     int pageNum;
     public GameObject Lbtn, Rbtn;
     public GameObject bookImg;
-    //現在是一張圖兩頁 到時候可能要改
 	// Use this for initialization
 	void OnEnable () {
+        SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
         pageNum = 0;
         displayBtn();
         displayImg();
@@ -17,11 +17,13 @@ public class Book : MonoBehaviour {
 
     public void changePage(int i) {
         pageNum += i;
+        SoundManager.sound.playOne(SoundManager.sound.playerse.pick);
         displayBtn();
         displayImg();
     }
     public void closeBook() {
-       GameManager.game.Player.Playerstate = Player.PlayerState.idle;
+        SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
+        GameManager.game.Player.Playerstate = Player.PlayerState.idle;
         GameManager.game.Setactive(this.gameObject, false);
     }
     void displayBtn() {

@@ -13,13 +13,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private GameObject _TalkUI;
     Talk _talky;
+    
     private void Awake()
     {
         if (game == null) {
             game = this;
         }
-      
-        Debug.Log(SceneManager.GetActiveScene().name);
+
+    #if UNITY_EDITOR
+
         if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221.csv");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
@@ -27,31 +29,123 @@ public class GameManager : MonoBehaviour {
         }
         else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223.csv");//loadCSV
 
-        if (!SaveData._data.blueRoom.firstTalk)
+#elif UNITY_ANDROID
+        
+        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile("jar:file://" + Application.dataPath + "!/assets/", "opentest1221.csv");//loadCSV
+        else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
-            Player.transform.position = GameObject.Find(SaveData._data.nowScene).transform.position;
-            SaveData._data.playerPos = Player.transform.position;
-            SaveData._data.nowScene = SceneManager.GetActiveScene().name;//update scene name
+            CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "fakeopentest1223.csv");
         }
-        else SaveData._data.nowScene = SceneManager.GetActiveScene().name;
+        else CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "test1223.csv");//loadCSV
+#else 
+        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "opentest1221.csv");//loadCSV
+        else if (SceneManager.GetActiveScene().name == "SmainFake")
+        {
+            CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "fakeopentest1223.csv");
+        }
+        else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223.csv");//loadCSV
+
+#endif
+       
+        //Debug用 跳關可能可以用
+        if (SceneManager.GetActiveScene().name == "SblueRoom") SaveData._data.tutorialEnd = true;
+        //load player position
+        if (SaveData._data.tutorialEnd)
+        {
+            SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SceneManager.GetActiveScene().name);
+
+            if ((roomInfo.name != "SblueRoom" || !roomInfo.firstTalk))
+            {
+                Player.transform.position = GameObject.Find(SaveData._data.nowScene).transform.position;
+                SaveData._data.playerPos = Player.transform.position;
+            }
+            SaveData._data.nowScene = roomInfo.name;//first set scene name
+        }
+
         Items = GameObject.FindGameObjectsWithTag("item");
-        _talky = _TalkUI.GetComponent<Talk>();
+        
+        if(SceneManager.GetActiveScene().name != "Stitle") _talky = _TalkUI.GetComponent<Talk>();
     }
     public void refindItem() {
         Items = GameObject.FindGameObjectsWithTag("item");
     }
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "SredRoom"  && SaveData._data.blueRoom.firstTalk) {
-            SaveData._data.blueRoom.firstTalk = false;
-            Camera.main.GetComponentInChildren<SpriteRenderer>().color += new Color(0, 0, 0, 1); 
-            StartCoroutine(fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.08f));
-            SetTalk("yellow",1);
-            Player.Playerstate = Player.PlayerState.talk;        
-            Setactive(TalkUI, true);
+        if (SaveData._data.tutorialEnd)
+        {
+            // load scene info
+            SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SceneManager.GetActiveScene().name);
+            if (!roomInfo.firstIn)
+            {
+                for (int i = 0; i < Items.Length; i++)
+                {
+                    bool isExist = false;
+                    for (int j = 0; j < roomInfo.itemName.Length; j++)
+                    {// in scene set active
+                        if (Items[i].name == roomInfo.itemName[j]) isExist = true;
+                    }
+                    Items[i].SetActive(isExist);
+                }
+            }
+
+            //load player info
+
+            foreach (string _item in SaveData._data.player.itemName)
+            {
+               if(_item != "") Player.AddHoldItem(_item);
+                if (_item == "mouse" && SceneManager.GetActiveScene().name == "SblueRoom") GameObject.Find("fakeMouse").SetActive(false);//特例 TODO:bug
+            }
+            if (Player.HoldItems.Count > 0)
+            {
+                Player.OnItemChanged();
+                Debug.Log("123456");
+            }
+
+            //tutorial
+            if (roomInfo.name == "SblueRoom" && roomInfo.firstTalk)
+            {
+                roomInfo.firstTalk = false;
+                Camera.main.GetComponentInChildren<SpriteRenderer>().color += new Color(0, 0, 0, 1);
+                StartCoroutine(fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.08f));
+                SetTalk("yellow", 1);
+                Player.Playerstate = Player.PlayerState.talk;
+                Setactive(TalkUI, true);
+            }
+
+            if (roomInfo.firstIn)  //is first in
+            {
+                roomInfo.firstIn = false;
+            }
+            SaveData._data.setRoomInfo(roomInfo.name, roomInfo);//save room
         }
+    }
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
+        if (Input.GetKeyDown(KeyCode.Keypad1)) {
+            Player.AddHoldItem("mouse");
+            Player.OnItemChanged();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            Player.AddHoldItem("seed");
+            Player.OnItemChanged();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            float speed = Player.getMoveSpeed();
+            speed++;
+            Player.setMoveSpeed(speed);
 
 
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
+        if (Input.GetKeyDown(KeyCode.Escape)) endGame();
+    }
+    void resetGame()
+    {
+        SaveData._data = new SaveData();
+        changeScene("Stitle");
     }
     public void changeScene(string name) {
         SceneManager.LoadScene(name);
@@ -90,7 +184,8 @@ public class GameManager : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().name == "SmainFake")
         {
-            changeScene("SredRoom");
+            SaveData._data.tutorialEnd = true;
+            changeScene("SblueRoom");
         }
     }
 
@@ -107,13 +202,15 @@ public class GameManager : MonoBehaviour {
         //check name and paragraph
         int iLine = 0;
         for (int i = 0; ; i++) {
-            Debug.Log(CSV.GetInstance().arrayData[i][0]);
+           // Debug.Log(CSV.GetInstance().arrayData[i][0]);
             if (name == CSV.GetInstance().arrayData[i][0] && paragraph.ToString() == CSV.GetInstance().arrayData[i][1]) {
                 iLine = i;
                 break;
             }
         }
-       
+        //set se
+        if (CSV.GetInstance().arrayData[iLine][0] == "yellow") _talky.talkSE = SoundManager.sound.uise.talk[0];
+        else _talky.talkSE = SoundManager.sound.uise.talk[1];
         int np; int.TryParse(CSV.GetInstance().arrayData[iLine][3], out np);//4th parameter
         _talky.SetNextTalk(CSV.GetInstance().arrayData[iLine][2], np);
         int storySize = CSV.GetInstance().arrayData[iLine].Length;
@@ -122,9 +219,9 @@ public class GameManager : MonoBehaviour {
         for (int j = 4; j < storySize; j++)
         {//讀入第N段文字
             talkStory[j - 4] = CSV.GetInstance().arrayData[iLine][j];
-            Debug.Log(talkStory[j - 4]);
+        //    Debug.Log(talkStory[j - 4]);
         }
-        Debug.Log(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
+    //    Debug.Log(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
         _talky.SetCharsBG(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
 
     }
@@ -134,5 +231,9 @@ public class GameManager : MonoBehaviour {
     }
     public Talk Talky {
         get { return _talky; }
+    }
+    public void endGame()
+    {
+        Application.Quit();
     }
 }

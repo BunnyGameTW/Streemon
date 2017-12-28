@@ -6,7 +6,7 @@ using System;
 
 public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-   //可被吃掉的物品要和空物件 "itemname"+"_target" 搭配使用 ,target tag要設置
+   //可被吃掉的物品要和空物件 "image name"+"_target" 搭配使用 ,target tag要設置
     GameObject target;
     private Transform myTransform;
     private RectTransform myRectTransform;
@@ -20,25 +20,24 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         originalPosition = myTransform.position;
         player = GameManager.game.Player;
         canDrag = false;
+      
     }
    
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("1"+player.Playerstate);//ok
+      
         if (player.Playerstate == Player.PlayerState.talk) canDrag = false;
         if (player.Playerstate == Player.PlayerState.idle || player.Playerstate == Player.PlayerState.walk || player.Playerstate == Player.PlayerState.interactive)
         {
             player.Playerstate = Player.PlayerState.interactive;
             originalPosition = myTransform.position;
-            if (GetComponent<Image>().sprite.name == "UIMask" || GetComponent<Image>().sprite.name == "diamond") { canDrag = false; }//TODO:名字要改成書的圖片名
+            if (GetComponent<Image>().sprite.name == "transparent" || GetComponent<Image>().sprite.name == "book") { canDrag = false; }//TODO:名字要改成書的圖片名
             else canDrag = true;
-            Debug.Log(player.Playerstate);
-            //Debug.Log(canDrag);
+         
         }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(canDrag);
         if (canDrag)
         {
             Vector3 globalMousePos;
@@ -52,31 +51,56 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (canDrag)
         {
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("target");
-            for (int i = 0; i < targets.Length; i++)
-            {
-                if (targets[i].name == GetComponent<Image>().sprite.name + "_target")
-                {
-                    target = targets[i];
-                }
-            }
-
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("target");         
             Vector3 pos = Camera.main.ScreenToWorldPoint(transform.position); pos.z = 0;
-
-            if (Vector3.Distance(pos, target.transform.position) < 1.0f)//TBD
-            {
-                Debug.Log("delete:" + GetComponent<Image>().sprite.name);
-                if (GetComponent<Image>().sprite.name == "cake_03")
-                {//
-                    Debug.Log("123456");
-                    target.GetComponentInParent<InteractiveItem>().SetTalkNum(1);
-                    target.GetComponentInParent<InteractiveItem>().SetTalk();
+            if (targets.Length != 0) {
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    if (Vector3.Distance(pos, targets[i].transform.position) < 1.0f)
+                    {
+                        Debug.Log(targets[i]);
+                        //判斷是否為正確目標
+                        if (targets[i].name == GetComponent<Image>().sprite.name + "_target")
+                        {
+                            Debug.Log("delete:" + GetComponent<Image>().sprite.name);
+                            if (GetComponent<Image>().sprite.name == "cheese_02")//cage has cheese, mouse go to cage
+                            {
+                                Debug.Log("cheese delete!");
+                                targets[i].GetComponentInChildren<SpriteRenderer>().enabled = true;//display cheese
+                                FindObjectOfType<mouse>()._mishState = mouse.MishState.caught;//set mouse go to cage
+                                FindObjectOfType<mouse>().cagePos.x = targets[i].transform.position.x;//set mouse cage pos               
+                            }
+                            else {
+                                int _talkNum = 0;
+                                if (GetComponent<Image>().sprite.name == "mouse")
+                                {
+                                    targets[i].GetComponentInParent<Animator>().SetTrigger("Flip");
+                                    _talkNum = 8;
+                                }
+                                else if (GetComponent<Image>().sprite.name == "diamond") _talkNum = 15;
+                                else if (GetComponent<Image>().sprite.name == "seed") _talkNum = 13;
+                                targets[i].GetComponentInParent<InteractiveItem>().SetTalkNum(_talkNum);
+                                targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
+                                
+                            }
+                            player.DeleteHoldItem(GetComponent<Image>().sprite.name);
+                            player.OnItemChanged(); 
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Log("uncorrect target");
+                        }
+                        //yes
+                        //delete
+                        //no
+                        //talk and repos
+                    }
+                   
                 }
-                player.DeleteHoldItem(GetComponent<Image>().sprite.name);
-                player.OnItemChanged();
-                
             }
             myTransform.position = originalPosition;
+           
 
         }
     }
@@ -98,10 +122,10 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             isBig = false;
             transform.localScale = transform.localScale / 1.5f;
-            if (GetComponent<Image>().sprite.name == "diamond")
+            if (GetComponent<Image>().sprite.name == "book")
             {//TODO:名字要改成書的圖片名
                 GameManager.game.Setactive(GameManager.game.BookUI, true);
-                player.Playerstate = Player.PlayerState.interactive;
+                player.Playerstate = Player.PlayerState.read;
             }
         }
     }

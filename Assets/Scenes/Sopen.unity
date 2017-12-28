@@ -464,9 +464,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1572429757
+  m_SortingLayer: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: a618e0eeccd62fa43a260d29d3c71d15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -546,6 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789659231}
   - component: {fileID: 1789659230}
+  - component: {fileID: 1789659232}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -580,6 +581,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789659232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1789659229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df41e03a1f744844b826a69d5ba8922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerse:
+    pick: {fileID: 8300000, guid: 359fa3c147bbaeb4ca5257f33592c052, type: 3}
+    jump: {fileID: 8300000, guid: c41786501ad67f1499e35922944de316, type: 3}
+  uise:
+    click:
+    - {fileID: 8300000, guid: 4973b84a6d31f11469a1a7487c7be696, type: 3}
+    - {fileID: 8300000, guid: b7660769cae84c3459d13d397312fbcc, type: 3}
+    talk:
+    - {fileID: 8300000, guid: d41c74420f964f24497c21cd373a3eb9, type: 3}
+    - {fileID: 8300000, guid: b67245f7ec20b454bbd616c5e9652fc2, type: 3}
+  musics:
+  - sceneName: SpurpleRoom
+    bgm: {fileID: 8300000, guid: 3820fdbedb42fe44e95f82afda35f76c, type: 3}
+  - sceneName: SblueRoom
+    bgm: {fileID: 8300000, guid: 1138b565d9231954fa2e0f3200932633, type: 3}
+  - sceneName: Sbalcony
+    bgm: {fileID: 8300000, guid: 570b28fb942e36b4484bae747ee17242, type: 3}
+  - sceneName: Smain
+    bgm: {fileID: 8300000, guid: c520616273e093c4ea26be6c56919738, type: 3}
+  - sceneName: SredRoom
+    bgm: {fileID: 8300000, guid: 370ff0d399274814e88e2f0e5f67fd0a, type: 3}
+  - sceneName: Stitle
+    bgm: {fileID: 8300000, guid: 94527abfd68152344bee0cd3725b1926, type: 3}
+  - sceneName: Sopen
+    bgm: {fileID: 8300000, guid: a66b832377868304786663d6aa8c78b2, type: 3}
 --- !u!1001 &1841402179
 Prefab:
   m_ObjectHideFlags: 0
@@ -633,6 +670,8 @@ GameObject:
   - component: {fileID: 1941281297}
   - component: {fileID: 1941281296}
   - component: {fileID: 1941281295}
+  - component: {fileID: 1941281300}
+  - component: {fileID: 1941281299}
   m_Layer: 0
   m_Name: bg
   m_TagString: item
@@ -714,7 +753,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27bc66c5948c78846a252d5063091f3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc0ad7f3860f2a94aa622b800cd13e5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -737,6 +776,48 @@ Transform:
   m_Father: {fileID: 120589745}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1941281299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1941281294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1941281300}
+          m_MethodName: change
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
+--- !u!114 &1941281300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1941281294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a236619556fb36449f7c1cca7add99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: fcfc7cd5eb4e902469312725665a6709, type: 3}
 --- !u!1001 &1981818382
 Prefab:
   m_ObjectHideFlags: 0
@@ -838,23 +919,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114832610012777434, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
-        type: 2}
-      propertyPath: chars.Array.data[2].name
-      value: red
-      objectReference: {fileID: 0}
-    - target: {fileID: 114832610012777434, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
-        type: 2}
-      propertyPath: chars.Array.data[2].icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 5dbe1e976ab6d6948b810c86087d1df7,
-        type: 3}
-    - target: {fileID: 114832610012777434, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
-        type: 2}
-      propertyPath: chars.Array.data[2].bg
-      value: 
-      objectReference: {fileID: 21300000, guid: d9e348b66fd07ad4ca2e4a194db2e70b,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4aadfdfc631600f46bdd5a2e00dbb898, type: 2}
   m_IsPrefabParent: 0
