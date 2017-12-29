@@ -55,7 +55,7 @@ public class mouse : MonoBehaviour {
                 cheeseInCage.enabled = false;
                 mouseInCage.enabled = true;
                 mouseInCage.transform.root.GetComponent<SpriteRenderer>().sprite = cageCaught;
-                realMouse.GetComponent<BoxCollider2D>().enabled = true; // SetActive(true);
+                realMouse.GetComponent<BoxCollider2D>().enabled = true; 
                 GameManager.game.refindItem();
                 Destroy(this.gameObject);
             }

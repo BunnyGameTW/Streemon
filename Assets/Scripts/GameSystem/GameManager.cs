@@ -93,12 +93,12 @@ public class GameManager : MonoBehaviour {
             foreach (string _item in SaveData._data.player.itemName)
             {
                if(_item != "") Player.AddHoldItem(_item);
-                if (_item == "mouse" && SceneManager.GetActiveScene().name == "SblueRoom") GameObject.Find("fakeMouse").SetActive(false);//特例 TODO:bug
+               // if (_item == "mouse" && SceneManager.GetActiveScene().name == "SblueRoom") GameObject.Find("fakeMouse").SetActive(false);//特例 TODO:bug
             }
             if (Player.HoldItems.Count > 0)
             {
                 Player.OnItemChanged();
-                Debug.Log("123456");
+              //  Debug.Log("123456");
             }
 
             //tutorial
@@ -182,11 +182,11 @@ public class GameManager : MonoBehaviour {
         }
         yield return new WaitForSeconds(3.0f);
 
-        if (SceneManager.GetActiveScene().name == "SmainFake")
-        {
-            SaveData._data.tutorialEnd = true;
-            changeScene("SblueRoom");
-        }
+        //if (SceneManager.GetActiveScene().name == "SmainFake")
+        //{
+        //    SaveData._data.tutorialEnd = true;
+        //    changeScene("SblueRoom");
+        //}
     }
 
     public void Setactive(GameObject obj, bool isAble) {
@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour {
         //set se
         if (CSV.GetInstance().arrayData[iLine][0] == "yellow") _talky.talkSE = SoundManager.sound.uise.talk[0];
         else _talky.talkSE = SoundManager.sound.uise.talk[1];
+
         int np; int.TryParse(CSV.GetInstance().arrayData[iLine][3], out np);//4th parameter
         _talky.SetNextTalk(CSV.GetInstance().arrayData[iLine][2], np);
         int storySize = CSV.GetInstance().arrayData[iLine].Length;

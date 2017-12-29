@@ -17,7 +17,6 @@ public class InteractiveItem : MonoBehaviour {
     bool canPick;
     [SerializeField]
     bool canTalk;
-    int talkNum;
     private void Start()
     {
         player = GameManager.game.Player;
@@ -28,7 +27,6 @@ public class InteractiveItem : MonoBehaviour {
         {
             _spriteRender.enabled = false;
         }
-        talkNum = 1;
     }
     private void Update()
     {
@@ -70,6 +68,7 @@ public class InteractiveItem : MonoBehaviour {
                 roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];      
                 for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
                 SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
+
                 //save chars info
                 for (int i = 0; i <GameManager.game.Items.Length; i++)
                 {
@@ -77,9 +76,12 @@ public class InteractiveItem : MonoBehaviour {
                     {
                         if (SaveData._data.chars[j].name == GameManager.game.Items[i].GetComponent<InteractiveItem>().itemName)
                         {
-                            SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(SaveData._data.chars[j].name); 
-                            if(!(charInfo.name == "bird" && charInfo.talkNum == 6))charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
-
+                            SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(SaveData._data.chars[j].name);
+                            // if(!(charInfo.name == "bird" && charInfo.talkNum == 6))charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
+                         //   charInfo.name = SaveData._data.chars[j].name;
+                          //  charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
+                            //charInfo.talkStatus  ;
+                            
                             SaveData._data.setCharInfo(charInfo.name, charInfo);
                         }
                     }
@@ -100,25 +102,22 @@ public class InteractiveItem : MonoBehaviour {
             
             }
             if (canTalk) {
-                //load talk data
-               SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(itemName);
-               talkNum = charInfo.talkNum;
-                SetTalk();
-
-
+                 SetTalk();
             }
         }
     }
-    public void SetTalkNum(int i)
-    {
-        talkNum = i;
-       
-    }
+
     public void SetTalk() {
         player.Playerstate = Player.PlayerState.talk;
-      
-        if (itemName == "tutorial" || (itemName =="girl" && talkNum !=15) || (itemName == "blue" && talkNum !=11 && talkNum !=12 && talkNum!=13 && talkNum != 18)) { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
-        else GameManager.game.SetTalk(itemName, talkNum);//item talk first
+        //load talk data
+        int _talkNum = 1;
+        if(SaveData._data.tutorialEnd) _talkNum = SaveData._data.getCharInfo(itemName).talkNum;
+        Debug.Log("name"+ SaveData._data.getCharInfo(itemName).name + "charTF" + SaveData._data.getCharInfo(itemName).charTalkFirst);
+        if (itemName == "tutorial" || !SaveData._data.getCharInfo(itemName).charTalkFirst ) { GameManager.game.SetTalk("yellow", _talkNum); }//player talk first
+        else GameManager.game.SetTalk(itemName, _talkNum);//item talk first
+
+        //if (itemName == "tutorial" || (itemName =="girl" && talkNum !=15) || (itemName == "blue" && talkNum !=11 && talkNum !=12 && talkNum!=13 && talkNum != 18)) { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
+        //else GameManager.game.SetTalk(itemName, _talkNum);//item talk first
         GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }
     //item move to point

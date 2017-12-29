@@ -65,7 +65,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                             Debug.Log("delete:" + GetComponent<Image>().sprite.name);
                             if (GetComponent<Image>().sprite.name == "cheese_02")//cage has cheese, mouse go to cage
                             {
-                                Debug.Log("cheese delete!");
+                              
                                 targets[i].GetComponentInChildren<SpriteRenderer>().enabled = true;//display cheese
                                 FindObjectOfType<mouse>()._mishState = mouse.MishState.caught;//set mouse go to cage
                                 FindObjectOfType<mouse>().cagePos.x = targets[i].transform.position.x;//set mouse cage pos               
@@ -78,8 +78,12 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                     _talkNum = 8;
                                 }
                                 else if (GetComponent<Image>().sprite.name == "diamond") _talkNum = 15;
-                                else if (GetComponent<Image>().sprite.name == "seed") _talkNum = 13;
-                                targets[i].GetComponentInParent<InteractiveItem>().SetTalkNum(_talkNum);
+                                else if (GetComponent<Image>().sprite.name == "seed") _talkNum = 13;                              
+                                //save talk data
+                                SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(targets[i].GetComponentInParent<InteractiveItem>().itemName);
+                                charInfo.talkNum = _talkNum;
+                                SaveData._data.setCharInfo(charInfo.name, charInfo);
+
                                 targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
                                 
                             }

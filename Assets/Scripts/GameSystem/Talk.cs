@@ -42,24 +42,20 @@ public class Talk : MonoBehaviour {
         nextName = name;
         nextParagraph = paragraph;
     }
-    public void nextTalk() {
-        //if (nextName == "0" && nextParagraph.ToString() == "0")
+    public void nextTalk() {    
+        //if (nextName != "0")
         //{
-        //    GameManager.game.Player.Playerstate = Player.PlayerState.idle;
-        //    GameManager.game.Setactive(GameManager.game.TalkUI, false);
+        //    setTalkBehavior();    
         //}
-        //else
-        //{
-        //    setTalkBehavior();
-        //}
-        if (nextName != "0")
-        {
-            setTalkBehavior();
-            
-        }
         if (nextName != "0" && nextParagraph.ToString() != "0")//1.special, 2.normal 
         {
-            if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");//add paragraph number
+
+            if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");
+            else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
+            {
+                SaveData._data.tutorialEnd = true;
+                GameManager.game.changeScene("SblueRoom");
+            }
             else if (nextName == "yellow" && nextParagraph.ToString() == "999")//特殊
             {
                 GameManager.game.SetTalk(nextName, nextParagraph);
@@ -78,20 +74,19 @@ public class Talk : MonoBehaviour {
             GameManager.game.Player.Playerstate = Player.PlayerState.idle;
             GameManager.game.Setactive(GameManager.game.TalkUI, false);
         }
-       
-
-        if (nextName == "yellow" && nextParagraph == 11)//給淡淡
+        if (nextName == "yellow" && nextParagraph == 11)//給淡淡 //直接給玩家還是掉地上
         {
-
             GameObject.Find("bird").GetComponent<Animator>().SetTrigger("Eat");
             GameManager.game.Player.AddHoldItem("diamond");
             GameManager.game.Player.OnItemChanged();
-            
         }
+
+
     }
     void setTalkBehavior()
     {
         SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
+        _charInfo.charTalkFirst = true;
         for (int i = 0; i < SaveData._data.chars.Length; i++)
         {
             if (nextName.ToString().Contains(SaveData._data.chars[i].name))
@@ -101,13 +96,11 @@ public class Talk : MonoBehaviour {
             }
            
         }
-        if (nextName.ToString().Contains("FirstTalkEnd")) { _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission; }
-        else if (nextName.ToString().Contains("End")) { _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete; }
+        if (nextName.ToString().Contains("FirstTalkEnd"))  _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission; 
+        else if (nextName.ToString().Contains("End"))  _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete; 
         if (nextName == "birdFirstTalkEnd")
-        {
-            _charInfo.talkNum = 6;
-        //    _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
-        //TODO:箝制任務限制，拿錯對話
+        {            
+            _charInfo.talkNum = 6;      
         }
         else if (nextName == "birdrandom")
         {      
@@ -115,17 +108,15 @@ public class Talk : MonoBehaviour {
         }
         else if (nextName == "birdEnd")
         {
-
             _charInfo.talkNum = 14;
-        //    _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete;
+        }
+        else if (nextName == "birdEndTalkRandom")
+        {
+          //  _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 16;//bird16 or bird17
         }
         else if (nextName == "girlFirstTalkEnd")
-        {
-          
+        {      
             _charInfo.talkNum = 30;
-         //   _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
-
-
         }
         else if (nextName == "girlTalkEnd")
         {         
@@ -134,7 +125,7 @@ public class Talk : MonoBehaviour {
         else if (nextName == "blueFirstTalkEnd")
         {         
             _charInfo.talkNum = 11;   
-           }
+         }
         else if (nextName == "blueRandom")
         {
             _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
@@ -143,6 +134,7 @@ public class Talk : MonoBehaviour {
         {          
             _charInfo.talkNum = 18;          
         }
+        //save char info
         SaveData._data.setCharInfo(_charInfo.name, _charInfo);
     }
     private void Awake()

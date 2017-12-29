@@ -20,6 +20,7 @@ public class SaveData :MonoBehaviour{
        public string name;
        public bool firstTalk;
        public int talkNum;
+       public bool charTalkFirst;
     }
     [Serializable]
     public struct SceneInfo
@@ -58,7 +59,9 @@ public class SaveData :MonoBehaviour{
         {
             chars[i].firstTalk = true;
             chars[i].talkNum = 1;
-            chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;
+            chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
+           if(i == 2 || i == 1) chars[i].charTalkFirst = false;
+           else chars[i].charTalkFirst = true;
         }
         chars[2].talkNum = 14;
         chars[1].talkNum = 32;
