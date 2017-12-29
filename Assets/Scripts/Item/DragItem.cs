@@ -69,36 +69,80 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                 targets[i].GetComponentInChildren<SpriteRenderer>().enabled = true;//display cheese
                                 FindObjectOfType<mouse>()._mishState = mouse.MishState.caught;//set mouse go to cage
                                 FindObjectOfType<mouse>().cagePos.x = targets[i].transform.position.x;//set mouse cage pos               
+                                player.DeleteHoldItem(GetComponent<Image>().sprite.name);
+                                player.OnItemChanged();
                             }
                             else {
-                                int _talkNum = 0;
-                                if (GetComponent<Image>().sprite.name == "mouse")
-                                {
-                                    targets[i].GetComponentInParent<Animator>().SetTrigger("Flip");
-                                    _talkNum = 8;
-                                }
-                                else if (GetComponent<Image>().sprite.name == "diamond") _talkNum = 15;
-                                else if (GetComponent<Image>().sprite.name == "seed") _talkNum = 13;                              
-                                //save talk data
                                 SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(targets[i].GetComponentInParent<InteractiveItem>().itemName);
-                                charInfo.talkNum = _talkNum;
-                                SaveData._data.setCharInfo(charInfo.name, charInfo);
+                                               
+                                if (charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.canDoMission)
+                                {
+                                    if (GetComponent<Image>().sprite.name == "mouse")
+                                    {
+                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Flip");
+                                        charInfo.talkNum = 8;
+                                        charInfo.charTalkFirst = true;
+                                        //set girl can first talk
+                                        SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
+                                    }
+                                    else if (GetComponent<Image>().sprite.name == "diamond")
+                                    {
+                                        charInfo.talkNum = 15;
+                                        charInfo.charTalkFirst = true;
+                                        //set blue can first talk
+                                        SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
 
-                                targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
-                                
-                            }
-                            player.DeleteHoldItem(GetComponent<Image>().sprite.name);
-                            player.OnItemChanged(); 
+                                    }
+                                    else if (GetComponent<Image>().sprite.name == "seed")
+                                    {
+                                        charInfo.talkNum = 13;
+                                        charInfo.charTalkFirst = true;
+                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Eat");
+                                    }
+                                    //save talk data
+                                    SaveData._data.setCharInfo(charInfo.name, charInfo);
+                                    targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
+                                    //delete item
+                                    player.DeleteHoldItem(GetComponent<Image>().sprite.name);
+                                    player.OnItemChanged();
+                                }
+                                else if (charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.firstTalk || charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.premissionNotComplete)
+                                {
+                                    targets[i].GetComponentInParent<InteractiveItem>().SetSpecialTalk();                                 
+                                }
+                            }                          
                             break;
                         }
                         else
                         {
+                            SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(targets[i].GetComponentInParent<InteractiveItem>().itemName);
+                            if (charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.canDoMission)//解任務 給錯
+                            {
+                                if (charInfo.name == "bird")
+                                {
+                                    charInfo.talkNum = 54;
+                                    charInfo.charTalkFirst = false;
+                                }
+                                else if (charInfo.name == "girl")
+                                {
+                                    charInfo.talkNum = 21;
+                                    charInfo.charTalkFirst = true;
+                                }
+                                else if (charInfo.name == "blue")
+                                {
+                                    charInfo.talkNum = 20;
+                                    charInfo.charTalkFirst = true;
+                                }
+                                SaveData._data.setCharInfo(charInfo.name, charInfo);
+                                targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
+
+                            }
+                            else
+                            {
+                                targets[i].GetComponentInParent<InteractiveItem>().SetSpecialTalk();
+                            }
                             Debug.Log("uncorrect target");
-                        }
-                        //yes
-                        //delete
-                        //no
-                        //talk and repos
+                        }                    
                     }
                    
                 }

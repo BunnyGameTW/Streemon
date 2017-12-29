@@ -68,26 +68,7 @@ public class InteractiveItem : MonoBehaviour {
                 roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];      
                 for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
                 SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
-
-                //save chars info
-                for (int i = 0; i <GameManager.game.Items.Length; i++)
-                {
-                    for (int j = 0; j < SaveData._data.chars.Length; j++)
-                    {
-                        if (SaveData._data.chars[j].name == GameManager.game.Items[i].GetComponent<InteractiveItem>().itemName)
-                        {
-                            SaveData.CharsInfo charInfo = SaveData._data.getCharInfo(SaveData._data.chars[j].name);
-                            // if(!(charInfo.name == "bird" && charInfo.talkNum == 6))charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
-                         //   charInfo.name = SaveData._data.chars[j].name;
-                          //  charInfo.talkNum = GameManager.game.Items[i].GetComponent<InteractiveItem>().talkNum;
-                            //charInfo.talkStatus  ;
-                            
-                            SaveData._data.setCharInfo(charInfo.name, charInfo);
-                        }
-                    }
-
-                }
-
+             
                 GameManager.game.changeScene(itemName);            
             }
             if(itemName == "mouse") {//特例
@@ -106,19 +87,37 @@ public class InteractiveItem : MonoBehaviour {
             }
         }
     }
-
+    public void SetSpecialTalk()
+    {
+        player.Playerstate = Player.PlayerState.talk;
+        SaveData.CharsInfo _charInfo = SaveData._data.getCharInfo(itemName);
+        if (_charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.firstTalk) { GameManager.game.SetTalk("yellow", 51); }
+        else if(_charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.premissionNotComplete) { GameManager.game.SetTalk("yellow", 52); }
+        else if(_charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.missionComplete) { GameManager.game.SetTalk("yellow", 53); }
+        GameManager.game.Setactive(GameManager.game.TalkUI, true);
+    }
     public void SetTalk() {
         player.Playerstate = Player.PlayerState.talk;
         //load talk data
-        int _talkNum = 1;
-        if(SaveData._data.tutorialEnd) _talkNum = SaveData._data.getCharInfo(itemName).talkNum;
-        Debug.Log("name"+ SaveData._data.getCharInfo(itemName).name + "charTF" + SaveData._data.getCharInfo(itemName).charTalkFirst);
-        if (itemName == "tutorial" || !SaveData._data.getCharInfo(itemName).charTalkFirst ) { GameManager.game.SetTalk("yellow", _talkNum); }//player talk first
-        else GameManager.game.SetTalk(itemName, _talkNum);//item talk first
+        SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
+        Debug.Log(_charInfo.talkStatus.ToString());
+        if (SaveData._data.tutorialEnd) {
+            _charInfo = SaveData._data.getCharInfo(itemName);
+        }else
+        {
+            _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
+            _charInfo.talkNum = 1;
+            _charInfo.charTalkFirst = true;
+        }
+        if (_charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.premissionNotComplete) { SetSpecialTalk(); }
+        else
+        {
+            Debug.Log(_charInfo.name + " , " + _charInfo.talkNum + ", " + _charInfo.talkStatus.ToString() + ", " + _charInfo.charTalkFirst);
+            if (itemName == "tutorial" || !_charInfo.charTalkFirst) { GameManager.game.SetTalk("yellow", _charInfo.talkNum); }//player talk first
+            else GameManager.game.SetTalk(itemName, _charInfo.talkNum);//item talk first
 
-        //if (itemName == "tutorial" || (itemName =="girl" && talkNum !=15) || (itemName == "blue" && talkNum !=11 && talkNum !=12 && talkNum!=13 && talkNum != 18)) { GameManager.game.SetTalk("yellow", talkNum); }//player talk first
-        //else GameManager.game.SetTalk(itemName, _talkNum);//item talk first
-        GameManager.game.Setactive(GameManager.game.TalkUI, true);
+            GameManager.game.Setactive(GameManager.game.TalkUI, true);
+        }
     }
     //item move to point
     IEnumerator itemGotoPoint(Vector3 point)

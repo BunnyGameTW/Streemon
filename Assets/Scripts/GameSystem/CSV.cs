@@ -20,21 +20,28 @@ public class CSV {
 		return arrayData [row] [col];
 	}
 	public void loadFile(string path, string fileName){
-		arrayData.Clear ();
+       
+        arrayData.Clear ();
 		StreamReader sr = null;
-		try{
-			sr = File.OpenText(path+"//"+fileName);
+      //  TextAsset txt = null;
+
+        try
+        {   
+            sr = File.OpenText(path+"\\"+fileName);
 			Debug.Log("file found!");
 		}catch{
 			Debug.Log ("file lost");
 			return;
 		}
 		string line;
-		while ((line = sr.ReadLine ()) != null) {
-			arrayData.Add (line.Split(','));
-		}
-		sr.Close ();
-		sr.Dispose ();
-	}
+      
+      while ((line = sr.ReadLine ()) != null) {
+           
+        	arrayData.Add (line.Split(','));
+        //    Debug.Log(line.Split(',')[0]);
+        }
+        sr.Close();
+        sr.Dispose();
+    }
 
 }

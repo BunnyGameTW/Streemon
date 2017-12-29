@@ -42,31 +42,10 @@ public class Talk : MonoBehaviour {
         nextName = name;
         nextParagraph = paragraph;
     }
-    public void nextTalk() {    
-        //if (nextName != "0")
-        //{
-        //    setTalkBehavior();    
-        //}
+    public void nextTalk() {          
         if (nextName != "0" && nextParagraph.ToString() != "0")//1.special, 2.normal 
         {
-
-            if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");
-            else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
-            {
-                SaveData._data.tutorialEnd = true;
-                GameManager.game.changeScene("SblueRoom");
-            }
-            else if (nextName == "yellow" && nextParagraph.ToString() == "999")//特殊
-            {
-                GameManager.game.SetTalk(nextName, nextParagraph);
-                reset();
-                StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
-            }
-            else
-            {
-                GameManager.game.SetTalk(nextName, nextParagraph);
-                reset();
-            }
+            setSpecialTalkBehavior();
         }
         else //1.talk end 2.set talk num
         {
@@ -80,18 +59,51 @@ public class Talk : MonoBehaviour {
             GameManager.game.Player.AddHoldItem("diamond");
             GameManager.game.Player.OnItemChanged();
         }
+        if (nextName == "yellow" && nextParagraph == 43)//給話 //直接給玩家還是掉地上
+        {
+          
+            GameObject.Find("blue").GetComponent<Animator>().SetTrigger("Paint");
+            GameObject.Find("paint").SetActive(false);
+           GameManager.game.Player.AddHoldItem("pizza");//TODO:改成化的名字
+            GameManager.game.Player.OnItemChanged();
+        }
 
 
+    }
+    void setSpecialTalkBehavior()
+    {
+        if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");
+        else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
+        {
+            SaveData._data.tutorialEnd = true;
+            GameManager.game.changeScene("SblueRoom");
+        }
+        else if (nextName == "yellow" && nextParagraph.ToString() == "999")//特殊
+        {
+            GameManager.game.SetTalk(nextName, nextParagraph);
+            reset();
+            StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+        }
+        else if (nextName == "birdEndTalkRandom")
+        {
+            int _talkNum = UnityEngine.Random.Range(0, 2) + 16;//bird16 or bird17            
+            GameManager.game.SetTalk("bird", _talkNum);
+            reset();
+        }
+        else //normal
+        {
+            GameManager.game.SetTalk(nextName, nextParagraph);
+            reset();
+        }
     }
     void setTalkBehavior()
     {
         SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
-        _charInfo.charTalkFirst = true;
         for (int i = 0; i < SaveData._data.chars.Length; i++)
         {
             if (nextName.ToString().Contains(SaveData._data.chars[i].name))
             {
-                _charInfo.name = SaveData._data.chars[i].name;
+                _charInfo = SaveData._data.getCharInfo(SaveData._data.chars[i].name);
                 Debug.Log(_charInfo.name);
             }
            
@@ -100,40 +112,48 @@ public class Talk : MonoBehaviour {
         else if (nextName.ToString().Contains("End"))  _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.missionComplete; 
         if (nextName == "birdFirstTalkEnd")
         {            
-            _charInfo.talkNum = 6;      
+            _charInfo.talkNum = 6;
+            _charInfo.charTalkFirst = true;
         }
         else if (nextName == "birdrandom")
         {      
-            _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 6;         
+            _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 6; //6 or 7        
         }
         else if (nextName == "birdEnd")
         {
             _charInfo.talkNum = 14;
         }
-        else if (nextName == "birdEndTalkRandom")
-        {
-          //  _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 16;//bird16 or bird17
-        }
+        
         else if (nextName == "girlFirstTalkEnd")
         {      
             _charInfo.talkNum = 30;
+            _charInfo.charTalkFirst = false;
+
         }
-        else if (nextName == "girlTalkEnd")
-        {         
-            _charInfo.talkNum = 31;      
+        else if (nextName == "girlTalkEnd" || nextName == "girlEndTalkRandom")
+        {
+            if (UnityEngine.Random.Range(0, 2) == 0) _charInfo.talkNum = 23;
+            else _charInfo.talkNum = 26;
         }
         else if (nextName == "blueFirstTalkEnd")
         {         
-            _charInfo.talkNum = 11;   
-         }
-        else if (nextName == "blueRandom")
+            _charInfo.talkNum = 19;
+            _charInfo.charTalkFirst = true;
+
+        }
+        else if (nextName == "blueRandom" || nextName== "blueTalkEnd")
         {
             _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
-         }
-        else if (nextName == "blueTalkEnd")
-        {          
-            _charInfo.talkNum = 18;          
+            _charInfo.charTalkFirst = true;
+
         }
+        else if (nextName == "blueMidTalkEnd")
+        {
+            _charInfo.talkNum = 65;
+            _charInfo.charTalkFirst = false;
+
+        }
+      
         //save char info
         SaveData._data.setCharInfo(_charInfo.name, _charInfo);
     }

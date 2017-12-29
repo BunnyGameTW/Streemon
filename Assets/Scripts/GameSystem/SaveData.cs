@@ -18,7 +18,6 @@ public class SaveData :MonoBehaviour{
        public enum TalkStatus { premissionNotComplete, firstTalk, canDoMission, missionComplete }
        public TalkStatus talkStatus;
        public string name;
-       public bool firstTalk;
        public int talkNum;
        public bool charTalkFirst;
     }
@@ -57,14 +56,15 @@ public class SaveData :MonoBehaviour{
 
         for (int i = 0; i < chars.Length; i++)
         {
-            chars[i].firstTalk = true;
+         
             chars[i].talkNum = 1;
-            chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
-           if(i == 2 || i == 1) chars[i].charTalkFirst = false;
+           if(i == 0 || i == 5) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
+           else chars[i].talkStatus = CharsInfo.TalkStatus.premissionNotComplete;//
+          if (i == 2 || i == 1) chars[i].charTalkFirst = false;
            else chars[i].charTalkFirst = true;
         }
-        chars[2].talkNum = 14;
-        chars[1].talkNum = 32;
+        chars[2].talkNum = 14;//girl first talk
+        chars[1].talkNum = 32;//blue first talk
     }
     public CharsInfo getCharInfo(string charName) {
         for (int i = 0; i < chars.Length; i++)

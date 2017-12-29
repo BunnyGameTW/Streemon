@@ -6,7 +6,7 @@ public class mouse : MonoBehaviour {
     Vector3 mishScrPos = Vector3.zero;
     [SerializeField]
     float moveSpeed = 4.0f;
-    public enum MishState { idle, walk , caught }
+    public enum MishState { walk , caught }
     public MishState _mishState;
     Animator ani;
     SpriteRenderer _spriteRender;
@@ -16,9 +16,10 @@ public class mouse : MonoBehaviour {
     public GameObject realMouse;
     public Transform start, end;
     Transform mouseTarPos;
+    Vector3 targetPos;
     private void Awake()
     {
-        _mishState = MishState.idle;
+        _mishState = MishState.walk;
         ani = GetComponent<Animator>();
         _spriteRender = GetComponentInChildren<SpriteRenderer>();
     }
@@ -31,31 +32,29 @@ public class mouse : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (_mishState == MishState.walk) targetPos = mouseTarPos.position;
+        else
+        {
+            targetPos = cagePos;
+            GetComponent<InteractiveItem>().interactiveDistance = 0;//can't talk
+        }
 
-        
-        if (_mishState == MishState.idle)
-        {   
-            transform.position = Vector3.MoveTowards(transform.position, mouseTarPos.position, moveSpeed * Time.deltaTime);
-            if (transform.position.x >= end.position.x) SetRotation(0);
-            else SetRotation(180);
-            if (transform.position == mouseTarPos.position)
-            {
+         transform.position = Vector3.MoveTowards(transform.position,targetPos, moveSpeed * Time.deltaTime);
+        if (transform.position.x >= targetPos.x) SetRotation(0);
+        else SetRotation(180);
+        if (transform.position == targetPos)
+        {
+            if (_mishState == MishState.walk) {
                 mouseTarPos = start;
                 start = end;
                 end = mouseTarPos;
             }
-        }
-        else if(_mishState == MishState.caught)
-        {
-            //go to cage
-            transform.position = Vector3.MoveTowards(transform.position, cagePos, moveSpeed * Time.deltaTime);
-            if (transform.position.x >= cagePos.x) SetRotation(0);
-            else SetRotation(180);
-            if (transform.position == cagePos) { //set mouse in cage display
+            else
+            {           
                 cheeseInCage.enabled = false;
                 mouseInCage.enabled = true;
                 mouseInCage.transform.root.GetComponent<SpriteRenderer>().sprite = cageCaught;
-                realMouse.GetComponent<BoxCollider2D>().enabled = true; 
+                realMouse.GetComponent<BoxCollider2D>().enabled = true;
                 GameManager.game.refindItem();
                 Destroy(this.gameObject);
             }
@@ -65,15 +64,5 @@ public class mouse : MonoBehaviour {
     public void SetRotation(int rot)
     {
         transform.eulerAngles = new Vector3(0, rot, 0);
-    }
-    public void SetMishState(int state)
-    {
-        _mishState = (MishState)state;
-    }
-
-    public MishState Mishstate
-    {
-        get { return _mishState; }
-        set { _mishState = value; }
     }
 }

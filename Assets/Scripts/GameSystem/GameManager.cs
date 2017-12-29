@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223.csv");
         }
-        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223.csv");//loadCSV
+        else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223.csv");//loadCSV
 
 #elif UNITY_ANDROID
         
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
             CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "fakeopentest1223.csv");
         }
         else CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "test1223.csv");//loadCSV
-#else 
+#else
         if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "opentest1221.csv");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour {
         else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223.csv");//loadCSV
 
 #endif
-       
-        //Debug用 跳關可能可以用
+
+
         if (SceneManager.GetActiveScene().name == "SblueRoom") SaveData._data.tutorialEnd = true;
         //load player position
         if (SaveData._data.tutorialEnd)
@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour {
             foreach (string _item in SaveData._data.player.itemName)
             {
                if(_item != "") Player.AddHoldItem(_item);
-               // if (_item == "mouse" && SceneManager.GetActiveScene().name == "SblueRoom") GameObject.Find("fakeMouse").SetActive(false);//特例 TODO:bug
             }
             if (Player.HoldItems.Count > 0)
             {
@@ -181,12 +180,6 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         yield return new WaitForSeconds(3.0f);
-
-        //if (SceneManager.GetActiveScene().name == "SmainFake")
-        //{
-        //    SaveData._data.tutorialEnd = true;
-        //    changeScene("SblueRoom");
-        //}
     }
 
     public void Setactive(GameObject obj, bool isAble) {
@@ -202,7 +195,6 @@ public class GameManager : MonoBehaviour {
         //check name and paragraph
         int iLine = 0;
         for (int i = 0; ; i++) {
-           // Debug.Log(CSV.GetInstance().arrayData[i][0]);
             if (name == CSV.GetInstance().arrayData[i][0] && paragraph.ToString() == CSV.GetInstance().arrayData[i][1]) {
                 iLine = i;
                 break;
@@ -220,9 +212,7 @@ public class GameManager : MonoBehaviour {
         for (int j = 4; j < storySize; j++)
         {//讀入第N段文字
             talkStory[j - 4] = CSV.GetInstance().arrayData[iLine][j];
-        //    Debug.Log(talkStory[j - 4]);
         }
-    //    Debug.Log(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
         _talky.SetCharsBG(_talky.CheckCharsNum(CSV.GetInstance().arrayData[iLine][0]));
 
     }
