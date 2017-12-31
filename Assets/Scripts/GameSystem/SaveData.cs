@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 public class SaveData :MonoBehaviour{
-    
+    public int ending;
     public string nowScene;
     public Vector3 playerPos;
     [Serializable]
@@ -38,6 +38,7 @@ public class SaveData :MonoBehaviour{
 
     public SaveData()
     {
+        ending = 1;
         player.itemName = new List<string>();
         rooms = new SceneInfo[6];
         chars = new CharsInfo[6];

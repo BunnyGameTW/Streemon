@@ -71,7 +71,11 @@ public class InteractiveItem : MonoBehaviour {
              
                 GameManager.game.changeScene(itemName);            
             }
-            if(itemName == "mouse") {//特例
+            if (itemName == "Sout")
+            {//結局
+                GameManager.game.changeScene(itemName);
+            }
+            if (itemName == "mouse") {//特例
                 GetComponent<SpriteRenderer>().enabled = true;
                 Destroy(GameObject.Find("cheese_02_target"));
             }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
+
 public class Talk : MonoBehaviour {
 	public string [] story;
 	int id,subId;//sentence, word
@@ -90,6 +92,10 @@ public class Talk : MonoBehaviour {
             GameManager.game.SetTalk("bird", _talkNum);
             reset();
         }
+        else if (nextName == "endingEnd" && nextParagraph.ToString() == "999")
+        {
+            GameManager.game.changeScene("Stitle");
+        }
         else //normal
         {
             GameManager.game.SetTalk(nextName, nextParagraph);
@@ -145,7 +151,9 @@ public class Talk : MonoBehaviour {
         {
             _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
             _charInfo.charTalkFirst = true;
-
+            if(nextName == "blueTalkEnd") {
+                SaveData._data.ending = 5;//無止境的實驗 
+            }
         }
         else if (nextName == "blueMidTalkEnd")
         {
@@ -188,7 +196,7 @@ public class Talk : MonoBehaviour {
         if (sentenceEnd)
         {
 
-            SoundManager.sound.playOne(talkSE);
+            if (SceneManager.GetActiveScene().name != "Sout") SoundManager.sound.playOne(talkSE);
             StartCoroutine(print());
         }
         else if (talkEnd)
@@ -217,7 +225,7 @@ public class Talk : MonoBehaviour {
 					sentenceEnd = false;
 					talkEnd = true;
 					id = 0;
-                    SoundManager.sound.stopSE();
+                    if (SceneManager.GetActiveScene().name != "Sout") SoundManager.sound.stopSE();
                     break;
 				}
 				sentenceEnd = true;

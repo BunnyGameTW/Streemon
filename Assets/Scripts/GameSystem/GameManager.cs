@@ -20,23 +20,15 @@ public class GameManager : MonoBehaviour {
             game = this;
         }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221.csv");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223.csv");
         }
-        else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223.csv");//loadCSV
+        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223.csv");//loadCSV
 
-#elif UNITY_ANDROID
-        
-        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile("jar:file://" + Application.dataPath + "!/assets/", "opentest1221.csv");//loadCSV
-        else if (SceneManager.GetActiveScene().name == "SmainFake")
-        {
-            CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "fakeopentest1223.csv");
-        }
-        else CSV.GetInstance().loadFile(Application.persistentDataPath + "/Resources", "test1223.csv");//loadCSV
 #else
         if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "opentest1221.csv");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
@@ -49,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
 
         if (SceneManager.GetActiveScene().name == "SblueRoom") SaveData._data.tutorialEnd = true;
+        else if (SceneManager.GetActiveScene().name == "Sout") SaveData._data.tutorialEnd = false;
         //load player position
         if (SaveData._data.tutorialEnd)
         {
@@ -97,7 +90,7 @@ public class GameManager : MonoBehaviour {
             if (Player.HoldItems.Count > 0)
             {
                 Player.OnItemChanged();
-              //  Debug.Log("123456");
+            
             }
 
             //tutorial
@@ -191,7 +184,6 @@ public class GameManager : MonoBehaviour {
         get { return _BookUI; }
     }
     public void SetTalk(string name, int paragraph) {
-      
         //check name and paragraph
         int iLine = 0;
         for (int i = 0; ; i++) {

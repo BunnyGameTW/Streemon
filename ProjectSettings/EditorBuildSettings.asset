@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SredRoom.unity
     guid: b2b437b5c1cb2c1459191a8ca43efcb7
+  - enabled: 1
+    path: Assets/Scenes/Sout.unity
+    guid: f14e049efdb3c114faa2ce07ff83a992
