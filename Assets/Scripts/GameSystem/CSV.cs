@@ -22,26 +22,37 @@ public class CSV {
 	public void loadFile(string path, string fileName){
        
         arrayData.Clear ();
-		StreamReader sr = null;
-      //  TextAsset txt = null;
+		//StreamReader sr = null;
+        TextAsset txt = null;
 
         try
-        {   
-            sr = File.OpenText(path+"\\"+fileName);
+        {
+            txt = (TextAsset)Resources.Load(fileName);
+            //sr = File.OpenText(path+"\\"+fileName);
 			Debug.Log("file found!");
 		}catch{
 			Debug.Log ("file lost");
 			return;
 		}
 		string line;
-      
-      while ((line = sr.ReadLine ()) != null) {
-           
-        	arrayData.Add (line.Split(','));
-        //    Debug.Log(line.Split(',')[0]);
+        line = txt.text;
+        string []  strLine = line.Split('\n');
+        //foreach ( string lines in strLine)
+        //{
+        //    Debug.Log(lines);
+        //}
+        for(int i = 0; i < strLine.Length; i++)
+        {
+            arrayData.Add(strLine[i].Split(','));
         }
-        sr.Close();
-        sr.Dispose();
+       
+        //while ((line = sr.ReadLine ()) != null) {
+           
+        //	arrayData.Add (line.Split(','));
+        //////    Debug.Log(line.Split(',')[0]);
+        ////}
+        //sr.Close();
+        //sr.Dispose();
     }
 
 }

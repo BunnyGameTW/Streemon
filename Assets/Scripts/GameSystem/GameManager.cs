@@ -22,20 +22,20 @@ public class GameManager : MonoBehaviour {
 
 #if UNITY_EDITOR
 
-        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221.csv");//loadCSV
+        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "opentest1221");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
-            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223.csv");
+            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223");
         }
-        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223.csv");//loadCSV
+        else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223");//loadCSV
 
 #else
-        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "opentest1221.csv");//loadCSV
+        if (SceneManager.GetActiveScene().name == "Sopen") CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "opentest1221");//loadCSV
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
-            CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "fakeopentest1223.csv");
+            CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "fakeopentest1223");
         }
-        else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223.csv");//loadCSV
+        else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223");//loadCSV
 
 #endif
 
