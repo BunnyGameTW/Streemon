@@ -94,7 +94,7 @@ public class Talk : MonoBehaviour {
         }
         else if (nextName == "endingEnd" && nextParagraph.ToString() == "999")
         {
-            GameManager.game.changeScene("Stitle");
+            GameManager.game.resetGame();
         }
         else //normal
         {

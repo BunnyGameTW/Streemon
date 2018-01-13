@@ -131,10 +131,10 @@ public class GameManager : MonoBehaviour {
 
 
         }
-        if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
+      //  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         if (Input.GetKeyDown(KeyCode.Escape)) endGame();
     }
-    void resetGame()
+    public void resetGame()
     {
         SaveData._data = new SaveData();
         changeScene("Stitle");
