@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class SaveData :MonoBehaviour{
+public class SaveData {
     public int ending;
     public string nowScene;
     public Vector3 playerPos;

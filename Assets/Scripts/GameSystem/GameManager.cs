@@ -113,27 +113,28 @@ public class GameManager : MonoBehaviour {
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
-        if (Input.GetKeyDown(KeyCode.Keypad1)) {
-            Player.AddHoldItem("mouse");
-            Player.OnItemChanged();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            Player.AddHoldItem("seed");
-            Player.OnItemChanged();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            float speed = Player.getMoveSpeed();
-            speed++;
-            Player.setMoveSpeed(speed);
+      //  if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
+      //  if (Input.GetKeyDown(KeyCode.Keypad1)) {
+      //      Player.AddHoldItem("mouse");
+      //      Player.OnItemChanged();
+      //  }
+      //  if (Input.GetKeyDown(KeyCode.Keypad2))
+      //  {
+      //      Player.AddHoldItem("seed");
+      //      Player.OnItemChanged();
+      //  }
+      //  if (Input.GetKeyDown(KeyCode.Keypad3))
+      //  {
+      //      float speed = Player.getMoveSpeed();
+      //      speed++;
+      //      Player.setMoveSpeed(speed);
 
 
-        }
-      //  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
-        if (Input.GetKeyDown(KeyCode.Escape)) endGame();
+      //  }
+      ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
+      //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
     }
+   
     public void resetGame()
     {
         SaveData._data = new SaveData();
