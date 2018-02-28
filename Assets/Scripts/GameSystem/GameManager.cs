@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 //門的命名要和Scene的名字一樣
 public class GameManager : MonoBehaviour {
     public static GameManager game;//singleton pattern
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private GameObject _TalkUI;
     Talk _talky;
-    
+    public Image fadeImg;
+
     private void Awake()
     {
         if (game == null) {
@@ -138,7 +140,7 @@ public class GameManager : MonoBehaviour {
     public void resetGame()
     {
         SaveData._data = new SaveData();
-        changeScene("Stitle");
+        changeSceneWithFade("Stitle");
     }
     public void changeScene(string name) {
         SceneManager.LoadScene(name);
@@ -219,5 +221,15 @@ public class GameManager : MonoBehaviour {
     public void endGame()
     {
         Application.Quit();
+    }
+    public void changeSceneWithFade(string sceneName)
+    {
+        StartCoroutine(fadeIn(sceneName));
+    }
+    IEnumerator fadeIn(string sceneName)
+    {
+        fadeImg.GetComponent<Animator>().SetBool("isFade", true);
+        yield return new WaitUntil(()=>fadeImg.color.a == 1);
+        changeScene(sceneName);
     }
 }

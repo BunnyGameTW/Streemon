@@ -46,13 +46,14 @@ public class InteractiveItem : MonoBehaviour {
                      
             if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
             {
-                //矯正誤差，讓玩家移動到定點再開始波動畫
+                //矯正誤差，讓玩家移動到定點再開始播動畫
                 Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
                 StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));         
             }
             if(itemName == "Smain" || itemName =="Sbalcony" || itemName == "SredRoom" || itemName =="SblueRoom")
             {
-                // go to door animation 
+                //TODO: go to door animation 
+
                 //save player hold item
                 SaveData._data.player.itemName.Clear();//清空
                 foreach (string _item in GameManager.game.Player.HoldItems)
@@ -68,12 +69,11 @@ public class InteractiveItem : MonoBehaviour {
                 roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];      
                 for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
                 SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
-             
-                GameManager.game.changeScene(itemName);            
+                GameManager.game.changeSceneWithFade(itemName);
             }
             if (itemName == "Sout")
             {//結局
-                GameManager.game.changeScene(itemName);
+                GameManager.game.changeSceneWithFade(itemName);
             }
             if (itemName == "mouse") {//特例
                 GetComponent<SpriteRenderer>().enabled = true;

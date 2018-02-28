@@ -74,17 +74,17 @@ public class Talk : MonoBehaviour {
     }
     void setSpecialTalkBehavior()
     {
-        if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeScene("SmainFake");
+        if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeSceneWithFade("SmainFake");
         else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
         {
             SaveData._data.tutorialEnd = true;
             GameManager.game.changeScene("SblueRoom");
         }
-        else if (nextName == "yellow" && nextParagraph.ToString() == "999")//特殊
+        else if (nextName == "yellow" && nextParagraph.ToString() == "999")//set bg black and ready to change scene
         {
             GameManager.game.SetTalk(nextName, nextParagraph);
             reset();
-            StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+           StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
         }
         else if (nextName == "birdEndTalkRandom")
         {

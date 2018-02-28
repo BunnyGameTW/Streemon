@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class LevelLoader : MonoBehaviour {
+public class LevelLoader : MonoBehaviour
+{
     public Text barTxt;
     public Image barImg;
     public GameObject progressBar;
+    public Image fadeImg;
+    AsyncOperation operation;
     public void loadScene(string name)
     {
         progressBar.SetActive(true);
@@ -16,7 +19,7 @@ public class LevelLoader : MonoBehaviour {
     {
         int displayProgress = 0;
         int toProgress = 0;
-        AsyncOperation operation = SceneManager.LoadSceneAsync(name);     
+        operation = SceneManager.LoadSceneAsync(name);
         operation.allowSceneActivation = false;
         while (operation.progress < 0.9f)
         {
@@ -25,9 +28,9 @@ public class LevelLoader : MonoBehaviour {
             while (displayProgress < toProgress)
             {
                 ++displayProgress;
-                barImg.transform.localScale = new Vector3(displayProgress * 0.01f, barImg.transform.localScale.y, barImg.transform.localScale.z);
-                barTxt.text = displayProgress + "%";               
-            }                   
+                barImg.fillAmount = displayProgress * 0.01f;
+                barTxt.text = displayProgress + "%";
+            }
             yield return null;
         }
         toProgress = 100;
@@ -35,12 +38,18 @@ public class LevelLoader : MonoBehaviour {
         while (displayProgress < toProgress)
         {
             ++displayProgress;
-            barImg.transform.localScale = new Vector3(displayProgress * 0.01f, barImg.transform.localScale.y, barImg.transform.localScale.z);
+            barImg.fillAmount = displayProgress * 0.01f;
             barTxt.text = displayProgress + "%";
             yield return null;
         }
-        operation.allowSceneActivation = true;
-        //TODO:加上轉場黑幕、音樂變小聲
+        StartCoroutine(fadeIn());
+       
+        //TODO:音樂變小聲
     }
-
+    IEnumerator fadeIn()
+    {
+        fadeImg.GetComponent<Animator>().SetBool("isFade", true);
+        yield return new WaitUntil(() => fadeImg.color.a == 1);
+        operation.allowSceneActivation = true;
+    }
 }
