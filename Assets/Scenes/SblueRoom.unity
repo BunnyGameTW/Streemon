@@ -2023,6 +2023,8 @@ MonoBehaviour:
     bgm: {fileID: 8300000, guid: 94527abfd68152344bee0cd3725b1926, type: 3}
   - sceneName: Sopen
     bgm: {fileID: 8300000, guid: a66b832377868304786663d6aa8c78b2, type: 3}
+  auGroup: {fileID: 24300002, guid: cbab99b993f53454687074ace0c72bb6, type: 2}
+  mixerVol: 0
 --- !u!1 &1352634771
 GameObject:
   m_ObjectHideFlags: 0

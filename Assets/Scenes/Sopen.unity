@@ -747,6 +747,8 @@ MonoBehaviour:
     bgm: {fileID: 8300000, guid: 94527abfd68152344bee0cd3725b1926, type: 3}
   - sceneName: Sopen
     bgm: {fileID: 8300000, guid: a66b832377868304786663d6aa8c78b2, type: 3}
+  auGroup: {fileID: 24300002, guid: cbab99b993f53454687074ace0c72bb6, type: 2}
+  mixerVol: 20
 --- !u!1001 &1841402179
 Prefab:
   m_ObjectHideFlags: 0
@@ -785,6 +787,11 @@ Prefab:
     - target: {fileID: 4947935669797572, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82482553383966052, guid: 4da5bbd2db436e243ae5880c5064702c,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
