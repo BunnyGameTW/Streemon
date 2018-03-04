@@ -224,6 +224,7 @@ public class GameManager : MonoBehaviour {
     }
     public void changeSceneWithFade(string sceneName)
     {
+        SoundManager.sound.bgmFadeOut();
         StartCoroutine(fadeIn(sceneName));
     }
     IEnumerator fadeIn(string sceneName)

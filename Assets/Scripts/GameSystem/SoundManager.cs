@@ -59,7 +59,8 @@ public class SoundManager : MonoBehaviour {
         {
             mixerVol = 0;
         }
-        auGroup.audioMixer.SetFloat("volume", mixerVol);
+        //auGroup.audioMixer.SetFloat("volume", mixerVol);
+        bgmFadeIn();
     }
     public void playOne(AudioClip se) {
         seSource.PlayOneShot(se);
@@ -69,8 +70,23 @@ public class SoundManager : MonoBehaviour {
     }
     public void bgmFadeIn()
     {
-        //-10~0 10~20
-        auGroup.audioMixer.SetFloat("volume", mixerVol);
+        float tmpVol = mixerVol - 10;
+        StartCoroutine(bgmFading(tmpVol,1));//-10~0 10~20
+    }
+    public void bgmFadeOut()
+    {
+        float tmpVol = mixerVol;
+        StartCoroutine(bgmFading(tmpVol, -1));//0~-10 20~10
+    }
+    IEnumerator bgmFading(float tmpVol, float type)
+    {
+        float targetVol = tmpVol + type * 10.0f;//TODO:
+        while (tmpVol != targetVol)
+        {
+            tmpVol += type;
+            auGroup.audioMixer.SetFloat("volume", tmpVol);
+            yield return new WaitForSeconds(0.1f);
 
+        }
     }
 }

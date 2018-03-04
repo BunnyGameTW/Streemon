@@ -43,7 +43,8 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         StartCoroutine(fadeIn());
-       
+        SoundManager.sound.bgmFadeOut();
+
         //TODO:音樂變小聲
     }
     IEnumerator fadeIn()
