@@ -42,8 +42,10 @@ public class InteractiveItem : MonoBehaviour {
     {
        
         if (_canInteractive) {
-            if (OnItemClicked != null) OnItemClicked(this, EventArgs.Empty);//分發事件
-                     
+            if (OnItemClicked != null)
+            {
+                OnItemClicked(this, EventArgs.Empty);//分發事件
+            }
             if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
             {
                 //矯正誤差，讓玩家移動到定點再開始播動畫
@@ -71,6 +73,16 @@ public class InteractiveItem : MonoBehaviour {
                 SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
                 GameManager.game.changeSceneWithFade(itemName);
             }
+            if(itemName == "SstorageRoom")
+            {
+                //TODO: go to door ani
+                FindObjectOfType<Storage>().goIn(true);
+            }
+            else if(itemName == "StorageInDoor")
+            {
+                GameManager.game.Player.SetPlayerState(2);
+                GetComponent<Storage>().goOut(false);
+            }
             if (itemName == "Sout")
             {//結局
                 GameManager.game.changeSceneWithFade(itemName);
@@ -81,6 +93,7 @@ public class InteractiveItem : MonoBehaviour {
             }
             if (canPick)
             {
+                GameManager.game.Player.Playerstate = Player.PlayerState.pick;
                 SoundManager.sound.playOne(SoundManager.sound.playerse.pick);              
                 Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
                 StartCoroutine(itemGotoPoint(pointPos)); 

@@ -38,7 +38,6 @@ public class Player : MonoBehaviour {
                 GameManager.game.Items[i].GetComponent<InteractiveItem>().CanInteractive = true; //讓物品變成可點選狀態
             else GameManager.game.Items[i].GetComponent<InteractiveItem>().CanInteractive = false;
         }
-
         if (Input.GetMouseButtonDown(0))
         {
             //walk
@@ -71,8 +70,9 @@ public class Player : MonoBehaviour {
         setAnimation(_playerState);
     }
     void OnItemClicked(object sender, EventArgs args) {
-        _playerState = PlayerState.pick;//??
-       
+        _playerState = PlayerState.interactive;//讓玩家不要亂動
+        Debug.Log(_playerState);
+
     }
 
     public PlayerState Playerstate
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
         if (state == PlayerState.interactive) ani.SetBool("isWalk", false);
         if (state == PlayerState.pick) ani.SetBool("isWalk", false);
         if (state == PlayerState.talk) ani.SetBool("isWalk", false);//talk 動畫
-        //down 動畫還沒加
+        //TODO: down 動畫還沒加
     }
     public void SetPlayerRotation(int rot) {
         transform.eulerAngles = new Vector3(0, rot, 0);

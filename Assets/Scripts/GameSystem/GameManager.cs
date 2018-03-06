@@ -225,12 +225,17 @@ public class GameManager : MonoBehaviour {
     public void changeSceneWithFade(string sceneName)
     {
         SoundManager.sound.bgmFadeOut();
-        StartCoroutine(fadeIn(sceneName));
+        StartCoroutine(fadeInScene(sceneName));
     }
-    IEnumerator fadeIn(string sceneName)
+    IEnumerator fadeInScene(string sceneName)
     {
         fadeImg.GetComponent<Animator>().SetBool("isFade", true);
         yield return new WaitUntil(()=>fadeImg.color.a == 1);
         changeScene(sceneName);
+    }
+    public IEnumerator fadeIn()
+    {
+        fadeImg.GetComponent<Animator>().SetBool("isFade", true);
+        yield return new WaitUntil(() => fadeImg.color.a == 1);
     }
 }
