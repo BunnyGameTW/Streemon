@@ -34,6 +34,7 @@ public class SaveData {
     public CharsInfo[] chars;
     public PlayerInfo player;
     public bool tutorialEnd;
+    public bool[] hasDiary;
     public static SaveData _data = new SaveData();
 
     public SaveData()
@@ -45,6 +46,8 @@ public class SaveData {
         setupRooms();
         tutorialEnd = false;
         setupChars();
+        hasDiary = new bool[5];
+        setupDiary();
     }
     void setupChars()
     {
@@ -112,5 +115,27 @@ public class SaveData {
             if (roomName == rooms[i].name) rooms[i] = roomInfo;
 
         }
+    }
+    
+    void setupDiary()
+    {
+        for(int i = 0;i < hasDiary.Length; i++)
+        {
+            hasDiary[i] = false;
+        }
+    }
+    public void setDiaryInfo(bool [] diarys)
+    {
+        hasDiary = diarys;
+        int x = 0;
+        foreach (bool _item in hasDiary)
+        {
+            Debug.Log(x + ": " + _item);
+            x++;
+        }
+    }
+    public bool [] getDiaryInfo()
+    {
+        return hasDiary;
     }
 }

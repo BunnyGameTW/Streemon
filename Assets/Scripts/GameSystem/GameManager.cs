@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private GameObject _TalkUI;
     Talk _talky;
     public Image fadeImg;
-
+    public GameObject clickEffect;
     private void Awake()
     {
         if (game == null) {
@@ -115,28 +115,37 @@ public class GameManager : MonoBehaviour {
     }
     public void Update()
     {
-      //  if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
-      //  if (Input.GetKeyDown(KeyCode.Keypad1)) {
-      //      Player.AddHoldItem("mouse");
-      //      Player.OnItemChanged();
-      //  }
-      //  if (Input.GetKeyDown(KeyCode.Keypad2))
-      //  {
-      //      Player.AddHoldItem("seed");
-      //      Player.OnItemChanged();
-      //  }
-      //  if (Input.GetKeyDown(KeyCode.Keypad3))
-      //  {
-      //      float speed = Player.getMoveSpeed();
-      //      speed++;
-      //      Player.setMoveSpeed(speed);
+        //cheat code
+        if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            Player.AddHoldItem("book");
+            Player.OnItemChanged();
+        }
+        //  if (Input.GetKeyDown(KeyCode.Keypad2))
+        //  {
+        //      Player.AddHoldItem("seed");
+        //      Player.OnItemChanged();
+        //  }
+        //  if (Input.GetKeyDown(KeyCode.Keypad3))
+        //  {
+        //      float speed = Player.getMoveSpeed();
+        //      speed++;
+        //      Player.setMoveSpeed(speed);
 
 
-      //  }
-      ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
-      //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
+        //  }
+        ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
+        //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
+        //點擊特效
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); pos.z = 0;
+        //   GameObject g = Instantiate(clickEffect, pos, transform.rotation);
+        //    Destroy(g, 1);
+        //}
     }
-   
+
     public void resetGame()
     {
         SaveData._data = new SaveData();

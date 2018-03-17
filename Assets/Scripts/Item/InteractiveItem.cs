@@ -5,18 +5,18 @@ using System;
 public class InteractiveItem : MonoBehaviour {
     //item tag要設置
     public string itemName;
-    Player player;
+    protected Player player;
     public float interactiveDistance;
-    bool _canInteractive;
+    protected bool _canInteractive;
     public event EventHandler OnItemClicked;
     public float walkSpeed = 0.2f;
     [SerializeField]
     bool isHideSprite;
-    SpriteRenderer _spriteRender;
+    protected SpriteRenderer _spriteRender;
     [SerializeField]
-    bool canPick;
+    protected bool canPick;
     [SerializeField]
-    bool canTalk;
+    protected bool canTalk;
     private void Start()
     {
         player = GameManager.game.Player;

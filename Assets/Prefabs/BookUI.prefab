@@ -293,6 +293,7 @@ MonoBehaviour:
   Lbtn: {fileID: 1594768893031360}
   Rbtn: {fileID: 1220969586606306}
   bookImg: {fileID: 1654781361913986}
+  noDiaryImg: {fileID: 21300000, guid: 42dabe1ab5c83c642a70045415a199c5, type: 3}
 --- !u!114 &114397241263163448
 MonoBehaviour:
   m_ObjectHideFlags: 1
