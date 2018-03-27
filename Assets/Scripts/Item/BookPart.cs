@@ -24,7 +24,7 @@ public class BookPart : InteractiveItem {
     //pick up   
     private void OnMouseDown()
     {
-        if (canPick && hasBook)
+        if (canPick && hasBook && _canInteractive)
         {
             GameManager.game.Player.Playerstate = Player.PlayerState.pick;
             SoundManager.sound.playOne(SoundManager.sound.playerse.pick);
@@ -52,11 +52,11 @@ public class BookPart : InteractiveItem {
             yield return null;
         }
         if (canPick)
-        {
-            //TODO:show up text
+        {         
             diaryUI.GetComponentInChildren<Text>().text = "獲得了日記本第"+(index+1)+"頁";
             diaryUI.SetActive(true);
             yield return new WaitForSeconds(1.0f);
+            diaryUI.SetActive(false);
         }
         afterItemGotoPoint();
     }

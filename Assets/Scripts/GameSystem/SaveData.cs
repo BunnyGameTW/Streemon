@@ -39,14 +39,14 @@ public class SaveData {
 
     public SaveData()
     {
-        ending = 1;
+        ending = 0;
         player.itemName = new List<string>();
         rooms = new SceneInfo[6];
         chars = new CharsInfo[6];
         setupRooms();
         tutorialEnd = false;
         setupChars();
-        hasDiary = new bool[5];
+        hasDiary = new bool[14];
         setupDiary();
     }
     void setupChars()
@@ -119,7 +119,8 @@ public class SaveData {
     
     void setupDiary()
     {
-        for(int i = 0;i < hasDiary.Length; i++)
+        hasDiary[0] = hasDiary[1] = true;
+        for (int i = 2;i < hasDiary.Length; i++)
         {
             hasDiary[i] = false;
         }

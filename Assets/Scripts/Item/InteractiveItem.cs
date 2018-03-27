@@ -17,6 +17,8 @@ public class InteractiveItem : MonoBehaviour {
     protected bool canPick;
     [SerializeField]
     protected bool canTalk;
+    public event EventHandler OnItemTalked;
+
     private void Start()
     {
         player = GameManager.game.Player;
@@ -115,6 +117,11 @@ public class InteractiveItem : MonoBehaviour {
     }
     public void SetTalk() {
         player.Playerstate = Player.PlayerState.talk;
+        //發送NPC說話事件
+        if (OnItemTalked != null)
+        {
+            OnItemTalked(this, EventArgs.Empty);//分發事件
+        }
         //load talk data
         SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
         Debug.Log(_charInfo.talkStatus.ToString());

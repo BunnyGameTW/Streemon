@@ -79,7 +79,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                 {
                                     if (GetComponent<Image>().sprite.name == "mouse")
                                     {
-                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Flip");
+                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Eat");
                                         charInfo.talkNum = 8;
                                         charInfo.charTalkFirst = true;
                                         //set girl can first talk

@@ -7,8 +7,10 @@ public class Book : MonoBehaviour {
     int pageNum;
     public GameObject Lbtn, Rbtn;
     public GameObject bookImg;
-    bool[] hasDiary = new bool[5];//default false
-    public Sprite noDiaryImg;                
+    bool[] hasDiary = new bool[14];//default false
+    public Sprite noDiaryImg;
+    public Text pageTxt;
+    public Animator ani;
     private void Start()
     {
       
@@ -24,8 +26,17 @@ public class Book : MonoBehaviour {
     public void changePage(int i) {
         pageNum += i;
         SoundManager.sound.playOne(SoundManager.sound.playerse.pick);
-        displayBtn();
-        displayImg();
+        //disappear while animate playing
+        pageTxt.enabled = false;
+        bookImg.SetActive(false);
+        Lbtn.SetActive(false);
+        Rbtn.SetActive(false);
+        //appear while animate end
+        Invoke("displayBtn", 0.5f);
+        Invoke("displayImg", 0.5f);
+
+
+
     }
     public void closeBook() {
         SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
@@ -39,12 +50,14 @@ public class Book : MonoBehaviour {
         else if (pageNum == _imgs.Length - 1) GameManager.game.Setactive(Rbtn, false);
     }
     void displayImg() {
-        //
-        if(pageNum < 5) {
-            if (hasDiary[pageNum]) bookImg.GetComponent<Image>().sprite = _imgs[pageNum];//顯示正常日記
-            else bookImg.GetComponent<Image>().sprite = noDiaryImg;//顯示尚未取得日記的圖片
-        }
-        else bookImg.GetComponent<Image>().sprite = _imgs[pageNum];
+        bookImg.SetActive(true);
+
+        if (hasDiary[pageNum]) bookImg.GetComponent<Image>().sprite = _imgs[pageNum];//顯示正常日記
+        else bookImg.GetComponent<Image>().sprite = noDiaryImg;//顯示尚未取得日記的圖片
+       
+        //display text
+        pageTxt.enabled = true;
+        pageTxt.text = (pageNum + 1).ToString();
     }
     public void AddDiary(int diaryIndex)//傳入第N張
     {

@@ -53,15 +53,17 @@ public class Talk : MonoBehaviour {
         {
             setTalkBehavior();
             GameManager.game.Player.Playerstate = Player.PlayerState.idle;
+            //TODO: player end talk event
+            GameManager.game.Player.OnItemEndTalked();
             GameManager.game.Setactive(GameManager.game.TalkUI, false);
         }
-        if (nextName == "yellow" && nextParagraph == 11)//給淡淡 //直接給玩家還是掉地上
+        if (nextName == "yellow" && nextParagraph == 11)//給淡淡 //TODO:掉地上
         {
             GameObject.Find("bird").GetComponent<Animator>().SetTrigger("Eat");
             GameManager.game.Player.AddHoldItem("diamond");
             GameManager.game.Player.OnItemChanged();
         }
-        if (nextName == "yellow" && nextParagraph == 43)//給話 //直接給玩家還是掉地上
+        if (nextName == "yellow" && nextParagraph == 43)//給話 //TODO掉地上
         {
           
             GameObject.Find("blue").GetComponent<Animator>().SetTrigger("Paint");

@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour {
 #endif
 
 
-        if (SceneManager.GetActiveScene().name == "SblueRoom") SaveData._data.tutorialEnd = true;
+        if (SceneManager.GetActiveScene().name == "SblueRoom")
+        {
+            SaveData._data.tutorialEnd = true;
+            
+
+        }
         else if (SceneManager.GetActiveScene().name == "Sout") SaveData._data.tutorialEnd = false;
         //load player position
         if (SaveData._data.tutorialEnd)
@@ -104,6 +109,7 @@ public class GameManager : MonoBehaviour {
                 SetTalk("yellow", 1);
                 Player.Playerstate = Player.PlayerState.talk;
                 Setactive(TalkUI, true);
+                Player.setAnimation(Player.PlayerState.bed);
             }
 
             if (roomInfo.firstIn)  //is first in
@@ -122,11 +128,11 @@ public class GameManager : MonoBehaviour {
             Player.AddHoldItem("book");
             Player.OnItemChanged();
         }
-        //  if (Input.GetKeyDown(KeyCode.Keypad2))
-        //  {
-        //      Player.AddHoldItem("seed");
-        //      Player.OnItemChanged();
-        //  }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            Player.AddHoldItem("mouse");
+            Player.OnItemChanged();
+        }
         //  if (Input.GetKeyDown(KeyCode.Keypad3))
         //  {
         //      float speed = Player.getMoveSpeed();

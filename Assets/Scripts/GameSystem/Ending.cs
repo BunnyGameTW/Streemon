@@ -8,7 +8,7 @@ public class Ending : MonoBehaviour {
 	void Start () {
         changeSprite();
         Debug.Log(SaveData._data.ending);
-        GameManager.game.SetTalk("ending", 1);
+        GameManager.game.SetTalk("ending", 0);
         GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }
     void changeSprite() {
@@ -22,6 +22,6 @@ public class Ending : MonoBehaviour {
             GameManager.game.Talky.next();
         }
    }
-    //TODO:改結局圖片, to title,
+    //TODO:改結局圖片
 
 }
