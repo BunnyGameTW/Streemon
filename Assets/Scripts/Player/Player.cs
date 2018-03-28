@@ -110,6 +110,7 @@ public class Player : MonoBehaviour {
         if (state == PlayerState.pick) ani.SetBool("isWalk", false);
         if (state == PlayerState.talk) ani.SetBool("isWalk", false);//TODO:talk 動畫
         if (state == PlayerState.bed) ani.SetTrigger("Bed");
+       
         //TODO: down 動畫還沒加
     }
     public void SetPlayerRotation(int rot) {

@@ -42,7 +42,7 @@ public class SaveData {
         ending = 0;
         player.itemName = new List<string>();
         rooms = new SceneInfo[6];
-        chars = new CharsInfo[6];
+        chars = new CharsInfo[7];
         setupRooms();
         tutorialEnd = false;
         setupChars();
@@ -57,12 +57,12 @@ public class SaveData {
         chars[3].name = "flower";
         chars[4].name = "purple";
         chars[5].name = "fakeMouse";
-
+        chars[6].name = "pizza";
         for (int i = 0; i < chars.Length; i++)
         {
          
             chars[i].talkNum = 1;
-           if(i == 0 || i == 5) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
+           if(i == 0 || i == 5 || i== 6) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
            else chars[i].talkStatus = CharsInfo.TalkStatus.premissionNotComplete;//
           if (i == 2 || i == 1) chars[i].charTalkFirst = false;
            else chars[i].charTalkFirst = true;

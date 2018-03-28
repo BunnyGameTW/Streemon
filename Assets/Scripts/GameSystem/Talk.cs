@@ -59,7 +59,7 @@ public class Talk : MonoBehaviour {
         }
         if (nextName == "yellow" && nextParagraph == 11)//給淡淡 //TODO:掉地上
         {
-            GameObject.Find("bird").GetComponent<Animator>().SetTrigger("Eat");
+            GameObject.Find("bird").GetComponent<Animator>().SetTrigger("Egg");
             GameManager.game.Player.AddHoldItem("diamond");
             GameManager.game.Player.OnItemChanged();
         }
@@ -79,14 +79,18 @@ public class Talk : MonoBehaviour {
         if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeSceneWithFade("SmainFake");
         else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
         {
+
             SaveData._data.tutorialEnd = true;
             GameManager.game.changeScene("SblueRoom");
         }
-        else if (nextName == "yellow" && nextParagraph.ToString() == "999")//set bg black and ready to change scene
+        else if (nextName == "pizzaTalkEnd")//set bg black and ready to change scene
         {
-            GameManager.game.SetTalk(nextName, nextParagraph);
-            reset();
-           StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+            //set pizza can eat
+           // GameObject.Find("pizza").GetComponent<InteractiveItem>().interactiveDistance = 3;
+            //GameManager.game.SetTalk("yellow", 999);
+            //GameManager.game.SetTalk(nextName, nextParagraph);
+            //reset();
+            //StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
         }
         else if (nextName == "birdEndTalkRandom")
         {
@@ -163,7 +167,11 @@ public class Talk : MonoBehaviour {
             _charInfo.charTalkFirst = false;
 
         }
-      
+        else if(nextName == "pizzaTalkEnd")
+        {
+            GameObject.Find("pizza").GetComponent<InteractiveItem>().interactiveDistance = 3;
+
+        }
         //save char info
         SaveData._data.setCharInfo(_charInfo.name, _charInfo);
     }
