@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Ending : MonoBehaviour {
     public Sprite[] endingSprite;
+    public bool canEnd;
 	// Use this for initialization
 	void Start () {
+        canEnd = false;
         changeSprite();
         Debug.Log(SaveData._data.ending);
-        GameManager.game.SetTalk("ending", 0);
+        GameManager.game.SetTalk("ending", SaveData._data.ending);
         GameManager.game.Setactive(GameManager.game.TalkUI, true);
     }
     void changeSprite() {
@@ -19,7 +21,8 @@ public class Ending : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.game.Talky.next();
+            if (!canEnd) GameManager.game.Talky.next();
+            else GameManager.game.resetGame();
         }
    }
     //TODO:改結局圖片

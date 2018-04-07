@@ -121,18 +121,18 @@ public class GameManager : MonoBehaviour {
     }
     public void Update()
     {
-        //cheat code
+        ////cheat code
         if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             Player.AddHoldItem("book");
             Player.OnItemChanged();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            Player.AddHoldItem("mouse");
-            Player.OnItemChanged();
-        }
+        //if (Input.GetKeyDown(KeyCode.Keypad2))
+        //{
+        //    Player.AddHoldItem("mouse");
+        //    Player.OnItemChanged();
+        //}
         //  if (Input.GetKeyDown(KeyCode.Keypad3))
         //  {
         //      float speed = Player.getMoveSpeed();
@@ -144,12 +144,12 @@ public class GameManager : MonoBehaviour {
         ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
         //點擊特效
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); pos.z = 0;
-        //   GameObject g = Instantiate(clickEffect, pos, transform.rotation);
-        //    Destroy(g, 1);
-        //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); pos.z = 0;
+            GameObject g = Instantiate(clickEffect, pos, transform.rotation);
+            Destroy(g, 1);
+        }
     }
 
     public void resetGame()
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour {
             }
         }
         //set se
-        if (CSV.GetInstance().arrayData[iLine][0] == "yellow") _talky.talkSE = SoundManager.sound.uise.talk[0];
+        if (CSV.GetInstance().arrayData[iLine][0] == "yellow" || CSV.GetInstance().arrayData[iLine][0] == "pizza") _talky.talkSE = SoundManager.sound.uise.talk[0];
         else _talky.talkSE = SoundManager.sound.uise.talk[1];
 
         int np; int.TryParse(CSV.GetInstance().arrayData[iLine][3], out np);//4th parameter

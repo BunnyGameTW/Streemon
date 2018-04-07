@@ -79,19 +79,9 @@ public class Talk : MonoBehaviour {
         if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeSceneWithFade("SmainFake");
         else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
         {
-
             SaveData._data.tutorialEnd = true;
             GameManager.game.changeScene("SblueRoom");
-        }
-        else if (nextName == "pizzaTalkEnd")//set bg black and ready to change scene
-        {
-            //set pizza can eat
-           // GameObject.Find("pizza").GetComponent<InteractiveItem>().interactiveDistance = 3;
-            //GameManager.game.SetTalk("yellow", 999);
-            //GameManager.game.SetTalk(nextName, nextParagraph);
-            //reset();
-            //StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
-        }
+        }      
         else if (nextName == "birdEndTalkRandom")
         {
             int _talkNum = UnityEngine.Random.Range(0, 2) + 16;//bird16 or bird17            
@@ -100,7 +90,8 @@ public class Talk : MonoBehaviour {
         }
         else if (nextName == "endingEnd" && nextParagraph.ToString() == "999")
         {
-            GameManager.game.resetGame();
+            //play end animation
+            GetComponent<Animator>().SetBool("isTalkEnd", true);          
         }
         else //normal
         {
@@ -169,8 +160,8 @@ public class Talk : MonoBehaviour {
         }
         else if(nextName == "pizzaTalkEnd")
         {
-            GameObject.Find("pizza").GetComponent<InteractiveItem>().interactiveDistance = 3;
-
+            Pizza _p = GameObject.Find("pizza").GetComponent<Pizza>();
+            _p.hasPermission = true;            
         }
         //save char info
         SaveData._data.setCharInfo(_charInfo.name, _charInfo);
@@ -246,4 +237,9 @@ public class Talk : MonoBehaviour {
 			yield return new WaitForSeconds (0.07f);
 		}
 	}
+    //bad method TODO: improved
+    void setEnding()
+    {
+        FindObjectOfType<Ending>().canEnd = true;
+    }
 }

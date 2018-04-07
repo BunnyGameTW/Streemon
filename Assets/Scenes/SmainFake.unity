@@ -227,22 +227,22 @@ Prefab:
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.5810708
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1177292400950494, guid: 4aadfdfc631600f46bdd5a2e00dbb898, type: 2}
       propertyPath: m_IsActive
@@ -333,12 +333,12 @@ Prefab:
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 1800
       objectReference: {fileID: 0}
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1280, y: 800}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -861,15 +861,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 997103409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9032eba0f13bfbf40b0003d20813c262, type: 3}
+  m_Script: {fileID: 11500000, guid: 66a5f77e7dcbb0847972a518d3f225f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: pizza
-  interactiveDistance: 0
+  interactiveDistance: 3
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
-  canTalk: 1
+  canTalk: 0
+  hasPermission: 0
 --- !u!212 &997103412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1096,7 +1097,8 @@ MonoBehaviour:
   _BookUI: {fileID: 0}
   _TalkUI: {fileID: 481949047}
   fadeImg: {fileID: 0}
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 1899851819819216, guid: 54e19aa6336906047980cbcd13d5d851,
+    type: 2}
 --- !u!4 &1157731833
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,6 +1283,11 @@ Prefab:
       propertyPath: OnUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetPlayerState
       objectReference: {fileID: 0}
+    - target: {fileID: 212104107386290104, guid: 5024b51840fe64c4b9ce17a7e6b19afc,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5024b51840fe64c4b9ce17a7e6b19afc, type: 2}
   m_IsPrefabParent: 0
@@ -1445,7 +1452,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1572429757
   m_SortingLayer: 2
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -1755,7 +1762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: purple_tutorial
-  interactiveDistance: 4
+  interactiveDistance: 3
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -1793,7 +1800,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1572429757
   m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: eb10b19c3f0b6d8448f030aeb445bf27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

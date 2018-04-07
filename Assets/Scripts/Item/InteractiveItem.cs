@@ -44,6 +44,7 @@ public class InteractiveItem : MonoBehaviour {
     {
        
         if (_canInteractive) {
+           // if (!playerhasBook) {SetTalk(yellow,n) } // TODO:強制剪日記
             if (OnItemClicked != null)
             {
                 OnItemClicked(this, EventArgs.Empty);//分發事件

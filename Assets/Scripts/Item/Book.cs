@@ -61,6 +61,7 @@ public class Book : MonoBehaviour {
     }
     public void AddDiary(int diaryIndex)//傳入第N張
     {
+        hasDiary = SaveData._data.getDiaryInfo();
         hasDiary[diaryIndex] = true;
         SaveData._data.setDiaryInfo(hasDiary);
 

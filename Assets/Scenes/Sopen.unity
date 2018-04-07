@@ -203,12 +203,12 @@ Prefab:
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 1800
       objectReference: {fileID: 0}
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
@@ -248,7 +248,11 @@ Prefab:
     - target: {fileID: 224779334444541174, guid: 879ac5bfaf2862344b326e49d61bff7b,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 24.083368
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444162692092878, guid: 879ac5bfaf2862344b326e49d61bff7b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 879ac5bfaf2862344b326e49d61bff7b, type: 2}
@@ -458,7 +462,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1280, y: 800}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -698,7 +702,8 @@ MonoBehaviour:
   _BookUI: {fileID: 0}
   _TalkUI: {fileID: 293456741}
   fadeImg: {fileID: 145497059}
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 1899851819819216, guid: 54e19aa6336906047980cbcd13d5d851,
+    type: 2}
 --- !u!4 &1789659231
 Transform:
   m_ObjectHideFlags: 0
@@ -1062,17 +1067,22 @@ Prefab:
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224429448298197144, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
         type: 2}
       propertyPath: m_AnchoredPosition.x
       value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 224105695158642826, guid: 4aadfdfc631600f46bdd5a2e00dbb898,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4aadfdfc631600f46bdd5a2e00dbb898, type: 2}
