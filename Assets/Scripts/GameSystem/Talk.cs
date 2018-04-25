@@ -117,6 +117,7 @@ public class Talk : MonoBehaviour {
         {            
             _charInfo.talkNum = 6;
             _charInfo.charTalkFirst = true;
+            SaveData._data.ending = 1;
         }
         else if (nextName == "birdrandom")
         {      
@@ -131,6 +132,7 @@ public class Talk : MonoBehaviour {
         {      
             _charInfo.talkNum = 30;
             _charInfo.charTalkFirst = false;
+            SaveData._data.ending = 3;//暗影的襲擊
 
         }
         else if (nextName == "girlTalkEnd" || nextName == "girlEndTalkRandom")
@@ -142,14 +144,14 @@ public class Talk : MonoBehaviour {
         {         
             _charInfo.talkNum = 19;
             _charInfo.charTalkFirst = true;
-
+            SaveData._data.ending = 6;//小湖的死亡
         }
         else if (nextName == "blueRandom" || nextName== "blueTalkEnd")
         {
             _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
             _charInfo.charTalkFirst = true;
             if(nextName == "blueTalkEnd") {
-                SaveData._data.ending = 5;//無止境的實驗 
+              //TODO:鎖大門
             }
         }
         else if (nextName == "blueMidTalkEnd")

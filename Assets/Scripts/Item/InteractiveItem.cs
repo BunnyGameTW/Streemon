@@ -44,66 +44,78 @@ public class InteractiveItem : MonoBehaviour {
     {
        
         if (_canInteractive) {
-           // if (!playerhasBook) {SetTalk(yellow,n) } // TODO:強制剪日記
-            if (OnItemClicked != null)
+            if (!SaveData._data.playerHasBook && itemName != "book")
             {
-                OnItemClicked(this, EventArgs.Empty);//分發事件
+                SetTalk();
+                //  GameManager.game.SetTalk("yellow", 87);
             }
-            if (itemName == "2to3" || itemName =="3to2" || itemName =="2to1" || itemName =="1to2")
+            else
             {
-                //矯正誤差，讓玩家移動到定點再開始播動畫
-                Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
-                StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));         
-            }
-            if(itemName == "Smain" || itemName =="Sbalcony" || itemName == "SredRoom" || itemName =="SblueRoom")
-            {
-                //TODO: go to door animation 
 
-                //save player hold item
-                SaveData._data.player.itemName.Clear();//清空
-                foreach (string _item in GameManager.game.Player.HoldItems)
+
+                //
+                if (OnItemClicked != null)
                 {
-                    SaveData._data.player.itemName.Add(_item) ;            
+                    OnItemClicked(this, EventArgs.Empty);//分發事件
                 }
-                foreach (string _item in SaveData._data.player.itemName)//Debug
+                if (itemName == "2to3" || itemName == "3to2" || itemName == "2to1" || itemName == "1to2")
                 {
-                    Debug.Log(_item);
+                    //矯正誤差，讓玩家移動到定點再開始播動畫
+                    Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
+                    StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));
                 }
-                //save scene item    
-                SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SaveData._data.nowScene);
-                roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];      
-                for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
-                SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
-                GameManager.game.changeSceneWithFade(itemName);
-            }
-            if(itemName == "SstorageRoom")
-            {
-                //TODO: go to door ani
-                FindObjectOfType<Storage>().goIn(true);
-            }
-            else if(itemName == "StorageInDoor")
-            {
-                GameManager.game.Player.SetPlayerState(2);
-                GetComponent<Storage>().goOut(false);
-            }
-            if (itemName == "Sout")
-            {//結局
-                GameManager.game.changeSceneWithFade(itemName);
-            }
-            if (itemName == "mouse") {//特例
-                GetComponent<SpriteRenderer>().enabled = true;
-                Destroy(GameObject.Find("cheese_02_target"));
-            }
-            if (canPick)
-            {
-                GameManager.game.Player.Playerstate = Player.PlayerState.pick;
-                SoundManager.sound.playOne(SoundManager.sound.playerse.pick);              
-                Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
-                StartCoroutine(itemGotoPoint(pointPos)); 
-            
-            }
-            if (canTalk) {
-                 SetTalk();
+                if (itemName == "Smain" || itemName == "Sbalcony" || itemName == "SredRoom" || itemName == "SblueRoom")
+                {
+                    //TODO: go to door animation 
+
+                    //save player hold item
+                    SaveData._data.player.itemName.Clear();//清空
+                    foreach (string _item in GameManager.game.Player.HoldItems)
+                    {
+                        SaveData._data.player.itemName.Add(_item);
+                    }
+                    foreach (string _item in SaveData._data.player.itemName)//Debug
+                    {
+                        Debug.Log(_item);
+                    }
+                    //save scene item    
+                    SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SaveData._data.nowScene);
+                    roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];
+                    for (int i = 0; i < GameObject.FindGameObjectsWithTag("item").Length; i++) roomInfo.itemName[i] = GameObject.FindGameObjectsWithTag("item")[i].name;
+                    SaveData._data.setRoomInfo(SaveData._data.nowScene, roomInfo);
+                    GameManager.game.changeSceneWithFade(itemName);
+                }
+                if (itemName == "SstorageRoom")
+                {
+                    //TODO: go to door ani
+                    FindObjectOfType<Storage>().goIn(true);
+                }
+                else if (itemName == "StorageInDoor")
+                {
+                    GameManager.game.Player.SetPlayerState(2);
+                    GetComponent<Storage>().goOut(false);
+                }
+                if (itemName == "Sout")
+                {//結局
+                    GameManager.game.changeSceneWithFade(itemName);
+                }
+                if (itemName == "mouse")
+                {//特例
+                    GetComponent<SpriteRenderer>().enabled = true;
+                    Destroy(GameObject.Find("cheese_02_target"));
+                }
+                if (canPick)
+                {
+                    GameManager.game.Player.Playerstate = Player.PlayerState.pick;
+                    SoundManager.sound.playOne(SoundManager.sound.playerse.pick);
+                    Vector3 pointPos = Camera.main.transform.position; pointPos.z = 0.0f;
+                    StartCoroutine(itemGotoPoint(pointPos));
+
+                }
+                if (canTalk)
+                {
+                    SetTalk();
+                }
             }
         }
     }
@@ -123,12 +135,20 @@ public class InteractiveItem : MonoBehaviour {
         {
             OnItemTalked(this, EventArgs.Empty);//分發事件
         }
-        //load talk data
+        //load talk data   
         SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
         Debug.Log(_charInfo.talkStatus.ToString());
-        if (SaveData._data.tutorialEnd) {
+        if (SaveData._data.tutorialEnd)
+        {
             _charInfo = SaveData._data.getCharInfo(itemName);
-        }else
+            if (!SaveData._data.playerHasBook)
+            {
+                _charInfo.talkNum = 87;
+              //  GameManager.game.SetTalk("yellow", 87);
+            } // TODO:強制剪日記
+           
+        }
+        else
         {
             _charInfo.talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
             _charInfo.talkNum = 1;
@@ -138,11 +158,12 @@ public class InteractiveItem : MonoBehaviour {
         else
         {
             Debug.Log(_charInfo.name + " , " + _charInfo.talkNum + ", " + _charInfo.talkStatus.ToString() + ", " + _charInfo.charTalkFirst);
-            if (itemName == "tutorial" || !_charInfo.charTalkFirst) { GameManager.game.SetTalk("yellow", _charInfo.talkNum); }//player talk first
+            if (itemName == "tutorial" || !_charInfo.charTalkFirst || !SaveData._data.playerHasBook) { GameManager.game.SetTalk("yellow", _charInfo.talkNum); }//player talk first
             else GameManager.game.SetTalk(itemName, _charInfo.talkNum);//item talk first
 
             GameManager.game.Setactive(GameManager.game.TalkUI, true);
         }
+        
     }
     //item move to point
     IEnumerator itemGotoPoint(Vector3 point)

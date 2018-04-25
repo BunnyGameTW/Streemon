@@ -6,25 +6,18 @@ using System;
 public class BookPart : InteractiveItem {
     public int index;
     public Book book;
-    bool hasBook;
     public BagUI _bagUI;
     public GameObject diaryUI;
 	// Use this for initialization
 	void Start () {
-        hasBook = false;
-        _bagUI.OnBookGot += this.OnBookGot;//監聽 
         player = GameManager.game.Player;
         _spriteRender = GetComponent<SpriteRenderer>();
-    }
-	void OnBookGot(object sender, EventArgs args)
-    {
-        hasBook = true;
     }
 	
     //pick up   
     private void OnMouseDown()
     {
-        if (canPick && hasBook && _canInteractive)
+        if (canPick && SaveData._data.playerHasBook && _canInteractive)
         {
             GameManager.game.Player.Playerstate = Player.PlayerState.pick;
             SoundManager.sound.playOne(SoundManager.sound.playerse.pick);

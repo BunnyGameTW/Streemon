@@ -6,6 +6,7 @@ public class SaveData {
     public int ending;
     public string nowScene;
     public Vector3 playerPos;
+    public bool playerHasBook;
     [Serializable]
     public struct PlayerInfo
     {
@@ -41,6 +42,7 @@ public class SaveData {
     {
         ending = 0;
         player.itemName = new List<string>();
+        playerHasBook = false;
         rooms = new SceneInfo[6];
         chars = new CharsInfo[7];
         setupRooms();

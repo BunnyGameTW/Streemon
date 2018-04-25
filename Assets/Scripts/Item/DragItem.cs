@@ -31,7 +31,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             player.Playerstate = Player.PlayerState.interactive;
             originalPosition = myTransform.position;
-            if (GetComponent<Image>().sprite.name == "transparent" || GetComponent<Image>().sprite.name == "book") { canDrag = false; }//TODO:名字要改成書的圖片名
+            if (GetComponent<Image>().sprite.name == "transparent" || GetComponent<Image>().sprite.name == "book") { canDrag = false; }
             else canDrag = true;
          
         }
@@ -85,7 +85,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                         //set girl can first talk
                                         SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
                                         //set ending
-                                        SaveData._data.ending = 2;//從天而降的屎
+                                        SaveData._data.ending = 2;//破石而出
                                     }
                                     else if (GetComponent<Image>().sprite.name == "diamond")
                                     {
@@ -93,14 +93,14 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                         charInfo.charTalkFirst = true;
                                         //set blue can first talk
                                         SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
-                                        SaveData._data.ending = 3;//被搶劫
+                                        SaveData._data.ending = 4;//TODO: 缺結局對話CSV
                                     }
                                     else if (GetComponent<Image>().sprite.name == "seed")
                                     {
                                         charInfo.talkNum = 13;
                                         charInfo.charTalkFirst = true;
                                         targets[i].GetComponentInParent<Animator>().SetTrigger("Eat");
-                                        SaveData._data.ending = 4;//小湖的死亡
+                                        SaveData._data.ending = 5;//被注視的感覺
                                     }
                                     //save talk data
                                     SaveData._data.setCharInfo(charInfo.name, charInfo);

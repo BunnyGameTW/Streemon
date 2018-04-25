@@ -40,7 +40,10 @@ public class BagUI : MonoBehaviour {
                 if (_item == itemSprite[i].name)
                 {
                     GetComponentsInChildren<Image>()[itemListNum].sprite = itemSprite[i];
-                    if(_item == "book" && this.OnBookGot != null) OnBookGot(this, EventArgs.Empty);//分發事件
+                    if(_item == "book") {
+                    //    OnBookGot(this, EventArgs.Empty);//分發事件
+                       SaveData._data.playerHasBook = true;
+                    }
                         break;
                 }
                 else
