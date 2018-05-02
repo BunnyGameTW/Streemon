@@ -47,7 +47,6 @@ public class InteractiveItem : MonoBehaviour {
             if (!SaveData._data.playerHasBook && itemName != "book")
             {
                 SetTalk();
-                //  GameManager.game.SetTalk("yellow", 87);
             }
             else
             {
@@ -144,8 +143,7 @@ public class InteractiveItem : MonoBehaviour {
             if (!SaveData._data.playerHasBook)
             {
                 _charInfo.talkNum = 87;
-              //  GameManager.game.SetTalk("yellow", 87);
-            } // TODO:強制剪日記
+            }
            
         }
         else
@@ -158,7 +156,7 @@ public class InteractiveItem : MonoBehaviour {
         else
         {
             Debug.Log(_charInfo.name + " , " + _charInfo.talkNum + ", " + _charInfo.talkStatus.ToString() + ", " + _charInfo.charTalkFirst);
-            if (itemName == "tutorial" || !_charInfo.charTalkFirst || !SaveData._data.playerHasBook) { GameManager.game.SetTalk("yellow", _charInfo.talkNum); }//player talk first
+            if (itemName == "tutorial" || !_charInfo.charTalkFirst || (!SaveData._data.playerHasBook && SaveData._data.tutorialEnd)) { GameManager.game.SetTalk("yellow", _charInfo.talkNum); }//player talk first
             else GameManager.game.SetTalk(itemName, _charInfo.talkNum);//item talk first
 
             GameManager.game.Setactive(GameManager.game.TalkUI, true);

@@ -144,7 +144,7 @@ public class Talk : MonoBehaviour {
         {         
             _charInfo.talkNum = 19;
             _charInfo.charTalkFirst = true;
-            SaveData._data.ending = 6;//小湖的死亡
+            SaveData._data.ending = 4;//小湖的死亡
         }
         else if (nextName == "blueRandom" || nextName== "blueTalkEnd")
         {

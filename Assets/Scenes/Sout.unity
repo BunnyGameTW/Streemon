@@ -835,10 +835,12 @@ MonoBehaviour:
   endingSprite:
   - {fileID: 21300000, guid: 98650f1728f193044a0e6ea1c333c941, type: 3}
   - {fileID: 21300000, guid: ce6800569c107144d933fcb12dbd78a3, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 85a63b66cd797344285221d841aa51fa, type: 3}
+  - {fileID: 21300000, guid: ef8206829995baf41bff34568a56e429, type: 3}
+  - {fileID: 21300000, guid: 294f6f667f447b5459b237a73a428521, type: 3}
+  - {fileID: 21300000, guid: 26a6e77f66ea4194baa57c1d7a83970e, type: 3}
+  - {fileID: 21300000, guid: 9d835a82edf5c564594de6649850cd22, type: 3}
+  - {fileID: 21300000, guid: f19c6f65f3dbae04192e367a45fa6317, type: 3}
   canEnd: 0
 --- !u!224 &1123139217 stripped
 RectTransform:
