@@ -26,7 +26,6 @@ public class UselessTalkItem : InteractiveItem {
             }
             else
             {
- 
                 if (canTalk)
                 {
                     SetTalk();
@@ -37,11 +36,7 @@ public class UselessTalkItem : InteractiveItem {
     public void SetTalk()
     {
         player.Playerstate = Player.PlayerState.talk;
-        //發送NPC說話事件
-        //if (OnItemTalked != null)
-        //{
-        //    OnItemTalked(this, EventArgs.Empty);//分發事件
-        //}
+   
         //load talk data   
        
         if (SaveData._data.tutorialEnd)

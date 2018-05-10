@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     Vector3 mouseScrPos = Vector3.zero;
     [SerializeField]
     float moveSpeed = 1.0f;
-    public enum PlayerState { idle, walk, interactive, up, down, offset, pick, talk, read, bed }
+    public enum PlayerState { idle, walk, interactive, up, down, offset, pick, talk, read, bed, scared, flashlight }
     public PlayerState _playerState;
     Animator ani;
     SpriteRenderer _spriteRender;
@@ -110,7 +110,9 @@ public class Player : MonoBehaviour {
         if (state == PlayerState.pick) ani.SetBool("isWalk", false);
         if (state == PlayerState.talk) ani.SetBool("isWalk", false);//TODO:talk 動畫
         if (state == PlayerState.bed) ani.SetTrigger("Bed");
-       
+        if (state == PlayerState.scared) ani.SetTrigger("Scared");
+        if (state == PlayerState.flashlight) ani.SetTrigger("Flashlight");
+
         //TODO: down 動畫還沒加
     }
     public void SetPlayerRotation(int rot) {
@@ -146,5 +148,32 @@ public class Player : MonoBehaviour {
     }
     public void SetPlayerState(int state) {
         _playerState = (PlayerState)state;
+    }
+    public void SetPlayerScared()
+    {
+       // Playerstate = PlayerState.idle;
+        //set player stop and scared
+        Playerstate = PlayerState.scared;
+        //back to left
+        Vector3 pos = transform.position;
+        pos.x = pos.x - 1.0f;
+        StartCoroutine(gotoPoint(pos, 2.0f));
+       
+        //show talk
+
+    }
+    //set player go to point
+    IEnumerator gotoPoint(Vector3 point, float speed)
+    {       
+        while (transform.position.x != point.x)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
+            yield return null;
+        }
+        //
+        Playerstate = PlayerState.idle;
+        GameManager.game.Setactive(GameManager.game.TalkUI, false);
+        StopCoroutine("gotoPoint");
+        ani.ResetTrigger("Scared");
     }
 }

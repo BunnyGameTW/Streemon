@@ -56,7 +56,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (targets.Length != 0) {
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    if (Vector3.Distance(pos, targets[i].transform.position) < 1.0f)
+                    if (Vector3.Distance(pos, targets[i].transform.position) < 2.0f)
                     {
                         Debug.Log(targets[i]);
                         //判斷是否為正確目標
@@ -102,6 +102,15 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                         charInfo.charTalkFirst = true;
                                         targets[i].GetComponentInParent<Animator>().SetTrigger("Eat");
                                         SaveData._data.ending = 5;//被注視的感覺
+                                    }
+                                    else if(GetComponent<Image>().sprite.name == "flashlight")
+                                    {
+                                        //set flower small animation
+                                        
+                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Small");
+                                        //set player floshlight animation
+                                        player.SetPlayerState(11);
+                                        //afyer set flower at floor
                                     }
                                     //save talk data
                                     SaveData._data.setCharInfo(charInfo.name, charInfo);

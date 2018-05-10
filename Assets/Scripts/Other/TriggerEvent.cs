@@ -7,7 +7,7 @@ public class TriggerEvent : MonoBehaviour {
     public UnityEvent OnEnter;
     public UnityEvent OnDown;
     public UnityEvent OnUp;
-
+    public UnityEvent OnExit;
     // Use this for initialization
     void Start () {
 		
@@ -17,6 +17,10 @@ public class TriggerEvent : MonoBehaviour {
 	void Update () {
 		
 	}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        OnExit.Invoke();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         OnEnter.Invoke();

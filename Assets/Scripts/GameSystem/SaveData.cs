@@ -64,13 +64,16 @@ public class SaveData {
         {
          
             chars[i].talkNum = 1;
-           if(i == 0 || i == 5 || i== 6 ) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
-           else chars[i].talkStatus = CharsInfo.TalkStatus.premissionNotComplete;//
-          if (i == 2 || i == 1 ) chars[i].charTalkFirst = false;
+            if (i == 0 || i == 5 || i == 6) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
+            else if (i == 3) chars[i].talkStatus = CharsInfo.TalkStatus.canDoMission;//set flower can talk
+            else chars[i].talkStatus = CharsInfo.TalkStatus.premissionNotComplete;//
+           
+          if (i == 3 || i == 2 || i == 1 ) chars[i].charTalkFirst = false;
            else chars[i].charTalkFirst = true;
         }
         chars[2].talkNum = 14;//girl first talk
-        chars[1].talkNum = 32;//blue first talk     
+        chars[1].talkNum = 32;//blue first talk   
+        chars[3].talkNum = 110;//flower
     }
     public CharsInfo getCharInfo(string charName) {
         for (int i = 0; i < chars.Length; i++)

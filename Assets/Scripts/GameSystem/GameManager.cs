@@ -128,11 +128,11 @@ public class GameManager : MonoBehaviour {
             Player.AddHoldItem("book");
             Player.OnItemChanged();
         }
-        //if (Input.GetKeyDown(KeyCode.Keypad2))
-        //{
-        //    Player.AddHoldItem("mouse");
-        //    Player.OnItemChanged();
-        //}
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            Player.AddHoldItem("flashlight");
+            Player.OnItemChanged();
+        }
         //  if (Input.GetKeyDown(KeyCode.Keypad3))
         //  {
         //      float speed = Player.getMoveSpeed();
