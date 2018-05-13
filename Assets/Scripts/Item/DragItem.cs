@@ -53,12 +53,15 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             GameObject[] targets = GameObject.FindGameObjectsWithTag("target");         
             Vector3 pos = Camera.main.ScreenToWorldPoint(transform.position); pos.z = 0;
+           
             if (targets.Length != 0) {
                 for (int i = 0; i < targets.Length; i++)
                 {
                     if (Vector3.Distance(pos, targets[i].transform.position) < 2.0f)
                     {
+                        Debug.Log(Vector3.Distance(pos, targets[i].transform.position));
                         Debug.Log(targets[i]);
+
                         //判斷是否為正確目標
                         if (targets[i].name == GetComponent<Image>().sprite.name + "_target")
                         {
@@ -105,12 +108,12 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                     }
                                     else if(GetComponent<Image>().sprite.name == "flashlight")
                                     {
-                                        //set flower small animation
-                                        
+                                        targets[i].transform.parent.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
+
+                                        //set flower small animation                                        
                                         targets[i].GetComponentInParent<Animator>().SetTrigger("Small");
-                                        //set player floshlight animation
-                                        player.SetPlayerState(11);
-                                        //afyer set flower at floor
+                                        //set player flashlight animation                                    
+                                        player.setAnimation(Player.PlayerState.flashlight);
                                     }
                                     //save talk data
                                     SaveData._data.setCharInfo(charInfo.name, charInfo);
@@ -181,13 +184,16 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("dragitem point up:" + player.Playerstate);
-
+        if(GetComponent<Image>().sprite.name == "flower")
+        {
+            player.Playerstate = Player.PlayerState.interactive;
+        }
         if (isBig)
         {
             isBig = false;
             transform.localScale = transform.localScale / 1.5f;
             if (GetComponent<Image>().sprite.name == "book")
-            {//TODO:名字要改成書的圖片名
+            {
                 GameManager.game.Setactive(GameManager.game.BookUI, true);
                 player.Playerstate = Player.PlayerState.read;
             }

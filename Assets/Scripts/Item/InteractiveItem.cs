@@ -103,6 +103,10 @@ public class InteractiveItem : MonoBehaviour {
                     GetComponent<SpriteRenderer>().enabled = true;
                     Destroy(GameObject.Find("cheese_02_target"));
                 }
+                if(itemName == "freezer")
+                {
+                    GameManager.game.Setactive(GameManager.game.FreezerUI, true);
+                }
                 if (canPick)
                 {
                     GameManager.game.Player.Playerstate = Player.PlayerState.pick;
@@ -135,8 +139,7 @@ public class InteractiveItem : MonoBehaviour {
             OnItemTalked(this, EventArgs.Empty);//分發事件
         }
         //load talk data   
-        SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();
-        Debug.Log(_charInfo.talkStatus.ToString());
+        SaveData.CharsInfo _charInfo = new SaveData.CharsInfo();       
         if (SaveData._data.tutorialEnd)
         {
             _charInfo = SaveData._data.getCharInfo(itemName);
@@ -253,5 +256,18 @@ public class InteractiveItem : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, interactiveDistance);
     }
-
+    //flower
+    public void SetCanCaught()
+    {
+        //set disappear
+        GetComponent<Animator>().SetTrigger("Caught");
+        Vector3 pos = transform.position;
+        pos.y = -10.88f;
+        transform.position = pos;
+        //set jump to floor
+        canPick = true;
+        interactiveDistance = 6.0f;
+        //save data
+        SaveData._data.flowerIsSmall = true;
+    }
 }

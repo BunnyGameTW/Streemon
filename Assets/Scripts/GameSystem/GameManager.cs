@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     private GameObject _BookUI;
     [SerializeField]
     private GameObject _TalkUI;
+    [SerializeField]
+    private GameObject _FreezerUI;
     Talk _talky;
     public Image fadeImg;
     public GameObject clickEffect;
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour {
         if (SaveData._data.tutorialEnd)
         {
             // load scene info
+            //TODO:check flower status
             SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SceneManager.GetActiveScene().name);
             if (!roomInfo.firstIn)
             {
@@ -85,6 +88,15 @@ public class GameManager : MonoBehaviour {
                         if (Items[i].name == roomInfo.itemName[j]) isExist = true;
                     }
                     Items[i].SetActive(isExist);
+                }
+                //check flower status
+                if (SaveData._data.flowerIsSmall) {
+                    GameObject obj = GameObject.Find("Flower");
+                    if (obj != null)
+                    {
+                        obj.transform.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
+                        obj.GetComponentInParent<Animator>().SetTrigger("Small");
+                    }
                 }
             }
 
@@ -133,14 +145,20 @@ public class GameManager : MonoBehaviour {
             Player.AddHoldItem("flashlight");
             Player.OnItemChanged();
         }
-        //  if (Input.GetKeyDown(KeyCode.Keypad3))
-        //  {
-        //      float speed = Player.getMoveSpeed();
-        //      speed++;
-        //      Player.setMoveSpeed(speed);
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            Player.AddHoldItem("flower");
+            Player.OnItemChanged();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            //float speed = Player.getMoveSpeed();
+            //speed++;
+            //Player.setMoveSpeed(speed);
+            SaveData._data.tutorialEnd = true;
 
 
-        //  }
+        }
         ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
         //點擊特效
@@ -252,5 +270,9 @@ public class GameManager : MonoBehaviour {
     {
         fadeImg.GetComponent<Animator>().SetBool("isFade", true);
         yield return new WaitUntil(() => fadeImg.color.a == 1);
+    }
+    public GameObject FreezerUI
+    {
+        get { return _FreezerUI; }
     }
 }

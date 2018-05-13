@@ -7,6 +7,7 @@ public class SaveData {
     public string nowScene;
     public Vector3 playerPos;
     public bool playerHasBook;
+    public bool flowerIsSmall;
     [Serializable]
     public struct PlayerInfo
     {
@@ -50,6 +51,7 @@ public class SaveData {
         setupChars();
         hasDiary = new bool[14];
         setupDiary();
+        flowerIsSmall = false;
     }
     void setupChars()
     {

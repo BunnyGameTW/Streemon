@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b180fc1c3b4887e43a85e2d5b3f3b32e, type: 3}
   - {fileID: 21300000, guid: 58fddac4b8be68e43a8420021f3d17cd, type: 3}
   - {fileID: 21300000, guid: e78f7fdf2b2168c41b4a31893b7ff2ab, type: 3}
+  - {fileID: 21300000, guid: 723f0e493ee0e024e8a79e88ab12df3a, type: 3}
   noneSprite: {fileID: 21300000, guid: 923913c229b471c4d8c250a8ce6031da, type: 3}
 --- !u!114 &114945127700873036
 MonoBehaviour:
