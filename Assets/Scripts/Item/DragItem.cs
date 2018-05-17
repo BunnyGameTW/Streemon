@@ -58,10 +58,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 for (int i = 0; i < targets.Length; i++)
                 {
                     if (Vector3.Distance(pos, targets[i].transform.position) < 2.0f)
-                    {
-                        Debug.Log(Vector3.Distance(pos, targets[i].transform.position));
+                    {                    
                         Debug.Log(targets[i]);
-
                         //判斷是否為正確目標
                         if (targets[i].name == GetComponent<Image>().sprite.name + "_target")
                         {
@@ -115,12 +113,22 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                         //set player flashlight animation                                    
                                         player.setAnimation(Player.PlayerState.flashlight);
                                     }
+                                    else if (GetComponent<Image>().sprite.name == "flower")
+                                    {
+                                        GameManager.game.Setactive(GameManager.game.FreezerUI, true);
+                                        player.Playerstate = Player.PlayerState.interactive;
+                                        SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
+                                    }
                                     //save talk data
-                                    SaveData._data.setCharInfo(charInfo.name, charInfo);
-                                    targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
                                     //delete item
-                                    player.DeleteHoldItem(GetComponent<Image>().sprite.name);
-                                    player.OnItemChanged();
+                                    if (GetComponent<Image>().sprite.name != "flower")
+                                    {
+                                        SaveData._data.setCharInfo(charInfo.name, charInfo);
+                                         targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
+                                    
+                                        player.DeleteHoldItem(GetComponent<Image>().sprite.name);
+                                        player.OnItemChanged();
+                                    }
                                 }
                                 else if (charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.firstTalk || charInfo.talkStatus == SaveData.CharsInfo.TalkStatus.premissionNotComplete)
                                 {
@@ -183,11 +191,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("dragitem point up:" + player.Playerstate);
-        if(GetComponent<Image>().sprite.name == "flower")
-        {
-            player.Playerstate = Player.PlayerState.interactive;
-        }
+        Debug.Log("dragitem point up:" + player.Playerstate);      
         if (isBig)
         {
             isBig = false;

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     private GameObject _TalkUI;
     [SerializeField]
     private GameObject _FreezerUI;
+    [SerializeField]
+    private GameObject _LizardUI;
     Talk _talky;
     public Image fadeImg;
     public GameObject clickEffect;
@@ -76,8 +78,7 @@ public class GameManager : MonoBehaviour {
         if (SaveData._data.tutorialEnd)
         {
             // load scene info
-            //TODO:check flower status
-            SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SceneManager.GetActiveScene().name);
+             SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SceneManager.GetActiveScene().name);
             if (!roomInfo.firstIn)
             {
                 for (int i = 0; i < Items.Length; i++)
@@ -96,6 +97,17 @@ public class GameManager : MonoBehaviour {
                     {
                         obj.transform.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
                         obj.GetComponentInParent<Animator>().SetTrigger("Small");
+                    }
+                }
+                //check curtain status
+                if (SaveData._data.curtainIsOpen)
+                {
+                    GameObject obj = GameObject.Find("paint");
+                    if (obj != null)
+                    {
+                        GameObject obj2 = GameObject.Find("curtain");
+                        if(obj2 != null)obj2.SetActive(false);
+                        obj.GetComponent<InteractiveItem>().interactiveDistance = 4;
                     }
                 }
             }
@@ -145,19 +157,24 @@ public class GameManager : MonoBehaviour {
             Player.AddHoldItem("flashlight");
             Player.OnItemChanged();
         }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SaveData._data.tutorialEnd = true;
+        }
         if (Input.GetKeyDown(KeyCode.Keypad4))
         {
             Player.AddHoldItem("flower");
             Player.OnItemChanged();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Keypad5))
         {
-            //float speed = Player.getMoveSpeed();
-            //speed++;
-            //Player.setMoveSpeed(speed);
-            SaveData._data.tutorialEnd = true;
-
-
+            SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+            SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            Player.AddHoldItem("seed");
+            Player.OnItemChanged();
         }
         ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
@@ -270,9 +287,19 @@ public class GameManager : MonoBehaviour {
     {
         fadeImg.GetComponent<Animator>().SetBool("isFade", true);
         yield return new WaitUntil(() => fadeImg.color.a == 1);
+        
+    }
+    public IEnumerator fadeOut()
+    {      
+        fadeImg.GetComponent<Animator>().SetBool("isFade", false);
+        yield return new WaitUntil(() => fadeImg.color.a == 0);       
     }
     public GameObject FreezerUI
     {
         get { return _FreezerUI; }
+    }
+    public GameObject LizardUI
+    {
+        get { return _LizardUI; }
     }
 }

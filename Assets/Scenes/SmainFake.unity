@@ -514,7 +514,7 @@ SpriteRenderer:
   m_SortingLayerID: -113257169
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b6672b4f1f09aae4283c77219ccab9b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b4e48c43d387664299f4e3e97d5ed88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1170,6 +1170,7 @@ MonoBehaviour:
   _player: {fileID: 822476797}
   _BookUI: {fileID: 0}
   _TalkUI: {fileID: 481949047}
+  _FreezerUI: {fileID: 0}
   fadeImg: {fileID: 0}
   clickEffect: {fileID: 1899851819819216, guid: 54e19aa6336906047980cbcd13d5d851,
     type: 2}
@@ -1723,6 +1724,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnExit:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

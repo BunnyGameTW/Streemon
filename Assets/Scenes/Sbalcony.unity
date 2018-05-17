@@ -397,6 +397,11 @@ Prefab:
       propertyPath: OnUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 822476797}
+    - target: {fileID: 212104107386290104, guid: 5024b51840fe64c4b9ce17a7e6b19afc,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5024b51840fe64c4b9ce17a7e6b19afc, type: 2}
   m_IsPrefabParent: 0
@@ -1639,6 +1644,8 @@ MonoBehaviour:
   _player: {fileID: 822476797}
   _BookUI: {fileID: 1903745045}
   _TalkUI: {fileID: 481949047}
+  _FreezerUI: {fileID: 0}
+  _LizardUI: {fileID: 0}
   fadeImg: {fileID: 2061995432}
   clickEffect: {fileID: 1899851819819216, guid: 54e19aa6336906047980cbcd13d5d851,
     type: 2}

@@ -8,6 +8,8 @@ public class SaveData {
     public Vector3 playerPos;
     public bool playerHasBook;
     public bool flowerIsSmall;
+    public bool treeIsUnlock;
+    public bool curtainIsOpen;
     [Serializable]
     public struct PlayerInfo
     {
@@ -45,13 +47,15 @@ public class SaveData {
         player.itemName = new List<string>();
         playerHasBook = false;
         rooms = new SceneInfo[6];
-        chars = new CharsInfo[7];
+        chars = new CharsInfo[8];
         setupRooms();
         tutorialEnd = false;
         setupChars();
-        hasDiary = new bool[14];
+        hasDiary = new bool[16];
         setupDiary();
         flowerIsSmall = false;
+        treeIsUnlock = false;
+        curtainIsOpen = false;
     }
     void setupChars()
     {
@@ -62,20 +66,21 @@ public class SaveData {
         chars[4].name = "purple";
         chars[5].name = "fakeMouse";
         chars[6].name = "pizza";
+        chars[7].name = "freezer";
         for (int i = 0; i < chars.Length; i++)
-        {
-         
+        {         
             chars[i].talkNum = 1;
             if (i == 0 || i == 5 || i == 6) chars[i].talkStatus = CharsInfo.TalkStatus.firstTalk;//
-            else if (i == 3) chars[i].talkStatus = CharsInfo.TalkStatus.canDoMission;//set flower can talk
+            else if (i == 3 || i == 7) chars[i].talkStatus = CharsInfo.TalkStatus.canDoMission;//set flower and freezer can talk
             else chars[i].talkStatus = CharsInfo.TalkStatus.premissionNotComplete;//
            
-          if (i == 3 || i == 2 || i == 1 ) chars[i].charTalkFirst = false;
+          if (i==7 || i == 3 || i == 2 || i == 1 ) chars[i].charTalkFirst = false;
            else chars[i].charTalkFirst = true;
         }
         chars[2].talkNum = 14;//girl first talk
         chars[1].talkNum = 32;//blue first talk   
         chars[3].talkNum = 110;//flower
+        chars[7].talkNum = 111;//freezer
     }
     public CharsInfo getCharInfo(string charName) {
         for (int i = 0; i < chars.Length; i++)

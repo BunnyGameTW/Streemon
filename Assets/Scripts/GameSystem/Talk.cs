@@ -63,13 +63,13 @@ public class Talk : MonoBehaviour {
             GameManager.game.Player.AddHoldItem("diamond");
             GameManager.game.Player.OnItemChanged();
         }
-        if (nextName == "yellow" && nextParagraph == 43)//給話 //TODO掉地上
+        if (nextName == "yellow" && nextParagraph == 43)//給他看蜥蜴
         {
           
-            GameObject.Find("blue").GetComponent<Animator>().SetTrigger("Paint");
-            GameObject.Find("paint").SetActive(false);
-           GameManager.game.Player.AddHoldItem("pizza");//TODO:改成化的名字
-            GameManager.game.Player.OnItemChanged();
+            GameObject.Find("blue").GetComponent<Animator>().SetTrigger("Paint");   
+            SaveData._data.curtainIsOpen = true;
+            GameObject.Find("curtain").SetActive(false);
+            GameObject.Find("paint").GetComponent<InteractiveItem>().interactiveDistance = 4;
         }
 
 

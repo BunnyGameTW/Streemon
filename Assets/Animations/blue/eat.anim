@@ -25,7 +25,7 @@ AnimationClip:
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 1.05
+        time: 1.1666666
         value: {x: 1, y: 1, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -51,7 +51,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: b0b1e7a9d5fefa041a2f6a9b2c29e4d3, type: 3}
     - time: 0.85
       value: {fileID: 21300000, guid: 9902b1144359a3c45aedc6a240ded525, type: 3}
-    - time: 1.0333333
+    - time: 1.1666666
       value: {fileID: 21300000, guid: 9902b1144359a3c45aedc6a240ded525, type: 3}
     attribute: m_Sprite
     path: 
@@ -92,7 +92,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.05
+    m_StopTime: 1.1833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -118,7 +118,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1.05
+        time: 1.1666666
         value: 1
         inSlope: 0
         outSlope: 0
@@ -140,7 +140,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1.05
+        time: 1.1666666
         value: 1
         inSlope: 0
         outSlope: 0
@@ -162,7 +162,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1.05
+        time: 1.1666666
         value: 1
         inSlope: 0
         outSlope: 0

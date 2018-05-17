@@ -102,10 +102,15 @@ public class InteractiveItem : MonoBehaviour {
                 {//特例
                     GetComponent<SpriteRenderer>().enabled = true;
                     Destroy(GameObject.Find("cheese_02_target"));
-                }
-                if(itemName == "freezer")
+                }           
+                if(itemName == "lizard")
                 {
-                    GameManager.game.Setactive(GameManager.game.FreezerUI, true);
+                    GameManager.game.LizardUI.SetActive(true);
+                    SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
+                }
+                if(itemName == "password")
+                {
+                    //TODO:set ui active
                 }
                 if (canPick)
                 {
