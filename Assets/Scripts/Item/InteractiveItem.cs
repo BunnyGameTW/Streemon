@@ -63,7 +63,7 @@ public class InteractiveItem : MonoBehaviour {
                     Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
                     StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));
                 }
-                if (itemName == "Smain" || itemName == "Sbalcony" || itemName == "SredRoom" || itemName == "SblueRoom")
+                if (itemName == "Smain" || itemName == "Sbalcony" || itemName == "SredRoom" || itemName == "SblueRoom" || itemName == "SpurpleRoom")
                 {
                     //TODO: go to door animation 
 
@@ -111,6 +111,7 @@ public class InteractiveItem : MonoBehaviour {
                 if(itemName == "password")
                 {
                     //TODO:set ui active
+
                 }
                 if (canPick)
                 {
@@ -274,5 +275,18 @@ public class InteractiveItem : MonoBehaviour {
         interactiveDistance = 6.0f;
         //save data
         SaveData._data.flowerIsSmall = true;
+    }
+    //purpleRoom
+    public void DoorOpenFinish()
+    {
+       FindObjectOfType<CameraFollow>().target = player.gameObject;
+        player.Playerstate = Player.PlayerState.idle;
+        interactiveDistance = 4;
+    }
+    //
+    public void SetPurpleDoor()
+    {
+        FindObjectOfType<CameraFollow>().target = gameObject;
+        GetComponent<Animator>().SetTrigger("Open");
     }
 }

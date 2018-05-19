@@ -302,4 +302,6 @@ public class GameManager : MonoBehaviour {
     {
         get { return _LizardUI; }
     }
+   
+   
 }

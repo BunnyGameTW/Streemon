@@ -342,7 +342,7 @@ MonoBehaviour:
   Lbtn: {fileID: 1594768893031360}
   Rbtn: {fileID: 1220969586606306}
   bookImg: {fileID: 1654781361913986}
-  noDiaryImg: {fileID: 21300000, guid: 42dabe1ab5c83c642a70045415a199c5, type: 3}
+  noDiaryImg: {fileID: 21300000, guid: d71ebe5020bacc34faf038e7e49b97ca, type: 3}
   pageTxt: {fileID: 114323702342884000}
   ani: {fileID: 95467678242944152}
 --- !u!114 &114323702342884000

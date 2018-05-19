@@ -834,12 +834,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endingSprite:
   - {fileID: 21300000, guid: 98650f1728f193044a0e6ea1c333c941, type: 3}
-  - {fileID: 21300000, guid: ce6800569c107144d933fcb12dbd78a3, type: 3}
+  - {fileID: 21300000, guid: 8c4117d269026324ca4ff9f80d848f49, type: 3}
   - {fileID: 21300000, guid: 85a63b66cd797344285221d841aa51fa, type: 3}
   - {fileID: 21300000, guid: ef8206829995baf41bff34568a56e429, type: 3}
   - {fileID: 21300000, guid: 294f6f667f447b5459b237a73a428521, type: 3}
-  - {fileID: 21300000, guid: 26a6e77f66ea4194baa57c1d7a83970e, type: 3}
-  - {fileID: 21300000, guid: 9d835a82edf5c564594de6649850cd22, type: 3}
+  - {fileID: 21300000, guid: ae9e2008f41a95549a20b34858fcbbac, type: 3}
+  - {fileID: 21300000, guid: 2335ef3d75208d24eb32c8b8d7d45123, type: 3}
   - {fileID: 21300000, guid: f19c6f65f3dbae04192e367a45fa6317, type: 3}
   canEnd: 0
 --- !u!224 &1123139217 stripped
@@ -968,6 +968,8 @@ MonoBehaviour:
   _player: {fileID: 0}
   _BookUI: {fileID: 0}
   _TalkUI: {fileID: 481949047}
+  _FreezerUI: {fileID: 0}
+  _LizardUI: {fileID: 0}
   fadeImg: {fileID: 169154584}
   clickEffect: {fileID: 1899851819819216, guid: 54e19aa6336906047980cbcd13d5d851,
     type: 2}

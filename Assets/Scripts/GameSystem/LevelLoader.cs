@@ -23,7 +23,7 @@ public class LevelLoader : MonoBehaviour
         operation.allowSceneActivation = false;
         while (operation.progress < 0.9f)
         {
-            toProgress = (int)operation.progress * 100;
+            toProgress = (int)(operation.progress * 100);
 
             while (displayProgress < toProgress)
             {

@@ -29,3 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sout.unity
     guid: f14e049efdb3c114faa2ce07ff83a992
+  - enabled: 1
+    path: Assets/Scenes/SpurpleRoom.unity
+    guid: 7817412f3dac8f3429387119bc6ef6f7
