@@ -18,7 +18,6 @@ public class InteractiveItem : MonoBehaviour {
     [SerializeField]
     protected bool canTalk;
     public event EventHandler OnItemTalked;
-
     private void Start()
     {
         player = GameManager.game.Player;
@@ -65,8 +64,21 @@ public class InteractiveItem : MonoBehaviour {
                 }
                 if (itemName == "Smain" || itemName == "Sbalcony" || itemName == "SredRoom" || itemName == "SblueRoom" || itemName == "SpurpleRoom")
                 {
+                    if(itemName == "SpurpleRoom")
+                    {
+                        //check diary and set ending
+                        SaveData._data.ending = 7;
+                        bool[] _hasdiary = SaveData._data.getDiaryInfo();
+                        for(int i = 0; i < _hasdiary.Length; i++)
+                        {
+                            if (!_hasdiary[i])
+                            {
+                                SaveData._data.ending = 6;//無止境的實驗
+                                break;
+                            }
+                        }
+                    }
                     //TODO: go to door animation 
-
                     //save player hold item
                     SaveData._data.player.itemName.Clear();//清空
                     foreach (string _item in GameManager.game.Player.HoldItems)
@@ -178,18 +190,26 @@ public class InteractiveItem : MonoBehaviour {
         _canInteractive = false;
         interactiveDistance = 0;
         _spriteRender.sortingOrder = 9;
-
+        ShowClue _clue = GetComponent<ShowClue>();
         if (canPick)
         {
             player.AddHoldItem(itemName);
             StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), 0.08f));
+            if (_clue != null) { _clue.showText(); }
         }
         else StartCoroutine(GameManager.game.fadeInOut(Camera.main.GetComponentInChildren<SpriteRenderer>(), -0.18f));
         while (transform.position != point) {
             transform.position = Vector3.MoveTowards(transform.position, point, 10.0f * Time.deltaTime);
             yield return null;
+        }   
+        if (canPick)
+        {
+            yield return new WaitForSeconds(1.0f);                     
         }
-       if(canPick) yield return new WaitForSeconds(1.0f);
+        else
+        {
+            if(_clue != null) { _clue.closeTxt(); }
+        }
         afterItemGotoPoint();
     }
     void afterItemGotoPoint()

@@ -6,14 +6,9 @@ public class scenePintoo : InteractiveItem
 {
     public GameObject pintooUI;
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        //TODO:sprite to heart
 
     }
     private void OnMouseDown()

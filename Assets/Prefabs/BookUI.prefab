@@ -326,7 +326,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1972a47576d73ca429ed7a6ee6ff675e, type: 3}
   - {fileID: 21300000, guid: e68198513351f2d4cb021e2da74dcaca, type: 3}
   - {fileID: 21300000, guid: 41c84df39cafc13418faedd94e532a2a, type: 3}
-  - {fileID: 21300000, guid: 659dbaf9b846f4c41b01df751f148075, type: 3}
+  - {fileID: 21300000, guid: 6f075c0efd1f60549b155be19427ab0f, type: 3}
   - {fileID: 21300000, guid: bfa1b9cee9b6601409e674a68aaf5f0e, type: 3}
   - {fileID: 21300000, guid: 473b53eeeb8744b47949628d11da8b55, type: 3}
   - {fileID: 21300000, guid: 2d4a857975afd564782b28603996e8c8, type: 3}
@@ -338,11 +338,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b16853df49b6e5c4199801b552734938, type: 3}
   - {fileID: 21300000, guid: b9fb575f76b65bf42b20c96e959b9712, type: 3}
   - {fileID: 21300000, guid: a9d6225d969fb3644912abf34180c31f, type: 3}
-  - {fileID: 21300000, guid: 6f13a0ac43c06064eb59a57860d0678a, type: 3}
+  - {fileID: 21300000, guid: f0f8e6589da4cdc44a5c29f9767a7c31, type: 3}
   Lbtn: {fileID: 1594768893031360}
   Rbtn: {fileID: 1220969586606306}
   bookImg: {fileID: 1654781361913986}
-  noDiaryImg: {fileID: 21300000, guid: d71ebe5020bacc34faf038e7e49b97ca, type: 3}
+  noDiaryImg: {fileID: 21300000, guid: f7af0492e18a9ae42ad1ef6785bd6519, type: 3}
   pageTxt: {fileID: 114323702342884000}
   ani: {fileID: 95467678242944152}
 --- !u!114 &114323702342884000

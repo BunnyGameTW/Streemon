@@ -48,9 +48,7 @@ public class GameManager : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().name == "SblueRoom")
         {
-            SaveData._data.tutorialEnd = true;
-            
-
+            SaveData._data.tutorialEnd = true;          
         }
         else if (SceneManager.GetActiveScene().name == "Sout") SaveData._data.tutorialEnd = false;
         //load player position
@@ -60,6 +58,7 @@ public class GameManager : MonoBehaviour {
 
             if ((roomInfo.name != "SblueRoom" || !roomInfo.firstTalk))
             {
+                Debug.Log(SaveData._data.nowScene);
                 Player.transform.position = GameObject.Find(SaveData._data.nowScene).transform.position;
                 SaveData._data.playerPos = Player.transform.position;
             }
@@ -110,6 +109,19 @@ public class GameManager : MonoBehaviour {
                         obj.GetComponent<InteractiveItem>().interactiveDistance = 4;
                     }
                 }
+                //check purpleRoom
+                if (SaveData._data.canEnterPurpleRoom)
+                {                                    
+                    //set animation
+                    GameObject pRoom = GameObject.Find("SpurpleRoom");
+                    if (pRoom != null)
+                    {
+                        pRoom.GetComponent<InteractiveItem>().interactiveDistance = 4;
+                        pRoom.GetComponent<Animator>().SetTrigger("Open");
+                    }
+                }
+                //check main door
+                LockMainDoor();
             }
 
             //load player info
@@ -175,6 +187,14 @@ public class GameManager : MonoBehaviour {
         {
             Player.AddHoldItem("seed");
             Player.OnItemChanged();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            SaveData._data.nowScene = SceneManager.GetActiveScene().name;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            SaveData._data.ending = 7;
         }
         ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
@@ -302,6 +322,14 @@ public class GameManager : MonoBehaviour {
     {
         get { return _LizardUI; }
     }
-   
+   public void LockMainDoor()
+    {
+        GameObject outDoor = GameObject.Find("Sout");
+        if(outDoor != null && SaveData._data.mainDoorIsLock)
+        {
+            outDoor.GetComponent<InteractiveItem>().interactiveDistance = 0;
+        }
+        
+    }
    
 }

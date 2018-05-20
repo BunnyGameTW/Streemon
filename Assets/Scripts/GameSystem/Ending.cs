@@ -25,6 +25,5 @@ public class Ending : MonoBehaviour {
             else GameManager.game.resetGame();
         }
    }
-    //TODO:改結局圖片
 
 }

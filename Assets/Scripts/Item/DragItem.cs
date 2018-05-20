@@ -84,6 +84,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                         targets[i].GetComponentInParent<Animator>().SetTrigger("Eat");
                                         charInfo.talkNum = 8;
                                         charInfo.charTalkFirst = true;
+                                        targets[i].GetComponentInParent<ShowClue>().canShow = true;
                                         //set girl can first talk
                                         SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
                                         //set ending
@@ -91,11 +92,13 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                     }
                                     else if (GetComponent<Image>().sprite.name == "diamond")
                                     {
+                                        targets[i].GetComponentInParent<Animator>().SetTrigger("Happy");
                                         charInfo.talkNum = 15;
                                         charInfo.charTalkFirst = true;
                                         //set blue can first talk
+                                        targets[i].GetComponentInParent<ShowClue>().canShow = true;
                                         SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.firstTalk;
-                                        SaveData._data.ending = 4;//TODO:小湖的死亡
+                                        SaveData._data.ending = 4;//小湖的死亡
                                     }
                                     else if (GetComponent<Image>().sprite.name == "seed")
                                     {

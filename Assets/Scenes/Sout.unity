@@ -1009,7 +1009,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b67245f7ec20b454bbd616c5e9652fc2, type: 3}
   musics:
   - sceneName: Sout
-    bgm: {fileID: 8300000, guid: 3820fdbedb42fe44e95f82afda35f76c, type: 3}
+    bgm: {fileID: 8300000, guid: bf2b782afec6dc3448efd0073e70d9a8, type: 3}
   - sceneName: SblueRoom
     bgm: {fileID: 8300000, guid: 1138b565d9231954fa2e0f3200932633, type: 3}
   - sceneName: Sbalcony

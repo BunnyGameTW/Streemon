@@ -11,6 +11,7 @@ public class SaveData {
     public bool treeIsUnlock;
     public bool curtainIsOpen;
     public bool canEnterPurpleRoom;
+    public bool mainDoorIsLock;
     [Serializable]
     public struct PlayerInfo
     {
@@ -58,6 +59,7 @@ public class SaveData {
         treeIsUnlock = false;
         curtainIsOpen = false;
         canEnterPurpleRoom = false;
+        mainDoorIsLock = false;
     }
     void setupChars()
     {

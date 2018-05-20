@@ -53,7 +53,7 @@ public class Talk : MonoBehaviour {
         {
             setTalkBehavior();
             GameManager.game.Player.Playerstate = Player.PlayerState.idle;
-            //TODO: player end talk event
+            //         
             GameManager.game.Player.OnItemEndTalked();
             GameManager.game.Setactive(GameManager.game.TalkUI, false);
         }
@@ -146,12 +146,13 @@ public class Talk : MonoBehaviour {
             _charInfo.charTalkFirst = true;
             SaveData._data.ending = 4;//小湖的死亡
         }
-        else if (nextName == "blueRandom" || nextName== "blueTalkEnd")
+        else if (nextName == "blueRandom" || nextName == "blueTalkEnd")
         {
             _charInfo.talkNum = UnityEngine.Random.Range(0, 2) + 11;
             _charInfo.charTalkFirst = true;
             if(nextName == "blueTalkEnd") {
-              //TODO:鎖大門
+                SaveData._data.mainDoorIsLock = true;
+                GameManager.game.LockMainDoor();
             }
         }
         else if (nextName == "blueMidTalkEnd")
