@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39bd5451b2dc0b499fa3d8fb39f61af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
   checkPoint:
   - {fileID: 161841796}
   - {fileID: 798035801}
@@ -1362,7 +1361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39bd5451b2dc0b499fa3d8fb39f61af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
   checkPoint:
   - {fileID: 161841796}
   - {fileID: 798035801}
@@ -2979,7 +2977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39bd5451b2dc0b499fa3d8fb39f61af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 3
   checkPoint:
   - {fileID: 161841796}
   - {fileID: 798035801}
@@ -3409,7 +3406,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 794469076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.74, y: -8.99, z: 0}
+  m_LocalPosition: {x: -7.32, y: -8.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 82763639}
@@ -3784,7 +3781,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871741739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.43, y: -8.06, z: 0}
+  m_LocalPosition: {x: 9.84, y: -8.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1823292460}
@@ -6023,10 +6020,34 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 822476797}
         m_MethodName: SetPlayerScared
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1157731834}
+        m_MethodName: playOne
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 4936416b81a7ff841afa831ebfe22bd3,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1157731834}
+        m_MethodName: playOne
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: d975cc432e33f6c408edd5a2a7cadf27,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7130,7 +7151,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1708681958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.048701286, y: -6.540449, z: 0}
+  m_LocalPosition: {x: 19.28, y: -6.540449, z: 0}
   m_LocalScale: {x: 0.614568, y: 0.614568, z: 0.614568}
   m_Children: []
   m_Father: {fileID: 807436472}
@@ -9019,7 +9040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39bd5451b2dc0b499fa3d8fb39f61af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 2
   checkPoint:
   - {fileID: 161841796}
   - {fileID: 798035801}

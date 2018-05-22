@@ -20,7 +20,7 @@ public class ComputerManager : MonoBehaviour {
             //fade in out
             computers[0].canChange = computers[1].canChange = computers[2].canChange = computers[3].canChange = false;
             StartCoroutine(fading());
-            Debug.Log("correct!");
+          
         }
     }
    IEnumerator fading()
@@ -29,6 +29,6 @@ public class ComputerManager : MonoBehaviour {
         StartCoroutine(GameManager.game.fadeOut());
         billy.SetActive(true);
         gameObject.SetActive(false);
-
+        GameManager.game.Player.Playerstate = Player.PlayerState.interactive;
     }
 }

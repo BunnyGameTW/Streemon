@@ -28,6 +28,11 @@ public class InteractiveItem : MonoBehaviour {
         {
             _spriteRender.enabled = false;
         }
+        if (SaveData._data.giveCheese && itemName == "mouse")
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
     private void Update()
     {
@@ -122,8 +127,9 @@ public class InteractiveItem : MonoBehaviour {
                 }
                 if(itemName == "password")
                 {
-                    //TODO:set ui active
-
+                    GameManager.game.ComputerUI.SetActive(true);
+                    SoundManager.sound.playOne(SoundManager.sound.uise.click[0]);
+                    player.Playerstate = Player.PlayerState.read;
                 }
                 if (canPick)
                 {

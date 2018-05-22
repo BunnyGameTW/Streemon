@@ -149,14 +149,14 @@ public class Player : MonoBehaviour {
     public void SetPlayerState(int state) {
         _playerState = (PlayerState)state;
     }
-    public void SetPlayerScared()
+    public void SetPlayerScared(float _pos)
     {
        // Playerstate = PlayerState.idle;
         //set player stop and scared
         Playerstate = PlayerState.scared;
         //back to left
         Vector3 pos = transform.position;
-        pos.x = pos.x - 1.0f;
+        pos.x = pos.x + _pos;
         StartCoroutine(gotoPoint(pos, 2.0f));
        
         //show talk

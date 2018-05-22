@@ -55,6 +55,10 @@ public class SoundManager : MonoBehaviour {
         {
             mixerVol = 20;         
         }
+        else if(SceneManager.GetActiveScene().name == "Smain")
+        {
+            mixerVol = -10;
+        }
         else
         {
             mixerVol = 0;

@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
     private GameObject _FreezerUI;
     [SerializeField]
     private GameObject _LizardUI;
+    [SerializeField]
+    private GameObject _ComputerUI;
     Talk _talky;
     public Image fadeImg;
     public GameObject clickEffect;
@@ -322,7 +324,11 @@ public class GameManager : MonoBehaviour {
     {
         get { return _LizardUI; }
     }
-   public void LockMainDoor()
+    public GameObject ComputerUI
+    {
+        get { return _ComputerUI; }
+    }
+    public void LockMainDoor()
     {
         GameObject outDoor = GameObject.Find("Sout");
         if(outDoor != null && SaveData._data.mainDoorIsLock)

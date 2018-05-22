@@ -12,6 +12,7 @@ public class SaveData {
     public bool curtainIsOpen;
     public bool canEnterPurpleRoom;
     public bool mainDoorIsLock;
+    public bool giveCheese;
     [Serializable]
     public struct PlayerInfo
     {
@@ -60,6 +61,7 @@ public class SaveData {
         curtainIsOpen = false;
         canEnterPurpleRoom = false;
         mainDoorIsLock = false;
+        giveCheese = false;
     }
     void setupChars()
     {
