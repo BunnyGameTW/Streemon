@@ -196,7 +196,16 @@ public class GameManager : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Keypad8))
         {
-            SaveData._data.ending = 7;
+            SaveData._data.ending = 6;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            bool[] _d = SaveData._data.getDiaryInfo();
+            for (int i = 0; i < _d.Length; i++)
+            {
+                _d[i] = true;
+            }
+            SaveData._data.setDiaryInfo(_d);
         }
         ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
         //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
@@ -337,5 +346,45 @@ public class GameManager : MonoBehaviour {
         }
         
     }
-   
+    //cheat code
+   public void UnlockAllItem()
+    {
+        Player.AddHoldItem("seed"); Player.AddHoldItem("flashlight"); Player.AddHoldItem("mouse"); Player.AddHoldItem("diamond");
+        Player.OnItemChanged();
+    }
+    public void UnlockSpecialItem(string _str)
+    {
+        Player.AddHoldItem(_str);
+        Player.OnItemChanged();
+    }
+    public void SetEnding(int i)
+    {
+        SaveData._data.ending = i;
+    }
+    public void UnlockAllDiary()
+    {
+        bool[] _d = SaveData._data.getDiaryInfo();
+        for (int i = 0; i < _d.Length; i++)
+        {
+            _d[i] = true;
+        }
+        SaveData._data.setDiaryInfo(_d);
+    }
+    public void SetTotile()
+    {
+        resetGame();
+    }
+    public void SetToblueRoom()
+    {
+        SaveData._data = new SaveData();
+        changeSceneWithFade("SblueRoom");
+    }
+    public void changeTalkSpeed()
+    {
+        if(GameObject.Find("CheatUI") != null)
+        {
+            if (GameObject.Find("CheatUI").GetComponentInChildren<Scrollbar>().value < 0.5f) SaveData._data.playSpeed = 0.07f;
+            else SaveData._data.playSpeed = 0.01f;
+        }
+    }
 }

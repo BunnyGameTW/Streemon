@@ -9,15 +9,33 @@ public class scenePintoo : InteractiveItem
     private void Start()
     {
         //TODO:sprite to heart
-
+        player = GameManager.game.Player;
     }
     private void OnMouseDown()
     {
 
-        if (_canInteractive && !SaveData._data.canEnterPurpleRoom)
+        if (_canInteractive)
         {
-            pintooUI.SetActive(true);
-            GameManager.game.Player.Playerstate = Player.PlayerState.interactive;
+            if(SaveData._data.chars[1].talkStatus == SaveData.CharsInfo.TalkStatus.missionComplete)
+            {
+                if (!SaveData._data.canEnterPurpleRoom)
+                {
+                    pintooUI.SetActive(true);
+                    GameManager.game.Player.Playerstate = Player.PlayerState.read;
+                }
+            }
+            else
+            {
+                //  SetTalk();
+                player.Playerstate = Player.PlayerState.talk;
+                
+                GameManager.game.SetTalk("yellow", 119);//item talk first
+
+                GameManager.game.Setactive(GameManager.game.TalkUI, true);
+            }
         }
+            
+        
+      
     }
 }

@@ -93,6 +93,10 @@ public class Talk : MonoBehaviour {
             //play end animation
             GetComponent<Animator>().SetBool("isTalkEnd", true);          
         }
+        else if(nextName == "purpleEnd" && nextParagraph.ToString() == "999")//set ending appear and restart
+        {
+            GameObject.Find("BGimg").GetComponent<PurpleEnding>().SetEnding();
+        }
         else //normal
         {
             GameManager.game.SetTalk(nextName, nextParagraph);
@@ -237,7 +241,7 @@ public class Talk : MonoBehaviour {
 				break;
 
 			}
-			yield return new WaitForSeconds (0.07f);
+			yield return new WaitForSeconds (SaveData._data.playSpeed);
 		}
 	}
     //bad method TODO: improved

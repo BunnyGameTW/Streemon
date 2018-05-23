@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour {
         posNoZ.z = target.transform.position.z;
         Vector3 targetDirection = (target.transform.position - posNoZ);
         interpVelocity = targetDirection.magnitude * 5f;
-        targetPos = transform.position + (targetDirection.normalized * interpVelocity * Time.deltaTime);
+        targetPos = transform.position + (targetDirection.normalized * interpVelocity * Time.fixedDeltaTime);
         transform.position = Vector3.Lerp(transform.position, targetPos + offset, testspeed);
         if (transform.position.x < LB.position.x) transform.position = new Vector3(LB.position.x, transform.position.y, transform.position.z);
         else if (transform.position.x > RT.position.x) transform.position = new Vector3(RT.position.x,transform.position.y, transform.position.z);
@@ -30,5 +30,5 @@ public class CameraFollow : MonoBehaviour {
         else if (transform.position.y > RT.position.y) transform.position = new Vector3(transform.position.x, RT.position.y, transform.position.z);
 
     }
-
+   
 }

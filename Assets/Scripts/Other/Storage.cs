@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Storage : MonoBehaviour {
     public GameObject storageRoom;
-    public GameObject outDoor;
+    public GameObject outDoor,Switch;
     public Image fadeImg;
     public Transform roomPos;
     Vector3 pos;
@@ -23,6 +23,7 @@ public class Storage : MonoBehaviour {
     {
        
         outDoor.SetActive(!isIn);
+        Switch.SetActive(!isIn);
         GameManager.game.refindItem();
         GameManager.game.Player.SetPlayerState(0);
         Camera.main.GetComponent<CameraFollow>().enabled = !isIn;

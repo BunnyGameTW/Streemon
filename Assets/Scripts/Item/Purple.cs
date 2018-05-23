@@ -23,8 +23,14 @@ public class Purple : MonoBehaviour {
         }
         purple.GetComponentInChildren<Animator>().SetBool("isWalk", false);
         yield return new WaitForSeconds(0.5f);
+        //TODO:
+        GameManager.game.Player.Playerstate = Player.PlayerState.talk;
+        if (SaveData._data.ending == 6) GameManager.game.SetTalk("purple",0);
+        else GameManager.game.SetTalk("purple", 2);
+        GameManager.game.Setactive(GameManager.game.TalkUI, true);
+
         //change scene
-        GameManager.game.changeSceneWithFade("Sout");
+        //   GameManager.game.changeSceneWithFade("Sout");
 
     }
 }

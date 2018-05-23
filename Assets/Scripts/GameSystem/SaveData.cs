@@ -13,6 +13,7 @@ public class SaveData {
     public bool canEnterPurpleRoom;
     public bool mainDoorIsLock;
     public bool giveCheese;
+    public float playSpeed;
     [Serializable]
     public struct PlayerInfo
     {
@@ -62,6 +63,7 @@ public class SaveData {
         canEnterPurpleRoom = false;
         mainDoorIsLock = false;
         giveCheese = false;
+        playSpeed = 0.07f;
     }
     void setupChars()
     {
