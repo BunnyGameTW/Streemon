@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetMouseButtonDown(0))
         {
+
             //walk
             mouseScrPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseScrPos.z = 0.0f;
@@ -82,7 +83,6 @@ public class Player : MonoBehaviour {
     }
     PlayerState move() {
         transform.position = Vector3.MoveTowards(transform.position, mouseScrPos, moveSpeed * Time.deltaTime);
-
         if (transform.position == mouseScrPos) return PlayerState.idle;
         else return PlayerState.walk;
     }

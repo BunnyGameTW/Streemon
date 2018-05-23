@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="chuchu_color" size="1300.000000 1575.570312" />
+    <ImageTarget name="road_color" size="1300.000000 1515.099487" />
+    <ImageTarget name="house_color_2" size="1300.000000 1217.512695" />
+    <ImageTarget name="beard_color_2" size="900.000000 1053.255371" />
+  </Tracking>
+</QCARConfig>

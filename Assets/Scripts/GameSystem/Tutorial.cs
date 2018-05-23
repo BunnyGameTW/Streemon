@@ -6,7 +6,6 @@ public class Tutorial : MonoBehaviour {
     public GameObject purple,player;
     public Transform kitchen;
     public float speed;
-    public GameObject HintUI;
 	// Use this for initialization
 	void Start () {
         StartCoroutine(purpleMove(speed));
@@ -29,11 +28,7 @@ public class Tutorial : MonoBehaviour {
         Camera.main.GetComponent<CameraFollow>().target = player;
         Camera.main.GetComponent<CameraFollow>().offset.y = -0.12f;
         GameManager.game.Player.Playerstate = Player.PlayerState.idle;
-        StartCoroutine(hint());
+       
     }
-    IEnumerator hint() {
-
-        yield return new WaitForSeconds(2.0f);
-        HintUI.SetActive(true);
-    }
+   
 }

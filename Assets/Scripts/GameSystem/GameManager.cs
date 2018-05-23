@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour {
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223");
         }
+        else if (SceneManager.GetActiveScene().name == "Sbird")
+        {
+            CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "artest0524");
+        }
         else CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "test1223");//loadCSV
 
 #else

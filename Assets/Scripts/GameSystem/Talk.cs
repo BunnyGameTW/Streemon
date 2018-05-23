@@ -79,8 +79,8 @@ public class Talk : MonoBehaviour {
         if (nextName == "tutorialStart" && nextParagraph.ToString() == "999") GameManager.game.changeSceneWithFade("SmainFake");
         else if (nextName == "gotoRoom" && nextParagraph.ToString() == "999")
         {
-            SaveData._data.tutorialEnd = true;
-            GameManager.game.changeScene("SblueRoom");
+            SaveData._data.tutorialEnd = true;          
+            GameManager.game.changeSceneWithFade("SblueRoom");
         }      
         else if (nextName == "birdEndTalkRandom")
         {
