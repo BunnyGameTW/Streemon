@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 3
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 3
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 1
@@ -405,7 +405,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 370729427}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.71, y: -5.43, z: -0.32138395}
+  m_LocalPosition: {x: 8.71, y: -5.43, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 945405027}
@@ -543,7 +543,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947935669797572, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4947935669797572, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: SredRoom
-  interactiveDistance: 4
+  interactiveDistance: 6
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: SblueRoom
-  interactiveDistance: 4
+  interactiveDistance: 6
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2376,6 +2376,11 @@ Prefab:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: changeTalkSpeed
       objectReference: {fileID: 0}
+    - target: {fileID: 114807467753454506, guid: c3f4c338742602640907cb1572178b0e,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3f4c338742602640907cb1572178b0e, type: 2}
   m_IsPrefabParent: 0
@@ -2484,7 +2489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: bird
-  interactiveDistance: 5
+  interactiveDistance: 7
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0

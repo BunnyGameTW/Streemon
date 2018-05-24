@@ -57,7 +57,16 @@ public class Pintoo : MonoBehaviour ,IBeginDragHandler, IDragHandler, IEndDragHa
     }
     void check()
     {
-        if(pintoos[0].position == checkPoint[0].position && pintoos[1].position == checkPoint[1].position && pintoos[2].position == checkPoint[2].position && pintoos[3].position == checkPoint[3].position)
+        int checkNum = 0;
+        for(int i = 0; i < checkPoint.Length; i++)
+        {
+            if (Vector3.Distance(pintoos[i].position, checkPoint[i].position) < 2.0f)
+            {
+                checkNum++;
+            }
+        }
+       
+        if  (checkNum == 4)
         {
             //TODO:play sound
             //can enter billy room         

@@ -192,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4028361999180308, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4028361999180308, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}
       propertyPath: m_LocalRotation.x
@@ -229,6 +229,11 @@ Prefab:
       propertyPath: diaryUI
       value: 
       objectReference: {fileID: 1470518421}
+    - target: {fileID: 114821329230860706, guid: c726d3bd95a3cee429465fcaf76f09cb,
+        type: 2}
+      propertyPath: interactiveDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}
   m_IsPrefabParent: 0
@@ -409,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: book
-  interactiveDistance: 3
+  interactiveDistance: 7
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 1
@@ -465,7 +470,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 62928529}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.2, y: -0.61, z: 0}
+  m_LocalPosition: {x: 5.2, y: -0.61, z: -0.5}
   m_LocalScale: {x: 0.57256746, y: 0.57256746, z: 0.57256746}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -596,7 +601,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 91369415}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.86, y: 0.94, z: 0.38895294}
+  m_LocalPosition: {x: 5.86, y: 0.94, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -614,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -964,6 +969,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114807467753454506, guid: c3f4c338742602640907cb1572178b0e,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3f4c338742602640907cb1572178b0e, type: 2}
   m_IsPrefabParent: 0
@@ -1172,7 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Sbalcony
-  interactiveDistance: 4
+  interactiveDistance: 6
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -1270,7 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: cheese_02
-  interactiveDistance: 3
+  interactiveDistance: 7
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 1
@@ -1702,7 +1712,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839816569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.91, y: 0.20000005, z: 0.38895294}
+  m_LocalPosition: {x: 12.91, y: 0.20000005, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -1720,7 +1730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -1864,7 +1874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: mouse
-  interactiveDistance: 3
+  interactiveDistance: 7
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 1
@@ -2176,7 +2186,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1044011686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.16, y: 0.20000005, z: 0.38895294}
+  m_LocalPosition: {x: -10.16, y: 0.20000005, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -2194,7 +2204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2548,7 +2558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2561,7 +2571,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1484177641}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.950968, y: 1.3675786, z: 0.38895294}
+  m_LocalPosition: {x: -4.950968, y: 1.3675786, z: 0}
   m_LocalScale: {x: 3.035983, y: 3.0359824, z: 3.0359824}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -2616,7 +2626,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1511774488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.67, y: -0.38, z: 0.38895294}
+  m_LocalPosition: {x: -1.67, y: -0.38, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -2634,7 +2644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2689,7 +2699,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1563968350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.57, y: 0.2, z: 0.38895294}
+  m_LocalPosition: {x: 1.57, y: 0.2, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -2707,7 +2717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2874,7 +2884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: fakeMouse
-  interactiveDistance: 4
+  interactiveDistance: 10
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -2929,7 +2939,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1726478230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.21, y: 0.34, z: 0.38895294}
+  m_LocalPosition: {x: 10.21, y: 0.34, z: 0}
   m_LocalScale: {x: 3.03598, y: 3.03598, z: 3.03598}
   m_Children: []
   m_Father: {fileID: 813998827}
@@ -2947,7 +2957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  interactiveDistance: 4
+  interactiveDistance: 5
   walkSpeed: 0.2
   isHideSprite: 0
   canPick: 0
@@ -3000,7 +3010,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4947935669797572, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4947935669797572, guid: 4da5bbd2db436e243ae5880c5064702c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3771,7 +3781,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4028361999180308, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4028361999180308, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3826,7 +3836,7 @@ Prefab:
     - target: {fileID: 114821329230860706, guid: c726d3bd95a3cee429465fcaf76f09cb,
         type: 2}
       propertyPath: interactiveDistance
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c726d3bd95a3cee429465fcaf76f09cb, type: 2}

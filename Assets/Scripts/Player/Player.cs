@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
 
             //walk
             mouseScrPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseScrPos.z = 0.0f;
+            mouseScrPos.z = 1.0f;
             mouseScrPos.y = transform.position.y;
             //set player rotation
             if (_playerState == PlayerState.walk || _playerState == PlayerState.idle)

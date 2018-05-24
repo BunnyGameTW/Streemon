@@ -17,12 +17,15 @@ public class sceneFreezer : MonoBehaviour {
 	}
     public void SetUnlock()
     {
-        GetComponent<BoxCollider2D>().enabled = false;
-        GameObject.Find("flower_target").SetActive(false);
-        GetComponent<SpriteRenderer>().sprite = openFreezer;
-        trees.SetActive(false);
-        seed.transform.position = seeds.transform.position = transform.position;
         //set freezer open and seed
         //scene tree disappear
+        GetComponent<BoxCollider2D>().enabled = false;
+        GameObject.Find("flower_target").SetActive(false);
+        //GetComponent<SpriteRenderer>().sprite = openFreezer;
+        GetComponent<Animator>().SetBool("isOpen", true);
+        Debug.Log("change sprite");
+        trees.SetActive(false);
+        seed.transform.position = seeds.transform.position = transform.position; 
+        
     }
 }

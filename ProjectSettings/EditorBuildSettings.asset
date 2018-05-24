@@ -32,3 +32,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpurpleRoom.unity
     guid: 7817412f3dac8f3429387119bc6ef6f7
+  - enabled: 1
+    path: Assets/Scenes/ARcamera.unity
+    guid: a733859105d6cca47957821c50330e63
+  - enabled: 1
+    path: Assets/Scenes/Sbird.unity
+    guid: f524ea5d06a6d3848adee1b21a2fd190
+  - enabled: 1
+    path: Assets/Scenes/Schuchu.unity
+    guid: 1bb3406589c3bd34cb7e450bb725313f
+  - enabled: 1
+    path: Assets/Scenes/Sroad.unity
+    guid: e355e459e4ff4fb4cbef4b5fb95f725a
+  - enabled: 1
+    path: Assets/Scenes/Sanimation.unity
+    guid: d7a8001e72e9e9b449ae4ccbee62f721

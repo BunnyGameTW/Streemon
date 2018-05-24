@@ -23,7 +23,7 @@ public class ComputerManager : MonoBehaviour {
           
         }
     }
-   IEnumerator fading()
+   public IEnumerator fading()
     {
        yield return StartCoroutine(GameManager.game.fadeIn());
         StartCoroutine(GameManager.game.fadeOut());

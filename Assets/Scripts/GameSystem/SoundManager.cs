@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour {
         if(SceneManager.GetActiveScene().name =="SblueRoom") seSource = GameManager.game.Player.GetComponent<AudioSource>();
     }
     void Start () {
-        if (SceneManager.GetActiveScene().name != "Sout" && SceneManager.GetActiveScene().name != "Stitle") seSource = GameManager.game.Player.GetComponent<AudioSource>();//get player se
+        if (SceneManager.GetActiveScene().name != "Sout" && SceneManager.GetActiveScene().name != "Stitle" && SceneManager.GetActiveScene().name != "Sanimation" && SceneManager.GetActiveScene().name != "ARcamera") seSource = GameManager.game.Player.GetComponent<AudioSource>();//get player se
         for (int i = 0; i < musics.Length; i++)//set bgm
         {
             if (SceneManager.GetActiveScene().name == musics[i].sceneName)

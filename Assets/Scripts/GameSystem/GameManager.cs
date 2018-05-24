@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "fakeopentest1223");
         }
-        else if (SceneManager.GetActiveScene().name == "Sbird")
+        else if (SceneManager.GetActiveScene().name == "Sbird" || SceneManager.GetActiveScene().name == "Schuchu" || SceneManager.GetActiveScene().name == "Sroad")
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/Resources", "artest0524");
         }
@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour {
         else if (SceneManager.GetActiveScene().name == "SmainFake")
         {
             CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "fakeopentest1223");
+        }
+          else if (SceneManager.GetActiveScene().name == "Sbird" || SceneManager.GetActiveScene().name == "Schuchu" || SceneManager.GetActiveScene().name == "Sroad")
+        {
+            CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "artest0524");
         }
         else CSV.GetInstance().loadFile(Application.dataPath + "/StreamingAssets", "test1223");//loadCSV
 
@@ -73,7 +77,7 @@ public class GameManager : MonoBehaviour {
 
         Items = GameObject.FindGameObjectsWithTag("item");
         
-        if(SceneManager.GetActiveScene().name != "Stitle") _talky = _TalkUI.GetComponent<Talk>();
+        if(SceneManager.GetActiveScene().name != "Stitle" && SceneManager.GetActiveScene().name != "ARcamera"  && SceneManager.GetActiveScene().name != "Sanimation") _talky = _TalkUI.GetComponent<Talk>();
     }
     public void refindItem() {
         Items = GameObject.FindGameObjectsWithTag("item");
@@ -164,55 +168,27 @@ public class GameManager : MonoBehaviour {
     public void Update()
     {
         ////cheat code
-        if (Input.GetKeyDown(KeyCode.S)) _talky.skip();
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             Player.AddHoldItem("book");
             Player.OnItemChanged();
+
         }
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            Player.AddHoldItem("flashlight");
-            Player.OnItemChanged();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            SaveData._data.tutorialEnd = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            Player.AddHoldItem("flower");
-            Player.OnItemChanged();
+            SaveData._data.treeIsUnlock = true;
+
         }
         if (Input.GetKeyDown(KeyCode.Keypad5))
         {
             SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
             SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad6))
-        {
-            Player.AddHoldItem("seed");
-            Player.OnItemChanged();
-        }
+       
         if (Input.GetKeyDown(KeyCode.Keypad7))
         {
             SaveData._data.nowScene = SceneManager.GetActiveScene().name;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            SaveData._data.ending = 6;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad9))
-        {
-            bool[] _d = SaveData._data.getDiaryInfo();
-            for (int i = 0; i < _d.Length; i++)
-            {
-                _d[i] = true;
-            }
-            SaveData._data.setDiaryInfo(_d);
-        }
-        ////  if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9)) resetGame();
-        //  if (Input.GetKeyDown(KeyCode.Escape)) endGame();
+        }    
         //點擊特效
         if (Input.GetMouseButtonDown(0))
         {
@@ -364,6 +340,14 @@ public class GameManager : MonoBehaviour {
     public void SetEnding(int i)
     {
         SaveData._data.ending = i;
+        if (i == 7 || i == 6)
+        {
+
+            changeSceneWithFade("SpurpleRoom");
+        }else
+        {
+            changeSceneWithFade("Sout");
+        }      
     }
     public void UnlockAllDiary()
     {
@@ -390,5 +374,10 @@ public class GameManager : MonoBehaviour {
             if (GameObject.Find("CheatUI").GetComponentInChildren<Scrollbar>().value < 0.5f) SaveData._data.playSpeed = 0.07f;
             else SaveData._data.playSpeed = 0.01f;
         }
+    }
+    //setting
+    public void Contact()
+    {
+        Application.OpenURL("http://www.facebook.com/Streemon/");
     }
 }

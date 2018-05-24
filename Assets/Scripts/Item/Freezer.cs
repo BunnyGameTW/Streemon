@@ -47,8 +47,12 @@ public class Freezer : MonoBehaviour {
     IEnumerator fade()
     {
        
-        yield return StartCoroutine(GameManager.game.fadeIn());      
-        StartCoroutine(GameManager.game.fadeOut());
+        yield return StartCoroutine(GameManager.game.fadeIn());
+        Image[] imgs = transform.parent.gameObject.GetComponentsInChildren<Image>();
+        for (int i = 0; i < imgs.Length; i++) imgs[i].enabled = false;
+         StartCoroutine(GameManager.game.fadeOut());
+        sceneFreezer.GetComponent<Animator>().SetTrigger("Open");
+
         GameManager.game.Player.Playerstate = Player.PlayerState.idle;
         transform.parent.gameObject.SetActive(false);
     }
