@@ -150,8 +150,7 @@ public class SaveData {
         hasDiary = diarys;
         int x = 0;
         foreach (bool _item in hasDiary)
-        {
-            Debug.Log(x + ": " + _item);
+        {        
             x++;
         }
     }

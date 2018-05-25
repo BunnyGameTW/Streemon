@@ -64,7 +64,7 @@ public class InteractiveItem : MonoBehaviour {
                 if (itemName == "2to3" || itemName == "3to2" || itemName == "2to1" || itemName == "1to2")
                 {
                     //矯正誤差，讓玩家移動到定點再開始播動畫
-                    Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 0;
+                    Vector3 pointPos = transform.GetChild(0).position; pointPos.y = player.transform.position.y; pointPos.z = 1;
                     StartCoroutine(gotoPoint(Player.PlayerState.offset, pointPos, itemName, walkSpeed));
                 }
                 if (itemName == "Smain" || itemName == "Sbalcony" || itemName == "SredRoom" || itemName == "SblueRoom" || itemName == "SpurpleRoom")
@@ -89,11 +89,7 @@ public class InteractiveItem : MonoBehaviour {
                     foreach (string _item in GameManager.game.Player.HoldItems)
                     {
                         SaveData._data.player.itemName.Add(_item);
-                    }
-                    foreach (string _item in SaveData._data.player.itemName)//Debug
-                    {
-                        Debug.Log(_item);
-                    }
+                    }                
                     //save scene item    
                     SaveData.SceneInfo roomInfo = SaveData._data.getRoomInfo(SaveData._data.nowScene);
                     roomInfo.itemName = new String[GameObject.FindGameObjectsWithTag("item").Length];
@@ -112,8 +108,9 @@ public class InteractiveItem : MonoBehaviour {
                     GetComponent<Storage>().goOut(false);
                 }
                 if (itemName == "Sout")
-                {//結局
-                    GameManager.game.changeSceneWithFade(itemName);
+                {//結局                   
+                    GameManager.game.OutUI.SetActive(true);
+                    player.Playerstate = Player.PlayerState.read;
                 }
                 if (itemName == "mouse")
                 {//特例

@@ -129,9 +129,7 @@ public class Player : MonoBehaviour {
         _holdItems.Remove(name);
     }
     public void OnItemChanged() {
-        foreach (string _item in _holdItems)
-        { Debug.Log(_item + ","); }
-
+        foreach (string _item in _holdItems)       
             OnItemChange(this, EventArgs.Empty);//分發事件
     } 
     public void OnItemEndTalked()

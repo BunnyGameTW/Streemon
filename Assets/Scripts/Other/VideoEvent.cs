@@ -13,25 +13,17 @@ public class VideoEvent : MonoBehaviour
     }
     IEnumerator init()
     {
-       yield return new WaitForSeconds(1.0f);
+       yield return new WaitForSeconds(2.0f);
         videoPlayer = GetComponent<VideoPlayer>();
         videoPlayer.loopPointReached += EndReached;
         auSource = GetComponent<AudioSource>();
         videoPlayer.Play();
         auSource.Play();
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
     void EndReached(VideoPlayer vp)
-    {
-        Debug.Log("video end");
-        GameManager.game.GetComponent<LevelLoader>().loadScene("ARcamera");
-       
-
-
+    {     
+        GameManager.game.GetComponent<LevelLoader>().loadScene("ARcamera");      
     }
    
 }

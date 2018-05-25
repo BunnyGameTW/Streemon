@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     private GameObject _LizardUI;
     [SerializeField]
     private GameObject _ComputerUI;
+    [SerializeField]
+    private GameObject _outUI;
     Talk _talky;
     public Image fadeImg;
     public GameObject clickEffect;
@@ -317,6 +319,10 @@ public class GameManager : MonoBehaviour {
     {
         get { return _ComputerUI; }
     }
+    public GameObject OutUI
+    {
+        get { return _outUI; }
+    }
     public void LockMainDoor()
     {
         GameObject outDoor = GameObject.Find("Sout");
@@ -342,7 +348,7 @@ public class GameManager : MonoBehaviour {
         SaveData._data.ending = i;
         if (i == 7 || i == 6)
         {
-
+            SaveData._data.nowScene = "Smain";
             changeSceneWithFade("SpurpleRoom");
         }else
         {
@@ -374,6 +380,29 @@ public class GameManager : MonoBehaviour {
             if (GameObject.Find("CheatUI").GetComponentInChildren<Scrollbar>().value < 0.5f) SaveData._data.playSpeed = 0.07f;
             else SaveData._data.playSpeed = 0.01f;
         }
+    }
+    public void teleport(string room) {
+        switch (room)
+        {
+            case "SblueRoom":
+                SaveData._data.nowScene = "Sbalcony";
+                break;
+            case "Sbalcony":
+                SaveData._data.nowScene = "SredRoom";
+                break;
+            case "SredRoom":
+                SaveData._data.nowScene = "Sbalcony";
+                break;
+            case "Smain":
+                SaveData._data.nowScene = "SredRoom";
+                break;
+        }
+        changeSceneWithFade(room);
+    }
+    public void teleportSmain(int i) {
+        if (i == 2) Player.transform.position = new Vector3(10,-2.69f,1);
+        else if (i == 1) Player.transform.position = new Vector3(-13, 4.95f, 1);
+         else   new Vector3(-13, -10.32f, 1);
     }
     //setting
     public void Contact()

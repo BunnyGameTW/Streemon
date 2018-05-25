@@ -110,7 +110,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                     else if(GetComponent<Image>().sprite.name == "flashlight")
                                     {
                                         targets[i].transform.parent.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
-
+                                        charInfo.talkNum = 110;
+                                        charInfo.charTalkFirst = false;
                                         //set flower small animation                                        
                                         targets[i].GetComponentInParent<Animator>().SetTrigger("Small");
                                         //set player flashlight animation                                    
@@ -161,6 +162,10 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                                     {
                                         charInfo.talkNum = 20;
                                         charInfo.charTalkFirst = true;
+                                    }else if(charInfo.name == "flower")
+                                    {
+                                        charInfo.talkNum = 126;
+                                        charInfo.charTalkFirst = false;
                                     }
                                     SaveData._data.setCharInfo(charInfo.name, charInfo);
                                     targets[i].GetComponentInParent<InteractiveItem>().SetTalk();
