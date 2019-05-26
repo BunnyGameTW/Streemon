@@ -13,11 +13,11 @@ public class VideoEvent : MonoBehaviour
     }
     IEnumerator init()
     {
-       yield return new WaitForSeconds(2.0f);
+        yield return null;
         videoPlayer = GetComponent<VideoPlayer>();
         videoPlayer.loopPointReached += EndReached;
         auSource = GetComponent<AudioSource>();
-        videoPlayer.Play();
+       // videoPlayer.Play();
         auSource.Play();
     }
    

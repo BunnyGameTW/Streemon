@@ -170,27 +170,27 @@ public class GameManager : MonoBehaviour {
     public void Update()
     {
         ////cheat code
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            Player.AddHoldItem("book");
-            Player.OnItemChanged();
+        //if (Input.GetKeyDown(KeyCode.Keypad1))
+        //{
+        //    Player.AddHoldItem("book");
+        //    Player.OnItemChanged();
 
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            SaveData._data.treeIsUnlock = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad2))
+        //{
+        //    SaveData._data.treeIsUnlock = true;
 
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
-            SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
-        }
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad5))
+        //{
+        //    SaveData._data.chars[1].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+        //    SaveData._data.chars[2].talkStatus = SaveData.CharsInfo.TalkStatus.canDoMission;
+        //}
        
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-        {
-            SaveData._data.nowScene = SceneManager.GetActiveScene().name;
-        }    
+        //if (Input.GetKeyDown(KeyCode.Keypad7))
+        //{
+        //    SaveData._data.nowScene = SceneManager.GetActiveScene().name;
+        //}    
         //點擊特效
         if (Input.GetMouseButtonDown(0))
         {
